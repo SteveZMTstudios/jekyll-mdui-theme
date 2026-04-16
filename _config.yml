@@ -1,0 +1,28 @@
+title: Jekyll theme
+description: A minimal single-page Jekyll theme for markdown docs.
+lang: zh-CN
+repository: octocat/hello-world
+show_downloads: true
+theme_color: "#0b57d0"
+google_analytics:
+url: ""
+baseurl: ""
+
+markdown: kramdown
+highlighter: rouge
+permalink: pretty
+
+kramdown:
+  input: GFM
+  syntax_highlighter: rouge
+
+defaults:
+  - scope:
+      path: ""
+    values:
+      layout: default
+
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - node_modules

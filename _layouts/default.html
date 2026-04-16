@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="{{ site.lang | default: 'zh-CN' }}" class="mdui-theme-auto" data-seed-color="{{ site.theme_color | default: '#0b57d0' }}" data-translate-source="{{ site.translate_source | default: site.lang | default: 'zh-CN' }}">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="renderer" content="webkit">
+  <meta name="color-scheme" content="light dark">
+
+  {% assign repo_path = site.github.repository_nwo | default: site.repository | default: site.github.repository_name %}
+  {% assign repo_url = site.github.repository_url %}
+  {% if repo_url == blank %}
+    {% assign repo_url = 'https://github.com/' | append: repo_path %}
+  {% endif %}
+  {% assign repo_branch = site.github.source.branch | default: site.github.branch | default: 'main' %}
+  {% assign page_url = page.url | absolute_url %}
+  {% assign zip_url = site.github.zip_url %}
+  {% if zip_url == blank %}
+    {% assign zip_url = repo_url | append: '/archive/refs/heads/' | append: repo_branch | append: '.zip' %}
+  {% endif %}
+  {% assign tar_url = site.github.tar_url %}
+  {% if tar_url == blank %}
+    {% assign tar_url = repo_url | append: '/archive/refs/heads/' | append: repo_branch | append: '.tar.gz' %}
+  {% endif %}
+
+  <title>{% if page.title %}{{ page.title }} | {% endif %}{{ site.title }}</title>
+  <meta name="description" content="{{ page.excerpt | default: site.description | strip_html | strip_newlines | truncate: 140 }}">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700;800&family=Source+Serif+4:opsz,wght@8..60,500;8..60,700&display=swap">
+  <link rel="stylesheet" href="https://unpkg.com/mdui@2/mdui.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+  <script nomodule src="https://unpkg.com/@webcomponents/webcomponentsjs@2.8.0/webcomponents-loader.js"></script>
+  <script src="https://unpkg.com/mdui@2/mdui.global.js"></script>
+  <script src="https://sharepoint.cf.stevezmt.top/js/3rd-party/translate.min.js" onerror="this.onerror=null;this.src='https://cdn.staticfile.net/translate.js/3.18.66/translate.js'"></script>
+  <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
+</head>
+<body>
+  <div class="legacy-banner" id="legacyBanner" hidden>
+    当前浏览器未完整支持 mdui Web Components，已切换为兼容阅读模式。
+  </div>
+
+  <nav class="legacy-nav" aria-label="兼容模式导航">
+    <a href="{{ '/' | relative_url }}">首页</a>
+    <a href="{{ '/test-preview.html' | relative_url }}">test.md 预览</a>
+  </nav>
+
+  <mdui-top-app-bar class="app-bar" variant="small" scroll-behavior="elevate">
+    <mdui-button-icon icon="menu" id="sidebarToggle" aria-label="展开目录" aria-expanded="false"></mdui-button-icon>
+    <mdui-top-app-bar-title>{{ page.title | default: site.title }}</mdui-top-app-bar-title>
+    <div class="app-bar-spacer"></div>
+    <mdui-dropdown id="translateDropdown" class="translate-dropdown ignore-translate" placement="bottom-end">
+      <mdui-button-icon slot="trigger" id="translateToggle" icon="translate" aria-label="翻译" aria-haspopup="menu" aria-controls="translateMenu"></mdui-button-icon>
+      <mdui-menu id="translateMenu" class="translate-menu ignore-translate" selects="single">
+        <mdui-menu-item value="chinese_simplified" selected-icon="check">简体中文</mdui-menu-item>
+        <mdui-menu-item value="chinese_traditional" selected-icon="check">繁體中文</mdui-menu-item>
+        <mdui-menu-item value="english" selected-icon="check">English</mdui-menu-item>
+        <mdui-menu-item value="japanese" selected-icon="check">日本語</mdui-menu-item>
+        <mdui-menu-item value="korean" selected-icon="check">한국어</mdui-menu-item>
+        <mdui-menu-item value="russian" selected-icon="check">Русский</mdui-menu-item>
+        <mdui-menu-item value="french" selected-icon="check">Français</mdui-menu-item>
+        <mdui-menu-item value="deutsch" selected-icon="check">Deutsch</mdui-menu-item>
+        <mdui-menu-item value="spanish" selected-icon="check">Español</mdui-menu-item>
+        <mdui-menu-item value="portuguese" selected-icon="check">Português</mdui-menu-item>
+        <mdui-menu-item value="italian" selected-icon="check">Italiano</mdui-menu-item>
+        <mdui-menu-item value="vietnamese" selected-icon="check">Tiếng Việt</mdui-menu-item>
+        <mdui-menu-item value="thai" selected-icon="check">ไทย</mdui-menu-item>
+        <mdui-menu-item value="indonesian" selected-icon="check">Bahasa Indonesia</mdui-menu-item>
+        <mdui-menu-item value="arabic" selected-icon="check">العربية</mdui-menu-item>
+        <mdui-menu-item value="hindi" selected-icon="check">हिन्दी</mdui-menu-item>
+        <mdui-menu-item value="bengali" selected-icon="check">বাংলা</mdui-menu-item>
+        <mdui-menu-item value="turkish" selected-icon="check">Türkçe</mdui-menu-item>
+        <mdui-menu-item value="polish" selected-icon="check">Polski</mdui-menu-item>
+        <mdui-menu-item value="ukrainian" selected-icon="check">Українська</mdui-menu-item>
+        <mdui-menu-item value="dutch" selected-icon="check">Nederlands</mdui-menu-item>
+        <mdui-menu-item value="malay" selected-icon="check">Bahasa Melayu</mdui-menu-item>
+        <mdui-menu-item value="filipino" selected-icon="check">Pilipino</mdui-menu-item>
+        <mdui-divider></mdui-divider>
+        <mdui-menu-item value="other_language" icon="language">Other Language</mdui-menu-item>
+      </mdui-menu>
+    </mdui-dropdown>
+    <mdui-button-icon icon="brightness_auto" id="themeToggle" aria-label="切换主题"></mdui-button-icon>
+  </mdui-top-app-bar>
+
+  <mdui-navigation-drawer id="sidebar" class="app-drawer" close-on-esc close-on-overlay-click>
+    <div class="drawer-head">
+      <h2 class="drawer-title">{{ site.title }}</h2>
+    </div>
+
+    <div class="drawer-section page-link-wrap">
+      <p class="toc-title">本文链接</p>
+      <mdui-card class="article-share-card" variant="filled">
+        <p class="article-share-title" id="articleTitleText">{{ page.title | default: site.title }}</p>
+        <a class="article-share-url ignore-translate" id="articleUrlText" href="{{ page_url }}">{{ page_url }}</a>
+        <div class="article-share-actions" aria-label="文章分享操作">
+          <mdui-button-icon id="copyArticleUrlButton" icon="content_copy" variant="filled" aria-label="复制标题和链接"></mdui-button-icon>
+          <mdui-button-icon id="openQrDialogButton" icon="qr_code_2" variant="filled" aria-label="显示二维码" aria-haspopup="dialog" aria-controls="qrDialog"></mdui-button-icon>
+          <mdui-button-icon id="shareArticleButton" icon="share" variant="filled" aria-label="共享" hidden></mdui-button-icon>
+        </div>
+      </mdui-card>
+    </div>
+
+    <mdui-dialog id="qrDialog" class="qr-dialog" close-on-esc close-on-overlay-click headline="文章二维码">
+      <div class="qr-dialog-content">
+        <div class="article-qr-code" id="articleQrCode" aria-label="文章二维码"></div>
+        <p class="qr-dialog-url ignore-translate" id="qrDialogUrl">{{ page_url }}</p>
+      </div>
+      <mdui-button slot="action" id="closeQrDialogButton" variant="text">关闭</mdui-button>
+    </mdui-dialog>
+
+    <mdui-dialog id="translateDialog" class="translate-dialog ignore-translate" close-on-esc close-on-overlay-click headline="Other Language">
+      <div class="translate-dialog-content ignore-translate">
+        <div id="translate" class="ignore-translate"></div>
+      </div>
+      <mdui-button slot="action" id="closeTranslateDialogButton" variant="text">关闭</mdui-button>
+    </mdui-dialog>
+
+    <div class="drawer-section toc-wrap">
+      <p class="toc-title">本文目录</p>
+      <mdui-list id="toc" class="toc" aria-label="文章目录" rounded></mdui-list>
+    </div>
+  </mdui-navigation-drawer>
+
+  <main class="main-wrap" id="content" aria-label="主内容">
+    <section class="content">
+      <header class="hero" aria-label="页面引导信息">
+        <p class="hero-kicker">{{ repo_path | default: site.title }}</p>
+        <h1 class="hero-title">{{ page.title | default: site.title }}</h1>
+        <p class="hero-subtitle">{{ page.description | default: site.description }}</p>
+
+        {% if site.show_downloads != false and repo_path != blank %}
+          <div class="hero-actions">
+            <mdui-button href="{{ repo_url }}" target="_blank" rel="noopener" icon="code" variant="filled">
+              在 GitHub 上查看
+            </mdui-button>
+            <mdui-button href="{{ zip_url }}" icon="download" variant="tonal">下载 .zip</mdui-button>
+            <mdui-button href="{{ tar_url }}" icon="download" variant="tonal">下载 .tar.gz</mdui-button>
+          </div>
+        {% endif %}
+      </header>
+
+      <article class="mdui-prose" id="articleContent">
+        {{ content }}
+      </article>
+
+      <footer class="site-footer">
+        {% if repo_path != blank %}
+          <span><a href="{{ repo_url }}" target="_blank" rel="noopener">{{ repo_path }}</a> · Hosted on GitHub Pages.</span>
+        {% else %}
+          <span>Hosted on GitHub Pages · Powered by Jekyll + mdui v2.</span>
+        {% endif %}
+      </footer>
+    </section>
+  </main>
+
+  <mdui-fab id="scrollToTop" class="scroll-top-fab" icon="arrow_upward" variant="primary" aria-label="回到顶部"></mdui-fab>
+
+  <noscript>
+    <div class="no-script-tip">当前浏览器关闭了 JavaScript，已启用静态阅读模式。</div>
+  </noscript>
+
+  <script src="{{ '/assets/js/qrcode.min.js' | relative_url }}" defer></script>
+  <script src="{{ '/assets/js/theme.js' | relative_url }}" defer></script>
+</body>
+</html>
