@@ -4,8 +4,8 @@ lang: zh-CN
 show_downloads: true
 theme_color: "#0b57d0"
 google_analytics:
-url: ""
-baseurl: ""
+url: "https://stevezmt.top"
+baseurl: "/jekyll-mdui-theme"
 theme: null
 
 
