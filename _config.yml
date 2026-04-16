@@ -1,12 +1,13 @@
 title: Jekyll theme
 description: A minimal single-page Jekyll theme for markdown docs.
 lang: zh-CN
-repository: octocat/hello-world
 show_downloads: true
 theme_color: "#0b57d0"
 google_analytics:
 url: ""
 baseurl: ""
+theme: null
+
 
 markdown: kramdown
 highlighter: rouge
