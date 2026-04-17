@@ -8,12 +8,16 @@
 ## 功能
 
 - mdui v2 原生组件布局（Top App Bar、Navigation Drawer、List、Button、Fab）
+- Material Design 3 风格
 - 自动生成文章目录（H1/H2/H3）
 - 代码块复制按钮
+- 预取
 - 动态配色（基于 `theme_color` 生成 Material 配色）
 - 亮色 / 暗色 / 自动主题切换
-- 侧边栏文章分享卡片（标题 + URL 复制、Web Share、二维码）
-- GitHub Pages 风格按钮（View on GitHub / Download .zip / Download .tar.gz）
+- 多页面流畅切换
+- 响应式设计（适配手机、平板、桌面）
+- 侧边栏文章卡片（标题 + URL 复制、Web Share、二维码）
+- GitHub Pages 按钮（View on GitHub / Download .zip / Download .tar.gz）
 
 ## 本地预览
 

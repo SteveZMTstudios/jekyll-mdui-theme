@@ -13,6 +13,8 @@
   {% endif %}
   {% assign repo_branch = site.github.source.branch | default: site.github.branch | default: 'main' %}
   {% assign page_url = page.url | absolute_url %}
+  {% assign app_bar_title = page.short_title | default: page.nav_title | default: page.title | default: site.title %}
+  {% assign app_bar_title_large = site.title %}
   {% assign zip_url = site.github.zip_url %}
   {% if zip_url == blank %}
     {% assign zip_url = repo_url | append: '/archive/refs/heads/' | append: repo_branch | append: '.zip' %}
@@ -25,6 +27,47 @@
   <title>{% if page.title %}{{ page.title }} | {% endif %}{{ site.title }}</title>
   <meta name="description" content="{{ page.excerpt | default: site.description | strip_html | strip_newlines | truncate: 140 }}">
 
+  <script>
+    (function () {
+      const rootElement = document.documentElement;
+      const themeClasses = ['mdui-theme-auto', 'mdui-theme-light', 'mdui-theme-dark'];
+      let themeMode = 'auto';
+
+      try {
+        const savedTheme = window.localStorage.getItem('theme-mode');
+        if (savedTheme === 'auto' || savedTheme === 'light' || savedTheme === 'dark') {
+          themeMode = savedTheme;
+        }
+      } catch (error) {
+        themeMode = 'auto';
+      }
+
+      themeClasses.forEach(function (themeClass) {
+        rootElement.classList.remove(themeClass);
+      });
+      rootElement.classList.add('mdui-theme-' + themeMode);
+    })();
+  </script>
+  <style>
+    html,
+    body {
+      margin: 0;
+      background-color: #f7f8fb;
+    }
+
+    html.mdui-theme-dark,
+    html.mdui-theme-dark body {
+      background-color: #111318;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      html.mdui-theme-auto,
+      html.mdui-theme-auto body {
+        background-color: #111318;
+      }
+    }
+  </style>
+
   <link rel="preconnect" href="https://fonts.googleapis.cn">
   <link rel="preconnect" href="https://fonts.gstatic.cn" crossorigin>
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -35,6 +78,12 @@
   <script nomodule src="https://unpkg.com/@webcomponents/webcomponentsjs@2.8.0/webcomponents-loader.js"></script>
   <script src="https://unpkg.com/mdui@2/mdui.global.js"></script>
   <script src="https://sharepoint.cf.stevezmt.top/js/3rd-party/translate.min.js" onerror="this.onerror=null;this.src='https://cdn.staticfile.net/translate.js/3.18.66/translate.js'"></script>
+  {% unless page.url == '/' %}
+    <link rel="prefetch" href="{{ '/' | relative_url }}">
+  {% endunless %}
+  {% unless page.url == '/test/' %}
+    <link rel="prefetch" href="{{ '/test/' | relative_url }}">
+  {% endunless %}
   <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
 </head>
 <body>
@@ -47,9 +96,12 @@
     <a href="{{ '/test-preview.html' | relative_url }}">test.md 预览</a>
   </nav>
 
-  <mdui-top-app-bar class="app-bar" variant="small" scroll-behavior="elevate">
+  <mdui-top-app-bar class="app-bar" variant="medium" scroll-behavior="shrink elevate">
     <mdui-button-icon icon="menu" id="sidebarToggle" aria-label="展开目录" aria-expanded="false"></mdui-button-icon>
-    <mdui-top-app-bar-title>{{ page.title | default: site.title }}</mdui-top-app-bar-title>
+    <mdui-top-app-bar-title class="app-bar-title">
+      {{ app_bar_title }}
+      <span slot="label-large">{{ app_bar_title_large }}</span>
+    </mdui-top-app-bar-title>
     <div class="app-bar-spacer"></div>
     <mdui-dropdown id="translateDropdown" class="translate-dropdown ignore-translate" placement="bottom-end">
       <mdui-button-icon slot="trigger" id="translateToggle" icon="translate" aria-label="翻译" aria-haspopup="menu" aria-controls="translateMenu"></mdui-button-icon>
@@ -102,26 +154,26 @@
       </mdui-card>
     </div>
 
-    <mdui-dialog id="qrDialog" class="qr-dialog" close-on-esc close-on-overlay-click headline="文章二维码">
-      <div class="qr-dialog-content">
-        <div class="article-qr-code" id="articleQrCode" aria-label="文章二维码"></div>
-        <p class="qr-dialog-url ignore-translate" id="qrDialogUrl">{{ page_url }}</p>
-      </div>
-      <mdui-button slot="action" id="closeQrDialogButton" variant="text">关闭</mdui-button>
-    </mdui-dialog>
-
-    <mdui-dialog id="translateDialog" class="translate-dialog ignore-translate" close-on-esc close-on-overlay-click headline="Other Language">
-      <div class="translate-dialog-content ignore-translate">
-        <div id="translate" class="ignore-translate"></div>
-      </div>
-      <mdui-button slot="action" id="closeTranslateDialogButton" variant="text">关闭</mdui-button>
-    </mdui-dialog>
-
     <div class="drawer-section toc-wrap">
       <p class="toc-title">本文目录</p>
       <mdui-list id="toc" class="toc" aria-label="文章目录" rounded></mdui-list>
     </div>
   </mdui-navigation-drawer>
+
+  <mdui-dialog id="qrDialog" class="qr-dialog" close-on-esc close-on-overlay-click headline="文章二维码">
+    <div class="qr-dialog-content">
+      <div class="article-qr-code" id="articleQrCode" aria-label="文章二维码"></div>
+      <p class="qr-dialog-url ignore-translate" id="qrDialogUrl">{{ page_url }}</p>
+    </div>
+    <mdui-button slot="action" id="closeQrDialogButton" variant="text">关闭</mdui-button>
+  </mdui-dialog>
+
+  <mdui-dialog id="translateDialog" class="translate-dialog ignore-translate" close-on-esc close-on-overlay-click headline="Other Language">
+    <div class="translate-dialog-content ignore-translate">
+      <div id="translate" class="ignore-translate"></div>
+    </div>
+    <mdui-button slot="action" id="closeTranslateDialogButton" variant="text">关闭</mdui-button>
+  </mdui-dialog>
 
   <main class="main-wrap" id="content" aria-label="主内容">
     <section class="content">

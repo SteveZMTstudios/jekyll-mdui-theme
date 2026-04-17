@@ -12,6 +12,53 @@
   --syntax-operator: rgb(var(--mdui-color-on-surface-variant));
 }
 
+@view-transition {
+  navigation: auto;
+}
+
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: 220ms;
+  animation-timing-function: cubic-bezier(0.2, 0, 0, 1);
+}
+
+::view-transition-old(root) {
+  animation-name: page-fade-out;
+}
+
+::view-transition-new(root) {
+  animation-name: page-fade-in;
+}
+
+@keyframes page-fade-out {
+  from {
+    opacity: 1;
+  }
+
+  to {
+    opacity: 0.88;
+  }
+}
+
+@keyframes page-fade-in {
+  from {
+    opacity: 0;
+    filter: blur(1px) saturate(0.96);
+  }
+
+  to {
+    opacity: 1;
+    filter: blur(0) saturate(1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
+    animation: none;
+  }
+}
+
 * {
   box-sizing: border-box;
 }
@@ -23,7 +70,7 @@ body {
 }
 
 html {
-  scroll-padding-top: 80px;
+  scroll-padding-top: 112px;
 }
 
 body {
@@ -86,7 +133,9 @@ a {
 }
 
 .legacy-mode .app-bar,
-.legacy-mode .app-drawer,
+.legacy-mode .app-drawer, 
+.legacy-mode .translate-dropdown,
+.legacy-mode .translate-dialog,
 .legacy-mode .scroll-top-fab {
   display: none;
 }
@@ -95,12 +144,30 @@ a {
   position: sticky;
   top: 0;
   z-index: 1100;
-  border-bottom: 1px solid rgb(var(--mdui-color-outline-variant));
-  background-color: rgb(var(--mdui-color-surface));
+  /* border-bottom: 1px solid rgb(var(--mdui-color-outline-variant)); */
+  /* background-color: rgb(var(--mdui-color-surface)); */
 }
 
 .app-bar-spacer {
   flex: 1 1 auto;
+}
+
+.app-bar-title {
+  min-width: 0;
+}
+
+.app-bar-title::part(label) {
+  max-width: clamp(10rem, 42vw, 28rem);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.app-bar-title::part(label-large) {
+  max-width: min(76vw, var(--app-max-content-width));
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .translate-dropdown {
@@ -513,6 +580,18 @@ article.mdui-prose .err {
   body {
     padding-left: 0 !important;
     padding-right: 0 !important;
+  }
+
+  html {
+    scroll-padding-top: 96px;
+  }
+
+  .app-bar-title::part(label) {
+    max-width: max(7rem, calc(100vw - 220px));
+  }
+
+  .app-bar-title::part(label-large) {
+    max-width: max(8rem, calc(100vw - 64px));
   }
 
   .app-drawer {

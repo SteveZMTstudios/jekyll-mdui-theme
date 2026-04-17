@@ -28,6 +28,7 @@
   const hoverMediaQuery = window.matchMedia('(hover: hover) and (pointer: fine)');
   const themeModes = ['auto', 'light', 'dark'];
   const TRANSLATE_STORAGE_KEY = 'translate-language';
+  const DRAWER_STORAGE_KEY = 'drawer-state';
   const translateSourceFromConfig = root.dataset.translateSource || 'zh-CN';
   const themeClassMap = {
     auto: 'mdui-theme-auto',
@@ -157,20 +158,72 @@
     applyTheme(next);
   }
 
+  function getStoredDrawerState(isMobile) {
+    const drawerMode = isMobile ? 'mobile' : 'desktop';
+    try {
+      const rawState = window.localStorage.getItem(DRAWER_STORAGE_KEY);
+      if (!rawState) {
+        return null;
+      }
+
+      const parsedState = JSON.parse(rawState);
+      if (!parsedState || typeof parsedState !== 'object') {
+        return null;
+      }
+
+      if (typeof parsedState[drawerMode] === 'boolean') {
+        return parsedState[drawerMode];
+      }
+    } catch (error) {
+      return null;
+    }
+
+    return null;
+  }
+
+  function saveDrawerState(isMobile, isOpen) {
+    const drawerMode = isMobile ? 'mobile' : 'desktop';
+    let state = {};
+
+    try {
+      const rawState = window.localStorage.getItem(DRAWER_STORAGE_KEY);
+      if (rawState) {
+        const parsedState = JSON.parse(rawState);
+        if (parsedState && typeof parsedState === 'object') {
+          state = parsedState;
+        }
+      }
+
+      state[drawerMode] = Boolean(isOpen);
+      window.localStorage.setItem(DRAWER_STORAGE_KEY, JSON.stringify(state));
+    } catch (error) {
+      // Ignore storage failures.
+    }
+  }
+
+  function updateDrawerToggleState(isOpen) {
+    if (!sidebarToggle) {
+      return;
+    }
+
+    sidebarToggle.setAttribute('aria-expanded', String(Boolean(isOpen)));
+  }
+
   function syncDrawerState() {
     if (!sidebar) {
       return;
     }
 
     const isMobile = drawerMediaQuery.matches;
+    const savedOpenState = getStoredDrawerState(isMobile);
+    const fallbackOpenState = !isMobile;
+    const shouldOpen = typeof savedOpenState === 'boolean' ? savedOpenState : fallbackOpenState;
+
     sidebar.modal = isMobile;
-    sidebar.open = !isMobile;
+    sidebar.open = shouldOpen;
     body.classList.toggle('drawer-mobile', isMobile);
     body.classList.toggle('drawer-desktop', !isMobile);
-
-    if (sidebarToggle) {
-      sidebarToggle.setAttribute('aria-expanded', String(!isMobile));
-    }
+    updateDrawerToggleState(shouldOpen);
   }
 
   function toggleDrawer() {
@@ -179,9 +232,8 @@
     }
 
     sidebar.open = !sidebar.open;
-    if (sidebarToggle) {
-      sidebarToggle.setAttribute('aria-expanded', String(sidebar.open));
-    }
+    updateDrawerToggleState(sidebar.open);
+    saveDrawerState(drawerMediaQuery.matches, sidebar.open);
   }
 
   function registerDrawerResizeListener() {
@@ -193,6 +245,21 @@
     if (typeof drawerMediaQuery.addListener === 'function') {
       drawerMediaQuery.addListener(syncDrawerState);
     }
+  }
+
+  function registerDrawerStateListener() {
+    if (!sidebar) {
+      return;
+    }
+
+    const persistDrawerState = function () {
+      const isOpen = Boolean(sidebar.open);
+      updateDrawerToggleState(isOpen);
+      saveDrawerState(drawerMediaQuery.matches, isOpen);
+    };
+
+    sidebar.addEventListener('opened', persistDrawerState);
+    sidebar.addEventListener('closed', persistDrawerState);
   }
 
   function normalizeTranslateLanguageCode(code) {
@@ -731,6 +798,22 @@
     return window.location.href;
   }
 
+  function canUseNativeShare(shareData) {
+    if (typeof navigator.share !== 'function') {
+      return false;
+    }
+
+    if (typeof navigator.canShare !== 'function') {
+      return true;
+    }
+
+    try {
+      return navigator.canShare(shareData);
+    } catch (error) {
+      return false;
+    }
+  }
+
   function initSharePanel() {
     const shareUrl = resolveShareUrl();
     const shareTitle = articleTitleText ? articleTitleText.textContent.trim() : document.title;
@@ -792,14 +875,22 @@
       }
     }
 
-    if (shareButton && typeof navigator.share === 'function') {
-      shareButton.hidden = false;
+    if (shareButton) {
+      const shareData = {
+        title: shareTitle,
+        text: shareTitle,
+        url: shareUrl
+      };
+      const canShare = canUseNativeShare(shareData);
+
+      shareButton.hidden = !canShare;
+
+      if (!canShare) {
+        return;
+      }
+
       shareButton.addEventListener('click', function () {
-        navigator.share({
-          title: shareTitle,
-          text: shareTitle,
-          url: shareUrl
-        }).catch(function () {
+        navigator.share(shareData).catch(function () {
           // Ignore cancellation.
         });
       });
@@ -851,6 +942,7 @@
     sidebarToggle.addEventListener('click', toggleDrawer);
   }
 
+  registerDrawerStateListener();
   syncDrawerState();
   registerDrawerResizeListener();
   buildToc();

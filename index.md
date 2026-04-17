@@ -4,7 +4,7 @@ layout: default
 
 文本可以 **粗体**、_斜体_ 或 ~~删除线~~。
 
-[链接到另一个页面](./another-page.html)。
+[链接到另一个页面]({{ '/test/' | relative_url }})。
 
 段落之间应有空白。
 
