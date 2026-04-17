@@ -2,6 +2,9 @@
 
 一个面向 GitHub Pages 的 Jekyll 单页文档主题，基于 mdui v2 组件实现。
 
+你可以[在此预览其效果](https://stevezmt.top/jekyll-mdui-theme/)，或[立刻使用](#部署到-github-pages)。
+
+
 ## 功能
 
 - mdui v2 原生组件布局（Top App Bar、Navigation Drawer、List、Button、Fab）
@@ -54,6 +57,12 @@ baseurl: "" # 用户主页仓库留空；项目仓库填 "/<repo>"
 - `url` + `baseurl`：控制站点绝对链接和资源路径
 
 ## 部署到 GitHub Pages
+
+<a href="https://github.com/new?template_name=jekyll-mdui-theme&template_owner=SteveZMTstudios">
+  <img alt="Use this template" src="https://img.shields.io/badge/Use%20this%20template-2ea44f?style=for-the-badge&logo=github&logoColor=white">
+</a>
+
+点击上方按钮使用此模板创建仓库后，选择以下任一方式部署：
 
 ### 方式一：从分支直接发布（简单）
 

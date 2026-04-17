@@ -2,28 +2,30 @@
 layout: default
 ---
 
-Text can be **bold**, _italic_, or ~~strikethrough~~.
+文本可以 **粗体**、_斜体_ 或 ~~删除线~~。
 
-[Link to another page](./another-page.html).
+[链接到另一个页面](./another-page.html)。
 
-There should be whitespace between paragraphs.
+段落之间应有空白。
 
-There should be whitespace between paragraphs. We recommend including a README, or a file with information about your project.
+段落之间应有空白。建议包含 README 文件，或包含项目相关信息的文件。
 
-# Header 1
+# 一级标题
 
-This is a normal paragraph following a header. GitHub is a code hosting platform for version control and collaboration. It lets you and others work together on projects from anywhere.
+这是标题后的普通段落。GitHub 是一个用于版本控制和协作的代码托管平台。它让你和其他人能够随时随地一起协作项目。
 
-## Header 2
+## 二级标题
 
-> This is a blockquote following a header.
+> 这是标题后的引用块。
 >
-> When something is important enough, you do it even if the odds are not in your favor.
+> 当某件事足够重要时，即使胜算不站在你这边，你也会去做。
+>
+> > 这是一个嵌套的引用块。
 
-### Header 3
+### 三级标题
 
 ```js
-// Javascript code with syntax highlighting.
+// 带语法高亮的 JavaScript 代码
 var fun = function lang(l) {
   dateformat.i18n = require('./lang/' + l)
   return true;
@@ -31,93 +33,92 @@ var fun = function lang(l) {
 ```
 
 ```ruby
-# Ruby code with syntax highlighting
+# 带语法高亮的 Ruby 代码
 GitHubPages::Dependencies.gems.each do |gem, version|
   s.add_dependency(gem, "= #{version}")
 end
 ```
 
-#### Header 4
+#### 四级标题
 
-*   This is an unordered list following a header.
-*   This is an unordered list following a header.
-*   This is an unordered list following a header.
+*   这是标题后的无序列表。
+*   这是标题后的无序列表。
+*   这是标题后的无序列表。
 
-##### Header 5
+##### 五级标题
 
-1.  This is an ordered list following a header.
-2.  This is an ordered list following a header.
-3.  This is an ordered list following a header.
+1.  这是标题后的有序列表。
+2.  这是标题后的有序列表。
+3.  这是标题后的有序列表。
 
-###### Header 6
+###### 六级标题
 
-| head1        | head two          | three |
+| 表头1        | 表头2            | 表头3 |
 |:-------------|:------------------|:------|
-| ok           | good swedish fish | nice  |
-| out of stock | good and plenty   | nice  |
-| ok           | good `oreos`      | hmm   |
-| ok           | good `zoute` drop | yumm  |
+| 正常         | 好吃的瑞典鱼      | 不错  |
+| 缺货         | 美味糖果          | 不错  |
+| 正常         | 好吃的 `oreos`    | 嗯    |
+| 正常         | 好吃的 `zoute` 糖 | 好吃  |
 
-### There's a horizontal rule below this.
+### 下面是一条水平线
 
 * * *
 
-### Here is an unordered list:
+### 这是一个无序列表：
 
-*   Item foo
-*   Item bar
-*   Item baz
-*   Item zip
+*   项目 foo
+*   项目 bar
+*   项目 baz
+*   项目 zip
 
-### And an ordered list:
+### 以及一个有序列表：
 
-1.  Item one
-1.  Item two
-1.  Item three
-1.  Item four
+1.  项目一
+2.  项目二
+3.  项目三
+4.  项目四
 
-### And a nested list:
+### 还有一个嵌套列表：
 
-- level 1 item
-  - level 2 item
-  - level 2 item
-    - level 3 item
-    - level 3 item
-- level 1 item
-  - level 2 item
-  - level 2 item
-  - level 2 item
-- level 1 item
-  - level 2 item
-  - level 2 item
-- level 1 item
+- 第一级项目
+  - 第二级项目
+  - 第二级项目
+    - 第三级项目
+    - 第三级项目
+- 第一级项目
+  - 第二级项目
+  - 第二级项目
+  - 第二级项目
+- 第一级项目
+  - 第二级项目
+  - 第二级项目
+- 第一级项目
 
-### Small image
+### 小图片
 
-![Octocat](https://github.githubassets.com/images/icons/emoji/octocat.png)
+![章鱼猫](https://github.githubassets.com/images/icons/emoji/octocat.png)
 
-### Large image
+### 大图片
 
-![Branching](https://guides.github.com/activities/hello-world/branching.png)
+![分支](https://guides.github.com/activities/hello-world/branching.png)
 
-
-### Definition lists can be used with HTML syntax.
+### 可以使用 HTML 语法定义列表
 
 <dl>
-<dt>Name</dt>
-<dd>Godzilla</dd>
-<dt>Born</dt>
-<dd>1952</dd>
-<dt>Birthplace</dt>
-<dd>Japan</dd>
-<dt>Color</dt>
-<dd>Green</dd>
+<dt>名称</dt>
+<dd>哥斯拉</dd>
+<dt>出生年份</dt>
+<dd>1952年</dd>
+<dt>出生地</dt>
+<dd>日本</dd>
+<dt>颜色</dt>
+<dd>绿色</dd>
 </dl>
 
 ```
-Long, single-line code blocks should not wrap. They should horizontally scroll if they are too long. This line should be long enough to demonstrate this.
+较长的单行代码块不应换行。如果太长，它应该水平滚动而不是像某些编辑器那样自动换行。这一行应该足够长以演示这一点。中文实在是太简洁导致这个效果不明显，所以不可避免地要写一点废话来达到这个目的，比如说这段话。
 ```
 
 ```
-The final element.
+最后一个元素。
 ```

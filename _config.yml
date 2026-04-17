@@ -1,21 +1,37 @@
-title: Jekyll theme
-description: A minimal single-page Jekyll theme for markdown docs.
+
+
+# Jekyll 全局设置
+
+title: Material Themes
+description: Material Design 风格的 Jekyll 主题，基于 mdui v2 组件实现，适用于 GitHub Pages。
+
+# 站点语言
+# 此项将决定内置翻译功能的语言，默认为简体中文 
 lang: zh-CN
+
+# 站点设置
+# 展示Github Pages经典三段下载按钮
 show_downloads: true
 theme_color: "#0b57d0"
 google_analytics:
+
+# 站点URL和基础URL
 url: "https://stevezmt.top"
 baseurl: "/jekyll-mdui-theme"
+# url: ""
+# baseurl: ""
 theme: null
 
-
+# markdown和代码高亮设置
 markdown: kramdown
 highlighter: rouge
 permalink: pretty
 
+# kramdown设置
 kramdown:
   input: GFM
   syntax_highlighter: rouge
+
 
 defaults:
   - scope:
@@ -27,3 +43,8 @@ exclude:
   - Gemfile
   - Gemfile.lock
   - node_modules
+
+# github:
+#   zip_url: http://example.com/download.zip
+#   tar_url: http://example.com/download.tar.gz
+#   another_url: another value

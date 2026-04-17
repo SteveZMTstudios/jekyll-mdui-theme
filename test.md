@@ -1,71 +1,68 @@
+# 这是一级标题 h1
 
 
 
-# This is a Heading h1
+## 这是二级标题 h2
+###### 这是六级标题 h6
 
+## 强调
 
+*这段文字会倾斜*  
+_这段也会倾斜_
 
-## This is a Heading h2
-###### This is a Heading h6
+**这段文字会加粗**  
+__这段也会加粗__
 
-## Emphasis
+_你**可以**组合使用它们_
 
-*This text will be italic*  
-_This will also be italic_
+## 列表
 
-**This text will be bold**  
-__This will also be bold__
+### 无序列表
 
-_You **can** combine them_
+* 项目 1
+* 项目 2
+* 项目 2a
+* 项目 2b
+    * 项目 3a
+    * 项目 3b
 
-## Lists
+### 有序列表
 
-### Unordered
+1. 项目 1
+2. 项目 2
+3. 项目 3
+    1. 项目 3a
+    2. 项目 3b
 
-* Item 1
-* Item 2
-* Item 2a
-* Item 2b
-    * Item 3a
-    * Item 3b
+## 图片
 
-### Ordered
+![这是一段替代文本。](/image/Markdown-mark.svg "这是一个示例图片。")
 
-1. Item 1
-2. Item 2
-3. Item 3
-    1. Item 3a
-    2. Item 3b
+## 链接
 
-## Images
+你可能正在使用 [Markdown 实时预览](https://markdownlivepreview.com/)。
 
-![This is an alt text.](/image/Markdown-mark.svg "This is a sample image.")
+## 引用
 
-## Links
-
-You may be using [Markdown Live Preview](https://markdownlivepreview.com/).
-
-## Blockquotes
-
-> Markdown is a lightweight markup language with plain-text-formatting syntax, created in 2004 by John Gruber with Aaron Swartz.
+> Markdown 是一种轻量级标记语言，由约翰·格鲁伯（John Gruber）和亚伦·斯沃茨（Aaron Swartz）于 2004 年创建，采用纯文本格式语法。
 >
->> Markdown is often used to format readme files, for writing messages in online discussion forums, and to create rich text using a plain text editor.
+>> Markdown 常用于格式化自述文件、在在线讨论论坛中撰写消息，以及使用纯文本编辑器创建富文本。
 
-## Tables
+## 表格
 
-| Left columns  | Right columns |
+| 左对齐列       | 右对齐列        |
 | ------------- |:-------------:|
-| left foo      | right foo     |
-| left bar      | right bar     |
-| left baz      | right baz     |
+| 左边 foo      | 右边 foo       |
+| 左边 bar      | 右边 bar       |
+| 左边 baz      | 右边 baz       |
 
-## Blocks of code
+## 代码块
 
 ```
 let message = 'Hello world';
 alert(message);
 ```
 
-## Inline code
+## 行内代码
 
-This web site is using `markedjs/marked`.
+本网站正在使用 `markedjs/marked`。
