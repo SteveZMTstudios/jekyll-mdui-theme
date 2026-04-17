@@ -134,10 +134,27 @@ a {
 
 .legacy-mode .app-bar,
 .legacy-mode .app-drawer, 
+.legacy-mode .qr-dialog,
 .legacy-mode .translate-dropdown,
 .legacy-mode .translate-dialog,
 .legacy-mode .scroll-top-fab {
   display: none;
+}
+
+body.legacy-mode {
+  padding-top: 0 !important;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+
+.legacy-mode .main-wrap {
+  width: 100%;
+}
+
+.legacy-mode .content {
+  width: min(760px, 100%);
+  margin: 0 auto;
+  padding: 20px 16px 72px;
 }
 
 .app-bar {
@@ -597,6 +614,12 @@ article.mdui-prose .err {
   .app-drawer {
     width: 100%;
   }
+
+  .legacy-mode .content {
+    width: min(680px, 100%);
+    padding: 14px 12px 72px;
+  }
+
   .content {
     padding: 14px 12px 88px;
     max-width: 100vw;

@@ -918,10 +918,28 @@
     syncFabVisibility();
   }
 
+  function hasRequiredMduiComponents() {
+    if (!('customElements' in window)) {
+      return false;
+    }
+
+    const requiredTags = [
+      'mdui-top-app-bar',
+      'mdui-navigation-drawer',
+      'mdui-button-icon',
+      'mdui-dialog'
+    ];
+
+    return requiredTags.every(function (tagName) {
+      return Boolean(window.customElements.get(tagName));
+    });
+  }
+
   const hasWebComponents = 'customElements' in window;
-  setLegacyMode(!hasWebComponents);
+  const hasMduiRuntime = hasWebComponents && hasRequiredMduiComponents();
+  setLegacyMode(!hasMduiRuntime);
   setHoverCapable(hoverMediaQuery.matches);
-  if (!hasWebComponents) {
+  if (!hasMduiRuntime) {
     return;
   }
 
