@@ -75,11 +75,14 @@ html {
 
 body {
   font-family: "Noto Sans SC", "Segoe UI", sans-serif;
+  background-color: #f7f8fb;
+  color: #1b1f24;
   background-color: rgb(var(--mdui-color-surface));
   color: rgb(var(--mdui-color-on-surface));
 }
 
 a {
+  color: #0b57d0;
   color: rgb(var(--mdui-color-primary));
 }
 
@@ -110,51 +113,6 @@ a {
 #sidebar::-webkit-scrollbar-thumb:hover,
 .code-scroll::-webkit-scrollbar-thumb:hover {
   background-color: var(--scrollbar-thumb-hover);
-}
-
-.legacy-banner,
-.legacy-nav {
-  display: none;
-}
-
-.legacy-mode .legacy-banner {
-  display: block;
-  margin: 12px;
-  padding: 12px;
-  border-radius: 12px;
-  background: rgb(var(--mdui-color-error-container));
-  color: rgb(var(--mdui-color-on-error-container));
-}
-
-.legacy-mode .legacy-nav {
-  display: flex;
-  gap: 12px;
-  margin: 12px;
-}
-
-.legacy-mode .app-bar,
-.legacy-mode .app-drawer, 
-.legacy-mode .qr-dialog,
-.legacy-mode .translate-dropdown,
-.legacy-mode .translate-dialog,
-.legacy-mode .scroll-top-fab {
-  display: none;
-}
-
-body.legacy-mode {
-  padding-top: 0 !important;
-  padding-left: 0 !important;
-  padding-right: 0 !important;
-}
-
-.legacy-mode .main-wrap {
-  width: 100%;
-}
-
-.legacy-mode .content {
-  width: min(760px, 100%);
-  margin: 0 auto;
-  padding: 20px 16px 72px;
 }
 
 .app-bar {
@@ -584,14 +542,6 @@ article.mdui-prose .err {
   filter: blur(0);
 }
 
-.no-script-tip {
-  margin: 12px;
-  padding: 12px;
-  border-radius: 12px;
-  background: rgb(var(--mdui-color-tertiary-container));
-  color: rgb(var(--mdui-color-on-tertiary-container));
-}
-
 @media (max-width: 959px) {
   html,
   body {
@@ -613,11 +563,6 @@ article.mdui-prose .err {
 
   .app-drawer {
     width: 100%;
-  }
-
-  .legacy-mode .content {
-    width: min(680px, 100%);
-    padding: 14px 12px 72px;
   }
 
   .content {

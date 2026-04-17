@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ site.lang | default: 'zh-CN' }}" class="mdui-theme-auto" data-seed-color="{{ site.theme_color | default: '#6750a4' }}" data-translate-source="{{ site.translate_source | default: site.lang | default: 'zh-CN' }}">
+<html lang="{{ site.lang | default: 'zh-CN' }}" class="mdui-theme-light no-js" data-seed-color="{{ site.theme_color | default: '#6750a4' }}" data-translate-source="{{ site.translate_source | default: site.lang | default: 'zh-CN' }}">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -29,12 +29,17 @@
 
   <script>
     (function () {
-      const rootElement = document.documentElement;
-      const themeClasses = ['mdui-theme-auto', 'mdui-theme-light', 'mdui-theme-dark'];
-      let themeMode = 'auto';
+      var rootElement = document.documentElement;
+      var themeClasses = ['mdui-theme-auto', 'mdui-theme-light', 'mdui-theme-dark'];
+      var themeMode = 'auto';
+
+      rootElement.className = (rootElement.className || '')
+        .replace(/\bno-js\b/g, ' ')
+        .replace(/\s+/g, ' ')
+        .replace(/^\s+|\s+$/g, '');
 
       try {
-        const savedTheme = window.localStorage.getItem('theme-mode');
+        var savedTheme = window.localStorage.getItem('theme-mode');
         if (savedTheme === 'auto' || savedTheme === 'light' || savedTheme === 'dark') {
           themeMode = savedTheme;
         }
@@ -85,16 +90,18 @@
     <link rel="prefetch" href="{{ '/test/' | relative_url }}">
   {% endunless %}
   <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
+  <link rel="stylesheet" href="{{ '/assets/css/theme-legacy.css' | relative_url }}">
 </head>
 <body>
   <div class="legacy-banner" id="legacyBanner" hidden>
     当前浏览器未完整支持 mdui Web Components，已切换为兼容阅读模式。
   </div>
 
-  <!-- <nav class="legacy-nav" aria-label="兼容模式导航">
+  <nav class="legacy-nav" id="legacyNav" aria-label="兼容模式导航">
     <a href="{{ '/' | relative_url }}">首页</a>
-    <a href="{{ '/test-preview.html' | relative_url }}">test.md 预览</a>
-  </nav> -->
+    <a href="{{ page_url }}" class="ignore-translate">当前页链接</a>
+    <button type="button" class="legacy-theme-toggle" id="legacyThemeToggle" aria-label="切换深浅色主题">切换深浅色</button>
+  </nav>
 
   <mdui-top-app-bar class="app-bar" variant="medium" scroll-behavior="shrink elevate">
     <mdui-button-icon icon="menu" id="sidebarToggle" aria-label="展开目录" aria-expanded="false"></mdui-button-icon>
@@ -133,7 +140,7 @@
         <mdui-menu-item value="other_language" icon="language">Other Language</mdui-menu-item>
       </mdui-menu>
     </mdui-dropdown>
-    <mdui-button-icon icon="brightness_auto" id="themeToggle" aria-label="切换主题"></mdui-button-icon>
+    <mdui-button-icon icon="brightness_4" id="themeToggle" aria-label="切换主题"></mdui-button-icon>
   </mdui-top-app-bar>
 
   <mdui-navigation-drawer id="sidebar" class="app-drawer" close-on-esc close-on-overlay-click>
@@ -213,7 +220,8 @@
     <div class="no-script-tip">当前浏览器关闭了 JavaScript，部分函数和功能可能无法正常使用。</div>
   </noscript>
 
-  <script src="{{ '/assets/js/qrcode.min.js' | relative_url }}" defer></script>
-  <script src="{{ '/assets/js/theme.js' | relative_url }}" defer></script>
+  <script src="{{ '/assets/js/qrcode.min.js' | relative_url }}"></script>
+  <script nomodule src="{{ '/assets/js/theme-legacy.js' | relative_url }}" defer></script>
+  <script type="module" src="{{ '/assets/js/theme.js' | relative_url }}"></script>
 </body>
 </html>

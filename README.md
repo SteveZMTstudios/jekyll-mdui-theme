@@ -18,6 +18,15 @@
 - 响应式设计（适配手机、平板、桌面）
 - 侧边栏文章卡片（标题 + URL 复制、Web Share、二维码）
 - GitHub Pages 按钮（View on GitHub / Download .zip / Download .tar.gz）
+- 旧浏览器兼容模式（IE11 等）：基础布局、链接可达、图片渲染、深浅色切换、代码复制
+
+## 浏览器兼容策略
+
+- 新式与主流浏览器：保持现有完整体验（mdui 组件、目录、分享、二维码、动画等）。
+- IE11 及同代旧浏览器：自动进入兼容阅读模式，保证基础布局、超链接可达、图片渲染、深浅色切换和代码复制。
+- IE6、noscript 及更旧环境：保证页面可读、图片可渲染、超链接可访问。
+- 在兼容阅读模式/禁用 JavaScript 场景下，会自动隐藏依赖 JS 与 Web Components 的功能（如 App Bar、侧边栏抽屉、语言选单、二维码弹窗等）。
+- 当 JavaScript 被禁用时，页面始终使用浅色模式。
 
 ## 本地预览
 
@@ -37,6 +46,12 @@ bundle exec jekyll serve
 
 ```text
 http://127.0.0.1:4000
+```
+
+4. 构建：
+
+```bash
+bundle exec jekyll build
 ```
 
 ## 配置
