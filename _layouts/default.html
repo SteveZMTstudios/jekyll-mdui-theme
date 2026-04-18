@@ -33,6 +33,7 @@
   {% endif %}
   {% assign theme_assets_ref = theme_assets_ref | default: 'main' %}
   {% assign theme_assets_cdn_base = 'https://gcore.jsdelivr.net/gh/' | append: theme_assets_repo | append: '@' | append: theme_assets_ref %}
+  {% assign theme_assets_backup_base = site.theme_assets_backup_base | default: 'https://stevezmt.top/jekyll-mdui-theme' %}
 
   <title>{% if page.title %}{{ page.title }} | {% endif %}{{ site.title }}</title>
   <meta name="description" content="{{ page.excerpt | default: site.description | strip_html | strip_newlines | truncate: 140 }}">
@@ -99,8 +100,8 @@
   {% unless page.url == '/test/' %}
     <link rel="prefetch" href="{{ '/test/' | relative_url }}">
   {% endunless %}
-  <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}" onerror="this.onerror=null;this.href='{{ theme_assets_cdn_base }}/assets/css/style.css'">
-  <link rel="stylesheet" href="{{ '/assets/css/theme-legacy.css' | relative_url }}" onerror="this.onerror=null;this.href='{{ theme_assets_cdn_base }}/assets/css/theme-legacy.css'">
+  <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}" onerror="if(!this.dataset.fallback){this.dataset.fallback='1';this.href='{{ theme_assets_cdn_base }}/assets/css/style.css';}else{this.onerror=null;this.href='{{ theme_assets_backup_base }}/assets/css/style.css';}">
+  <link rel="stylesheet" href="{{ '/assets/css/theme-legacy.css' | relative_url }}" onerror="if(!this.dataset.fallback){this.dataset.fallback='1';this.href='{{ theme_assets_cdn_base }}/assets/css/theme-legacy.css';}else{this.onerror=null;this.href='{{ theme_assets_backup_base }}/assets/css/theme-legacy.css';}">
   {% include head-custom.html %}
 </head>
 <body>
@@ -250,8 +251,8 @@
     <div class="no-script-tip">当前浏览器关闭了 JavaScript，部分函数和功能可能无法正常使用。</div>
   </noscript>
 
-  <script src="{{ '/assets/js/qrcode.min.js' | relative_url }}" onerror="this.onerror=null;this.src='{{ theme_assets_cdn_base }}/assets/js/qrcode.min.js'"></script>
-  <script nomodule src="{{ '/assets/js/theme-legacy.js' | relative_url }}" defer onerror="this.onerror=null;this.src='{{ theme_assets_cdn_base }}/assets/js/theme-legacy.js'"></script>
-  <script type="module" src="{{ '/assets/js/theme.js' | relative_url }}" onerror="this.onerror=null;this.src='{{ theme_assets_cdn_base }}/assets/js/theme.js'"></script>
+  <script src="{{ '/assets/js/qrcode.min.js' | relative_url }}" onerror="if(!this.dataset.fallback){this.dataset.fallback='1';this.src='{{ theme_assets_cdn_base }}/assets/js/qrcode.min.js';}else{this.onerror=null;this.src='{{ theme_assets_backup_base }}/assets/js/qrcode.min.js';}"></script>
+  <script nomodule src="{{ '/assets/js/theme-legacy.js' | relative_url }}" defer onerror="if(!this.dataset.fallback){this.dataset.fallback='1';this.src='{{ theme_assets_cdn_base }}/assets/js/theme-legacy.js';}else{this.onerror=null;this.src='{{ theme_assets_backup_base }}/assets/js/theme-legacy.js';}"></script>
+  <script type="module" src="{{ '/assets/js/theme.js' | relative_url }}" onerror="if(!this.dataset.fallback){this.dataset.fallback='1';this.src='{{ theme_assets_cdn_base }}/assets/js/theme.js';}else{this.onerror=null;this.src='{{ theme_assets_backup_base }}/assets/js/theme.js';}"></script>
 </body>
 </html>
