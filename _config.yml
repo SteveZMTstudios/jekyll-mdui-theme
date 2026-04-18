@@ -27,9 +27,6 @@ url: "" # 站点域名
 baseurl: "" # 基础URL（如果站点部署在子路径下，例如 /blog）
 # repository: octocat/hello-world # 在此填写您的 GitHub 仓库路径
 theme: null # 使用 remote_theme 时需要设置 theme: null 来禁用本地主题
-# theme_assets_repo: SteveZMTstudios/jekyll-mdui-theme # 可选：主题静态资源仓库
-# theme_assets_ref: main # 可选：主题静态资源版本（tag/branch/commit）
-# theme_assets_backup_base: https://stevezmt.top/jekyll-mdui-theme # 可选：主题静态资源二级回退地址
 
 # github:
 #   zip_url: http://example.com/download.zip
