@@ -87,21 +87,40 @@ a {
 }
 
 #skip-to-content {
-  height: 1px;
-  width: 1px;
   position: absolute;
+  top: 0;
+  left: 0;
+  display: inline-block;
+  padding: 0;
+  border: 0;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
   overflow: hidden;
-  top: -10px;
+  white-space: nowrap;
+  clip: rect(0, 0, 0, 0);
+  clip-path: inset(50%);
+}
 
-  &:focus {
-    position: fixed;
-    top: 10px;
-    left: 10px;
-    height: auto;
-    width: auto;
-    background: rgb(var(--mdui-color-on-surface));
-    color: rgb(var(--mdui-color-surface));
-  }
+#skip-to-content:focus,
+#skip-to-content:focus-visible {
+  position: fixed;
+  top: 10px;
+  left: 10px;
+  z-index: 4000;
+  width: auto;
+  height: auto;
+  margin: 0;
+  padding: 10px 14px;
+  clip: auto;
+  clip-path: none;
+  overflow: visible;
+  background: rgb(var(--mdui-color-on-surface));
+  color: rgb(var(--mdui-color-surface));
+  text-decoration: none;
+  border-radius: 10px;
+  outline: 2px solid rgb(var(--mdui-color-primary));
+  outline-offset: 2px;
 }
 
 #sidebar {
