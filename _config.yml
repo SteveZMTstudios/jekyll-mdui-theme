@@ -36,6 +36,8 @@ theme: null # 使用 remote_theme 时需要设置 theme: null 来禁用本地主
 #   tar_url: http://example.com/download.tar.gz # 可选：下载链接，默认为 GitHub 仓库的 tar.gz 下载链接
 #   repository_url: http://example.com/repository # 可选：仓库链接，默认为 GitHub 仓库链接
 
+icon_path: "/favicon.png" # 可选：自定义图标路径，默认为 "/favicon.ico"
+
 links: # 可选：在 hero-actions 下追加自定义链接
   - name: "链接1" # 链接名称
     variant: "filled" # 可选，链接样式（例如：elevated、filled、tonal、outlined、text，默认tonal）
