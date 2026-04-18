@@ -1,5 +1,6 @@
 ---
 title: Test Preview
+description: This is a test preview of the Jekyll MDUI Theme.
 permalink: /test-preview.html
 layout: default
 ---

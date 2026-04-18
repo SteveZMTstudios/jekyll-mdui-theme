@@ -1,9 +1,10 @@
 
-
 # Jekyll 全局设置
 
 title: Material Themes
 description: Material Design 风格的 Jekyll 主题，基于 mdui v2 组件实现，适用于 GitHub Pages。
+
+# 如果您对某些值不确定，您可以检查 `gh-pages` 分支。
 
 # 站点语言
 # 此项将决定内置翻译功能的语言，默认为简体中文 
@@ -11,21 +12,35 @@ lang: zh-CN
 
 # 站点设置
 # 展示Github Pages经典三段下载按钮
-show_downloads: true
-theme_color: "#0b57d0"
-google_analytics:
+show_downloads: true # 是否显示下载按钮（默认：true）
+theme_color: "#0b57d0" # 主题色（默认：mdui蓝）
+google_analytics: "" # 在此填写您的 Google Analytics 追踪 ID（例如：UA-XXXXXXXXX-X）
+
+
+# 如果您的站点不托管在 GitHub Pages 上，或者您不希望显示 "Hosted on GitHub Pages" 的信息，请去除以下注释
+# not_in_ghpages: true 
+# beian: "" # 在此填写您的 ICP 备案号
+# psb_beian: "" # 在此填写您的公安备案号（可选）
 
 # 站点URL和基础URL
-url: "https://stevezmt.top"
-baseurl: "/jekyll-mdui-theme"
-# url: ""
-# baseurl: ""
-theme: null
+url: "" # 站点域名
+baseurl: "" # 基础URL（如果站点部署在子路径下，例如 /blog）
+# repository: octocat/hello-world # 在此填写您的 GitHub 仓库路径
+theme: null # 使用 remote_theme 时需要设置 theme: null 来禁用本地主题
+
+# github:
+#   zip_url: http://example.com/download.zip
+#   tar_url: http://example.com/download.tar.gz
+#   repository_url: http://example.com/repository
+
+
+
+# 高级选项
 
 # markdown和代码高亮设置
-markdown: kramdown
-highlighter: rouge
-permalink: pretty
+markdown: kramdown # Markdown 解析器（默认：kramdown）
+highlighter: rouge # 代码高亮器（默认：rouge）
+permalink: pretty # 文章链接格式（例如：/2024/06/01/sample-post/）
 
 # kramdown设置
 kramdown:
@@ -40,6 +55,9 @@ defaults:
       layout: default
 
 exclude:
+  - _site/
+  - lib/
+  - jekyll-theme-mdui.gemspec
   - .sass-cache/
   - .jekyll-cache/
   - .jekyll-metadata
@@ -47,7 +65,4 @@ exclude:
   - Gemfile.lock
   - node_modules
 
-# github:
-#   zip_url: http://example.com/download.zip
-#   tar_url: http://example.com/download.tar.gz
-#   another_url: another value
+

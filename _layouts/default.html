@@ -91,6 +91,7 @@
   {% endunless %}
   <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
   <link rel="stylesheet" href="{{ '/assets/css/theme-legacy.css' | relative_url }}">
+  {% include head-custom.html %}
 </head>
 <body>
   <div class="legacy-banner" id="legacyBanner" hidden>
@@ -205,10 +206,29 @@
       </article>
 
       <footer class="site-footer">
-        {% if repo_path != blank %}
-          <span><a href="{{ repo_url }}" target="_blank" rel="noopener">{{ repo_path }}</a> · Hosted on GitHub Pages.</span>
-        {% else %}
-          <span>Hosted on GitHub Pages · Powered by Jekyll + mdui v2.</span>
+        <div class="footer-info">
+          {% if repo_path != blank %}
+            <span><a href="{{ repo_url }}" target="_blank" rel="noopener">{{ repo_path }}</a>
+              {% unless site.show_downloads == false or site.not_in_ghpages == true or site.beian == blank %}
+               · Hosted on GitHub Pages.
+              {% endunless %}
+            </span>
+          {% else %}
+            <span>Powered by Jekyll + mdui v2.</span>
+          {% endif %}
+        </div>
+
+        {% if site.beian or site.psb_beian %}
+          <div class="beian-info">
+            {% if site.beian %}
+              <a href="https://beian.miit.gov.cn/" target="_blank" rel="noopener">{{ site.beian }}</a>
+            {% endif %}
+            {% if site.psb_beian %}
+              <a href="http://www.beian.gov.cn/portal/registerSystemInfo" target="_blank" rel="noopener">
+                {{ site.psb_beian }}
+              </a>
+            {% endif %}
+          </div>
         {% endif %}
       </footer>
     </section>

@@ -1,124 +1,212 @@
 # Jekyll mdui Theme
 
-一个面向 GitHub Pages 的 Jekyll 单页文档主题，基于 mdui v2 组件实现。
+[![pages-build-deployment](https://github.com/SteveZMTstudios/jekyll-mdui-theme/actions/workflows/pages/pages-build-deployment/badge.svg)](https://github.com/SteveZMTstudios/jekyll-mdui-theme/actions/workflows/pages/pages-build-deployment)
+[![GitHub release (latest SemVer)](https://img.shields.io/github/v/release/SteveZMTstudios/jekyll-mdui-theme?style=flat-square)](https://github.com/SteveZMTstudios/jekyll-mdui-theme/releases)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=flat-square)](/LICENSE)
 
-你可以[在此预览其效果](https://stevezmt.top/jekyll-mdui-theme/)，或[立刻使用](#部署到-github-pages)。
+一个面向 GitHub Pages 的 Jekyll 主题，基于 mdui v2 组件实现，支持 `remote_theme` 一键接入。
+
+*mdui 是一个现代 Material Design 组件库。本主题基于 mdui v2 Web Components 实现，你可以[在此预览效果](https://stevezmt.top/jekyll-mdui-theme/)，或者[立刻开始使用](#快速开始github-pages-推荐)。*
 
 
-## 功能
 
-- mdui v2 原生组件布局（Top App Bar、Navigation Drawer、List、Button、Fab）
-- Material Design 3 风格
-- 自动生成文章目录（H1/H2/H3）
-- 代码块复制按钮
-- 预取
-- 动态配色（基于 `theme_color` 生成 Material 配色）
-- 亮色 / 暗色 / 自动主题切换
-- 多页面流畅切换
-- 响应式设计（适配手机、平板、桌面）
-- 侧边栏文章卡片（标题 + URL 复制、Web Share、二维码）
-- GitHub Pages 按钮（View on GitHub / Download .zip / Download .tar.gz）
-- 旧浏览器兼容模式（IE11 等）：基础布局、链接可达、图片渲染、深浅色切换、代码复制
+## 快速开始（GitHub Pages）
 
-## 浏览器兼容策略
-
-- 新式与主流浏览器：保持现有完整体验（mdui 组件、目录、分享、二维码、动画等）。
-- IE11 及同代旧浏览器：自动进入兼容阅读模式，保证基础布局、超链接可达、图片渲染、深浅色切换和代码复制。
-- IE6、noscript 及更旧环境：保证页面可读、图片可渲染、超链接可访问。
-- 在兼容阅读模式/禁用 JavaScript 场景下，会自动隐藏依赖 JS 与 Web Components 的功能（如 App Bar、侧边栏抽屉、语言选单、二维码弹窗等）。
-- 当 JavaScript 被禁用时，页面始终使用浅色模式。
-
-## 本地预览
-
-1. 安装依赖：
-
-```bash
-bundle install
-```
-
-2. 启动本地服务：
-
-```bash
-bundle exec jekyll serve
-```
-
-3. 访问：
-
-```text
-http://127.0.0.1:4000
-```
-
-4. 构建：
-
-```bash
-bundle exec jekyll build
-```
-
-## 配置
-
-编辑 [_config.yml](_config.yml)：
+在你的站点仓库 `_config.yml` 中加入：
 
 ```yml
+remote_theme: SteveZMTstudios/jekyll-mdui-theme
+plugins:
+  - jekyll-remote-theme
+
 title: Your Site Title
 description: Your site description
-repository: octocat/hello-world
+
 show_downloads: true
 theme_color: "#0b57d0"
 url: "https://<username>.github.io"
 baseurl: "" # 用户主页仓库留空；项目仓库填 "/<repo>"
 ```
 
-### 关键项说明
+如果你希望固定版本，可使用：
 
-- `repository`：用于生成 hero 区域仓库名、GitHub 按钮和下载链接
-- `show_downloads`：`true` 或未定义时显示三枚按钮，`false` 时隐藏
-- `theme_color`：动态配色种子色
-- `url` + `baseurl`：控制站点绝对链接和资源路径
+```yml
+remote_theme: SteveZMTstudios/jekyll-mdui-theme@v1.0.0
+```
 
-## 部署到 GitHub Pages
+
+或者，基于此框架进行修改：
 
 <a href="https://github.com/new?template_name=jekyll-mdui-theme&template_owner=SteveZMTstudios">
   <img alt="Use this template" src="https://img.shields.io/badge/Use%20this%20template-2ea44f?style=for-the-badge&logo=github&logoColor=white">
 </a>
 
-点击上方按钮使用此模板创建仓库后，选择以下任一方式部署：
+> [!WARNING]
+> 若直接使用模板创建仓库，请务必清理
 
-### 方式一：从分支直接发布（简单）
+## 本地预览（使用 remote_theme 的站点）
 
-1. 将本仓库内容推送到你的 GitHub 仓库。
-2. 进入仓库 Settings -> Pages。
-3. 在 Build and deployment 中选择 Deploy from a branch。
-4. Source 选择 `main` 分支（`/(root)`）。
-5. 等待构建完成后访问站点。
+在你的站点仓库 `Gemfile` 中确保有：
 
-### 方式二：GitHub Actions 发布（推荐）
+```ruby
+source "https://rubygems.org"
 
-1. 在仓库 Settings -> Pages 中将 Source 切换到 GitHub Actions。
-2. 添加 Jekyll Pages 官方工作流（`jekyll.yml`）。
-3. 推送后由 Actions 自动构建和部署。
+gem "github-pages", group: :jekyll_plugins
+gem "jekyll-remote-theme", group: :jekyll_plugins
+gem "webrick", "~> 1.8"
+```
 
-## 用户主页仓库与项目仓库
+然后执行：
 
-- 用户主页仓库：`<username>.github.io`
-  - `url`: `https://<username>.github.io`
-  - `baseurl`: `""`
-- 项目仓库：`<repo>`
-  - `url`: `https://<username>.github.io`
-  - `baseurl`: `"/<repo>"`
+```bash
+bundle install
+bundle exec jekyll serve
+```
 
-## 可选：覆盖 GitHub 自动变量
+访问：<http://127.0.0.1:4000>
 
-主题会优先使用 GitHub Pages 注入的 `site.github.*` 变量（例如 `site.github.repository_url`、`site.github.zip_url`）。
+## 主题特性
 
-如果你想自定义这些地址，可在 `_config.yml` 添加：
+- mdui v2 原生组件布局（Top App Bar、Navigation Drawer、List、Button、Fab）
+- Material Design 3 风格
+- 自动生成文章目录（H1/H2/H3）
+- 代码块复制按钮
+- 动态配色（基于 `theme_color` 生成 Material 配色）
+- 内置翻译脚本（单语言编写，全球用户自动翻译）
+- 亮色 / 暗色 / 自动主题切换
+- 响应式设计（手机、平板、桌面）
+- 侧边栏文章卡片（标题 + URL 复制、Web Share、二维码）
+- GitHub Pages 风格按钮（View on GitHub / Download .zip / Download .tar.gz）
+
+
+## 配置项
+
+mdui 主题会遵循以下变量配置（在 `_config.yml` 中设置）：
 
 ```yml
-github:
-  repository_url: https://example.com/your-repo
-  zip_url: https://example.com/download.zip
-  tar_url: https://example.com/download.tar.gz
+title: [你的网站标题]
+description: [你的网站简介]
 ```
+
+另外，你也可以选择设置以下可选变量：
+
+```yml
+repository: [GitHub 仓库路径，格式如 octocat/hello-world]
+show_downloads: true  # 是否显示下载按钮，true 或 false（不加引号）
+theme_color: "#0b57d0"  # 主题配色种子色（Material Design 配色源）
+google_analytics: [你的 Google Analytics 追踪 ID]  # 可选
+```
+
+### 覆盖 GitHub 自动生成的 URLs
+
+模板通常依赖 GitHub 提供的 URL（如指向你的仓库的链接或下载项目的链接）。如果你想覆盖其中一个或多个 URL：
+
+1. 查看[布局源代码](https://github.com/SteveZMTstudios/jekyll-mdui-theme/blob/main/_layouts/default.html)以确定变量名称。它通常采用 `{{ site.github.zip_url }}` 的形式。
+2. 在你的网站 `_config.yml` 中指定你想使用的 URL。例如，如果变量是 `site.github.zip_url`，你应该添加：
+    ```yml
+    github:
+      zip_url: https://example.com/download.zip
+      repository_url: https://example.com/your-repo
+      tar_url: https://example.com/download.tar.gz
+    ```
+3. 当你的网站被构建时，Jekyll 会使用你指定的 URL，而不是 GitHub 提供的默认 URL。
+
+*注意：你必须移除 `site.` 前缀，每个变量名（在 `github:` 之后）应该用两个空格缩进。*
+
+### 自定义 CSS 样式
+
+如果你想添加自己的自定义样式：
+
+1. 在你的网站中创建一个文件：`/assets/css/style.scss`
+2. 在该文件的最上面添加以下内容，**完全按照所示的方式**：
+    ```scss
+    ---
+    ---
+
+    @import "{{ site.theme }}";
+    ```
+3. 在 `@import` 行之后立即添加任何你想要的自定义 CSS（或 Sass，包括 imports）
+
+*注意：如果你想更改主题的 Sass 变量，你必须在 stylesheet 中的 `@import` 行**之前**设置新值。*
+
+### 覆盖布局
+
+如果你想更改主题的 HTML 布局：
+
+#### 小改动（如添加自定义 favicon）
+
+1. 你可以在本地 `_includes` 文件夹中添加自定义文件。
+2. 本主题提供的[默认 includes](https://github.com/SteveZMTstudios/jekyll-mdui-theme/tree/main/_includes) 是一个很好的起点，并由[原始布局模板](https://github.com/SteveZMTstudios/jekyll-mdui-theme/blob/main/_layouts/default.html)包含。
+
+例如，要添加自定义 Google Analytics：
+
+1. 在 `_includes/head-custom-google-analytics.html` 中粘贴你从 Google 获得的最新 Analytics 代码。
+2. 本主题会自动包含该文件。
+
+#### 重大改动
+
+1. [复制原始模板](https://github.com/SteveZMTstudios/jekyll-mdui-theme/blob/main/_layouts/default.html)
+   （*Pro 提示：点击 "raw" 可以更容易地复制*）
+2. 在你的网站中创建一个文件：`/_layouts/default.html`
+3. 将第一步复制的布局内容粘贴进去
+4. 根据你的需求自定义该布局
+
+
+## 主题结构与兼容性
+
+本仓库已按 GitHub Pages 主题常见结构整理，既可以作为 `remote_theme` 远程主题使用，也具备标准 Jekyll 主题 gem 的目录形态：
+
+- `_layouts/default.html` - 主布局模板
+- `_includes/head-custom.html` - 可在站点中覆盖的自定义头部入口
+- `assets/css/*` 与 `assets/js/*` - 样式和脚本文件
+- `lib/jekyll-theme-mdui.rb` - 主题 Ruby 入口
+- `lib/jekyll-theme-mdui/version.rb` - 版本定义
+- `jekyll-theme-mdui.gemspec` - Gem 规范文件
+
+### 浏览器兼容策略
+
+- **现代浏览器**：完整的 mdui Web Components 体验
+- **IE11 及同代浏览器**：自动启用兼容阅读模式，保证基础布局、链接可达、图片渲染、深浅色切换和代码复制功能可用
+- **IE6/更旧浏览器及禁用 JavaScript 场景**：保证页面可读、图片可渲染、超链接可访问，不保证阅读体验。
+
+
+## 本地开发
+
+如果你想在本地预览主题（例如在提出变更时）：
+
+1. 克隆本主题仓库：`git clone https://github.com/SteveZMTstudios/jekyll-mdui-theme`
+2. 进入仓库目录：`cd jekyll-mdui-theme`
+3. 运行 `bundle install` 安装必要的依赖
+4. 运行 `bundle exec jekyll serve` 启动预览服务器
+5. 在浏览器中访问 [`localhost:4000`](http://localhost:4000) 预览主题
+
+### 运行测试
+
+本主题包含最小限度的测试套件，以确保使用该主题的网站能够成功构建：
+
+```bash
+bundle exec jekyll build
+```
+
+## 贡献
+
+对于改进 mdui 主题感兴趣？我们很乐意接受你的帮助。mdui 主题是一个开源项目，由像你这样的用户一次贡献一个功能而构建的。
+
+如果你发现 bug 或有功能建议：
+
+- 请在 [GitHub Issues](https://github.com/SteveZMTstudios/jekyll-mdui-theme/issues) 上提出
+- 欢迎提交 Pull Request
+
+## 外部资源
+
+- 页面元素：[mdui v2 Web Components](https://mdui.org/) 
+- Jekyll 主题开发：[Jekyll Theme Development Guide](https://jekyllrb.com/docs/themes/)
+- GitHub Pages 主题指南：[GitHub Pages Themes](https://docs.github.com/en/pages)
+- 翻译组件 translate.js：[translate.js](https://github.com/xnx3/translate)
+
+  
 
 ## 许可证
 
 [MIT License](LICENSE)
+

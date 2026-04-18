@@ -519,6 +519,27 @@ article.mdui-prose .err {
   font-size: 0.86rem;
 }
 
+.beian-info {
+  margin-top: 8px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: center;
+}
+
+.beian-info a {
+  text-decoration: none;
+  color: inherit;
+  display: inline-flex;
+  align-items: center;
+  transition: color 0.2s ease;
+}
+
+.beian-info a:hover {
+  color: rgb(var(--mdui-color-primary));
+}
+
+
 .scroll-top-fab {
   position: fixed;
   right: max(16px, env(safe-area-inset-right));
