@@ -34,6 +34,19 @@ baseurl: "" # 用户主页仓库留空；项目仓库填 "/<repo>"
 remote_theme: SteveZMTstudios/jekyll-mdui-theme@v1.0.0
 ```
 
+## 关于 assets（避免 404）
+
+本主题的 CSS/JS 位于主题仓库的 `assets/` 目录中。
+在 `remote_theme` + `jekyll-remote-theme` 模式下，这些资源会在构建阶段被 Jekyll 使用并输出，用户仓库无需复制一份 `assets`。
+
+如果你看到 404，优先检查：
+
+1. `_config.yml` 里是否已启用：
+  - `remote_theme: SteveZMTstudios/jekyll-mdui-theme`
+  - `plugins: [jekyll-remote-theme]`
+2. `baseurl` 是否与部署路径一致（项目站点通常是 `/<repo>`）。
+3. 是否被本地同路径文件覆盖（例如你自己的 `assets/css/style.css`）。
+
 
 或者，基于此框架进行修改：
 
@@ -42,7 +55,7 @@ remote_theme: SteveZMTstudios/jekyll-mdui-theme@v1.0.0
 </a>
 
 > [!WARNING]
-> 若直接使用模板创建仓库，请务必清理
+> 若直接使用模板创建仓库，请先按需删除示例内容（如 `test.md`、`THEME_SYNTAX.md`）。
 
 ## 本地预览（使用 remote_theme 的站点）
 
@@ -196,15 +209,6 @@ bundle exec jekyll build
 
 - 请在 [GitHub Issues](https://github.com/SteveZMTstudios/jekyll-mdui-theme/issues) 上提出
 - 欢迎提交 Pull Request
-
-## 外部资源
-
-- 页面元素：[mdui v2 Web Components](https://mdui.org/) 
-- Jekyll 主题开发：[Jekyll Theme Development Guide](https://jekyllrb.com/docs/themes/)
-- GitHub Pages 主题指南：[GitHub Pages Themes](https://docs.github.com/en/pages)
-- 翻译组件 translate.js：[translate.js](https://github.com/xnx3/translate)
-
-  
 
 ## 许可证
 
