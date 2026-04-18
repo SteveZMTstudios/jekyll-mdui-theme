@@ -86,6 +86,24 @@ a {
   color: rgb(var(--mdui-color-primary));
 }
 
+#skip-to-content {
+  height: 1px;
+  width: 1px;
+  position: absolute;
+  overflow: hidden;
+  top: -10px;
+
+  &:focus {
+    position: fixed;
+    top: 10px;
+    left: 10px;
+    height: auto;
+    width: auto;
+    background: rgb(var(--mdui-color-on-surface));
+    color: rgb(var(--mdui-color-surface));
+  }
+}
+
 #sidebar {
   scrollbar-width: thin;
   scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-track);

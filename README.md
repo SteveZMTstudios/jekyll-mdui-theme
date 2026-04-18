@@ -108,6 +108,15 @@ repository: [GitHub 仓库路径，格式如 octocat/hello-world]
 show_downloads: true  # 是否显示下载按钮，true 或 false（不加引号）
 theme_color: "#0b57d0"  # 主题配色种子色（Material Design 配色源）
 google_analytics: [你的 Google Analytics 追踪 ID]  # 可选
+
+# 可选：在 hero-actions 下追加自定义按钮
+links:
+  - name: "文档"
+    url: "https://example.com/docs"
+    icon: "description"   # 可选，Material Icons 名称
+    variant: "tonal"      # 可选：elevated/filled/tonal/outlined/text（flat 会自动转为 text）
+    _target: "_blank"     # 可选，默认 _self
+    rel: "noopener noreferrer" # 可选，_blank 且未填写时会自动补齐
 ```
 
 ### 覆盖 GitHub 自动生成的 URLs

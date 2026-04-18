@@ -23,6 +23,7 @@
   {% if tar_url == blank %}
     {% assign tar_url = repo_url | append: '/archive/refs/heads/' | append: repo_branch | append: '.tar.gz' %}
   {% endif %}
+  {% assign custom_links = site.links | default: empty %}
 
   <title>{% if page.title %}{{ page.title }} | {% endif %}{{ site.title }}</title>
   <meta name="description" content="{{ page.excerpt | default: site.description | strip_html | strip_newlines | truncate: 140 }}">
@@ -86,15 +87,14 @@
   {% unless page.url == '/' %}
     <link rel="prefetch" href="{{ '/' | relative_url }}">
   {% endunless %}
-  {% unless page.url == '/test/' %}
-    <link rel="prefetch" href="{{ '/test/' | relative_url }}">
-  {% endunless %}
   <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
   <link rel="stylesheet" href="{{ '/assets/css/theme-legacy.css' | relative_url }}">
   {% include head-custom.html %}
   {% include head-custom-google-analytics.html %}
 </head>
 <body>
+  <a id="skip-to-content" href="#articleContent" aria-label="跳到主要内容">Skip to the content.</a>
+
   <div class="legacy-banner" id="legacyBanner" hidden>
     当前浏览器未完整支持 mdui Web Components，已切换为兼容阅读模式。
   </div>
@@ -191,13 +191,44 @@
         <h1 class="hero-title">{{ page.title | default: site.title }}</h1>
         <p class="hero-subtitle">{{ page.description | default: site.description }}</p>
 
-        {% if site.show_downloads != false and repo_path != blank %}
+        {% assign show_github_action = false %}
+        {% if site.github.is_project_page and repo_path != blank %}
+          {% assign show_github_action = true %}
+        {% endif %}
+        {% assign show_download_actions = false %}
+        {% if site.show_downloads and repo_path != blank %}
+          {% assign show_download_actions = true %}
+        {% endif %}
+        {% if show_github_action or show_download_actions or custom_links.size > 0 %}
           <div class="hero-actions">
-            <mdui-button href="{{ repo_url }}" target="_blank" rel="noopener" icon="code" variant="filled">
-              在 GitHub 上查看
-            </mdui-button>
-            <mdui-button href="{{ zip_url }}" icon="download" variant="tonal">下载 .zip</mdui-button>
-            <mdui-button href="{{ tar_url }}" icon="download" variant="tonal">下载 .tar.gz</mdui-button>
+            {% if show_github_action %}
+              <mdui-button href="{{ repo_url }}" target="_blank" rel="noopener" icon="code" variant="filled">
+                在 GitHub 上查看
+              </mdui-button>
+            {% endif %}
+            {% if show_download_actions %}
+              <mdui-button href="{{ zip_url }}" icon="download" variant="tonal">下载 .zip</mdui-button>
+              <mdui-button href="{{ tar_url }}" icon="download" variant="tonal">下载 .tar.gz</mdui-button>
+            {% endif %}
+            {% for link in custom_links %}
+              {% assign link_name = link.name | default: link.title %}
+              {% assign link_url = link.url | default: link.href %}
+              {% assign link_icon = link.icon %}
+              {% assign link_variant = link.variant | default: 'tonal' %}
+              {% if link_variant == 'flat' %}
+                {% assign link_variant = 'text' %}
+              {% endif %}
+              {% assign link_target = link._target | default: link.target | default: '_self' %}
+              {% assign link_rel = link.rel %}
+              {% if link_target == '_blank' and link_rel == blank %}
+                {% assign link_rel = 'noopener noreferrer' %}
+              {% endif %}
+              {% if link_name != blank and link_url != blank %}
+                <mdui-button href="{{ link_url }}" target="{{ link_target }}" variant="{{ link_variant }}"{% if link_icon != blank %} icon="{{ link_icon }}"{% endif %}{% if link_rel != blank %} rel="{{ link_rel }}"{% endif %}>
+                  {{ link_name }}
+                </mdui-button>
+              {% endif %}
+            {% endfor %}
           </div>
         {% endif %}
       </header>
@@ -210,7 +241,7 @@
         <div class="footer-info">
           {% if repo_path != blank %}
             <span><a href="{{ repo_url }}" target="_blank" rel="noopener">{{ repo_path }}</a>
-              {% unless site.show_downloads == false or site.not_in_ghpages == true or site.beian == blank %}
+              {% unless site.show_downloads == false or site.github.is_project_page == false or site.beian == blank %}
                · Hosted on GitHub Pages.
               {% endunless %}
             </span>

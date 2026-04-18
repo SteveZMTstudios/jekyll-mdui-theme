@@ -1,10 +1,10 @@
 
 # Jekyll 全局设置
 
-title: Material Themes
-description: Material Design 风格的 Jekyll 主题，基于 mdui v2 组件实现，适用于 GitHub Pages。
+title: Material Themes # 站点标题
+description: Material Design 风格的 Jekyll 主题，基于 mdui v2 组件实现，适用于 GitHub Pages。 # 站点描述
 
-# 如果您对某些值不确定，您可以检查 `gh-pages` 分支。
+# 如果您对某些值不确定，您可以检查 `sample` 分支。
 
 # 站点语言
 # 此项将决定内置翻译功能的语言，默认为简体中文 
@@ -12,26 +12,44 @@ lang: zh-CN
 
 # 站点设置
 # 展示Github Pages经典三段下载按钮
-show_downloads: true # 是否显示下载按钮（默认：true）
-theme_color: "#0b57d0" # 主题色（默认：mdui蓝）
+show_downloads: true # 是否显示下载zip和tar.gz按钮（默认：true）
+theme_color: "#0b57d0" # 主题色（默认：mdui蓝，选择和您品牌匹配的颜色）
 google_analytics: "" # 在此填写您的 Google Analytics 追踪 ID（例如：UA-XXXXXXXXX-X）
 
-
-# 如果您的站点不托管在 GitHub Pages 上，或者您不希望显示 "Hosted on GitHub Pages" 的信息，请去除以下注释
-# not_in_ghpages: true 
 # beian: "" # 在此填写您的 ICP 备案号
 # psb_beian: "" # 在此填写您的公安备案号（可选）
 
 # 站点URL和基础URL
 url: "" # 站点域名
-baseurl: "" # 基础URL（如果站点部署在子路径下，例如 /blog）
+baseurl: "" # 基础URL（如果站点部署在子路径下，例如 blog/）
+
+# 例如：如果您的站点部署在 https://example.com/blog/，则设置如下：
+# url: "https://example.com"
+# baseurl: "blog/"
+
 # repository: octocat/hello-world # 在此填写您的 GitHub 仓库路径
 theme: null # 使用 remote_theme 时需要设置 theme: null 来禁用本地主题
 
 # github:
-#   zip_url: http://example.com/download.zip
-#   tar_url: http://example.com/download.tar.gz
-#   repository_url: http://example.com/repository
+#   is_project_page: false # 是否为项目页面（默认为 true，显示View on GitHub）
+#   zip_url: http://example.com/download.zip # 可选：下载链接，默认为 GitHub 仓库的 zip 下载链接
+#   tar_url: http://example.com/download.tar.gz # 可选：下载链接，默认为 GitHub 仓库的 tar.gz 下载链接
+#   repository_url: http://example.com/repository # 可选：仓库链接，默认为 GitHub 仓库链接
+
+links: # 可选：在 hero-actions 下追加自定义链接
+  - name: "链接1" # 链接名称
+    variant: "filled" # 可选，链接样式（例如：elevated、filled、tonal、outlined、text，默认tonal）
+    icon: "link" # 可选，使用 Material Icons 图标命名空间，若无则不显示图标
+    url: "http://example.com/link1"
+    _target: "_blank" # 可选，链接打开方式（默认：_self）
+  - name: "链接2"
+    variant: "text"
+    icon: "link"
+    url: "http://example.com/link2"
+    _target: "_blank"
+  # ... 可以添加更多链接
+
+
 
 
 
@@ -54,7 +72,7 @@ defaults:
     values:
       layout: default
 
-exclude:
+exclude: # Jekyll 构建时需要排除的文件和目录
   - _site/
   - lib/
   - jekyll-theme-mdui.gemspec
