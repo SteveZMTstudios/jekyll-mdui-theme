@@ -23,6 +23,16 @@
   {% if tar_url == blank %}
     {% assign tar_url = repo_url | append: '/archive/refs/heads/' | append: repo_branch | append: '.tar.gz' %}
   {% endif %}
+  {% assign theme_assets_repo = site.theme_assets_repo | default: 'SteveZMTstudios/jekyll-mdui-theme' %}
+  {% assign theme_assets_ref = site.theme_assets_ref %}
+  {% if theme_assets_ref == blank and site.remote_theme %}
+    {% assign remote_theme_parts = site.remote_theme | split: '@' %}
+    {% if remote_theme_parts[0] == theme_assets_repo and remote_theme_parts[1] != blank %}
+      {% assign theme_assets_ref = remote_theme_parts[1] %}
+    {% endif %}
+  {% endif %}
+  {% assign theme_assets_ref = theme_assets_ref | default: 'main' %}
+  {% assign theme_assets_cdn_base = 'https://gcore.jsdelivr.net/gh/' | append: theme_assets_repo | append: '@' | append: theme_assets_ref %}
 
   <title>{% if page.title %}{{ page.title }} | {% endif %}{{ site.title }}</title>
   <meta name="description" content="{{ page.excerpt | default: site.description | strip_html | strip_newlines | truncate: 140 }}">
@@ -89,8 +99,8 @@
   {% unless page.url == '/test/' %}
     <link rel="prefetch" href="{{ '/test/' | relative_url }}">
   {% endunless %}
-  <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
-  <link rel="stylesheet" href="{{ '/assets/css/theme-legacy.css' | relative_url }}">
+  <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}" onerror="this.onerror=null;this.href='{{ theme_assets_cdn_base }}/assets/css/style.css'">
+  <link rel="stylesheet" href="{{ '/assets/css/theme-legacy.css' | relative_url }}" onerror="this.onerror=null;this.href='{{ theme_assets_cdn_base }}/assets/css/theme-legacy.css'">
   {% include head-custom.html %}
 </head>
 <body>
@@ -240,8 +250,8 @@
     <div class="no-script-tip">当前浏览器关闭了 JavaScript，部分函数和功能可能无法正常使用。</div>
   </noscript>
 
-  <script src="{{ '/assets/js/qrcode.min.js' | relative_url }}"></script>
-  <script nomodule src="{{ '/assets/js/theme-legacy.js' | relative_url }}" defer></script>
-  <script type="module" src="{{ '/assets/js/theme.js' | relative_url }}"></script>
+  <script src="{{ '/assets/js/qrcode.min.js' | relative_url }}" onerror="this.onerror=null;this.src='{{ theme_assets_cdn_base }}/assets/js/qrcode.min.js'"></script>
+  <script nomodule src="{{ '/assets/js/theme-legacy.js' | relative_url }}" defer onerror="this.onerror=null;this.src='{{ theme_assets_cdn_base }}/assets/js/theme-legacy.js'"></script>
+  <script type="module" src="{{ '/assets/js/theme.js' | relative_url }}" onerror="this.onerror=null;this.src='{{ theme_assets_cdn_base }}/assets/js/theme.js'"></script>
 </body>
 </html>

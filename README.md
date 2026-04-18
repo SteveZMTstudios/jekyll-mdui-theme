@@ -26,6 +26,10 @@ show_downloads: true
 theme_color: "#0b57d0"
 url: "https://<username>.github.io"
 baseurl: "" # 用户主页仓库留空；项目仓库填 "/<repo>"
+
+# 可选：主题静态资源兜底（默认自动推断）
+# theme_assets_repo: SteveZMTstudios/jekyll-mdui-theme
+# theme_assets_ref: v1.0.0
 ```
 
 如果你希望固定版本，可使用：
@@ -95,6 +99,8 @@ repository: [GitHub 仓库路径，格式如 octocat/hello-world]
 show_downloads: true  # 是否显示下载按钮，true 或 false（不加引号）
 theme_color: "#0b57d0"  # 主题配色种子色（Material Design 配色源）
 google_analytics: [你的 Google Analytics 追踪 ID]  # 可选
+theme_assets_repo: [默认 SteveZMTstudios/jekyll-mdui-theme]
+theme_assets_ref: [默认自动从 remote_theme 的 @版本解析，解析不到时为 main]
 ```
 
 ### 覆盖 GitHub 自动生成的 URLs
