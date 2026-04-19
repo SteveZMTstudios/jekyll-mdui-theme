@@ -4,11 +4,13 @@
 [![GitHub release (latest SemVer)](https://img.shields.io/github/v/release/SteveZMTstudios/jekyll-mdui-theme?style=flat-square)](https://github.com/SteveZMTstudios/jekyll-mdui-theme/releases)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=flat-square)](/LICENSE)
 
+简体中文 | [English (US)](README_en.md)
+
 一个面向 GitHub Pages 的 Jekyll 主题，基于 mdui v2 组件实现，支持 `remote_theme` 一键接入。
 
 *mdui 是一个现代 Material Design 组件库。本主题基于 mdui v2 Web Components 实现，你可以[在此预览效果](https://stevezmt.top/jekyll-mdui-theme/)，或者[立刻开始使用](#快速开始github-pages)。*
 
-![thumbnail of jekyll-mdui-theme](thumbnail.jpg)
+<img src="thumbnail.png" alt="thumbnail of jekyll-mdui-theme" style="height:192px;width:auto;border-radius:28px;" />
 
 
 ## 快速开始（GitHub Pages）
