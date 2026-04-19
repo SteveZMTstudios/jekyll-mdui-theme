@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
-require_relative "lib/jekyll-theme-mdui/version"
+require_relative "lib/jekyll-mdui-theme/version"
 
 Gem::Specification.new do |spec|
-  spec.name          = "jekyll-theme-mdui"
+  spec.name          = "jekyll-mdui-theme"
   spec.version       = JekyllThemeMdui::VERSION
   spec.authors       = ["SteveZMTstudios"]
   spec.email         = ["me@stevezmt.top"]

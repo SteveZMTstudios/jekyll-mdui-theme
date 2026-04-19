@@ -77,7 +77,7 @@ defaults:
 exclude: # Jekyll 构建时需要排除的文件和目录
   - _site/
   - lib/
-  - jekyll-theme-mdui.gemspec
+  - jekyll-mdui-theme.gemspec
   - .sass-cache/
   - .jekyll-cache/
   - .jekyll-metadata

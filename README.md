@@ -6,8 +6,9 @@
 
 一个面向 GitHub Pages 的 Jekyll 主题，基于 mdui v2 组件实现，支持 `remote_theme` 一键接入。
 
-*mdui 是一个现代 Material Design 组件库。本主题基于 mdui v2 Web Components 实现，你可以[在此预览效果](https://stevezmt.top/jekyll-mdui-theme/)，或者[立刻开始使用](#快速开始github-pages-推荐)。*
+*mdui 是一个现代 Material Design 组件库。本主题基于 mdui v2 Web Components 实现，你可以[在此预览效果](https://stevezmt.top/jekyll-mdui-theme/)，或者[立刻开始使用](#快速开始github-pages)。*
 
+![thumbnail of jekyll-mdui-theme](thumbnail.jpg)
 
 
 ## 快速开始（GitHub Pages）
@@ -34,7 +35,7 @@ baseurl: "" # 用户主页仓库留空；项目仓库填 "/<repo>"
 remote_theme: SteveZMTstudios/jekyll-mdui-theme@v1.0.0
 ```
 
-## 关于 assets（避免 404）
+### 关于 assets（避免 404）
 
 本主题的 CSS/JS 位于主题仓库的 `assets/` 目录中。
 在 `remote_theme` + `jekyll-remote-theme` 模式下，这些资源会在构建阶段被 Jekyll 使用并输出，用户仓库无需复制一份 `assets`。
@@ -119,6 +120,8 @@ links:
     rel: "noopener noreferrer" # 可选，_blank 且未填写时会自动补齐
 ```
 
+完整的配置项请参见 [THEME_SYNTAX.md](THEME_SYNTAX.md) 和 [_config.yml](_config.yml)。
+
 ### 覆盖 GitHub 自动生成的 URLs
 
 模板通常依赖 GitHub 提供的 URL（如指向你的仓库的链接或下载项目的链接）。如果你想覆盖其中一个或多个 URL：
@@ -155,7 +158,7 @@ links:
 
 如果你想更改主题的 HTML 布局：
 
-#### 小改动（如添加自定义 favicon）
+#### 小改动
 
 1. 你可以在本地 `_includes` 文件夹中添加自定义文件。
 2. 本主题提供的[默认 includes](https://github.com/SteveZMTstudios/jekyll-mdui-theme/tree/main/_includes) 是一个很好的起点，并由[原始布局模板](https://github.com/SteveZMTstudios/jekyll-mdui-theme/blob/main/_layouts/default.html)包含。
@@ -168,7 +171,7 @@ links:
 #### 重大改动
 
 1. [复制原始模板](https://github.com/SteveZMTstudios/jekyll-mdui-theme/blob/main/_layouts/default.html)
-   （*Pro 提示：点击 "raw" 可以更容易地复制*）
+   （*Protip：点击 "raw" 可以更容易地复制*）
 2. 在你的网站中创建一个文件：`/_layouts/default.html`
 3. 将第一步复制的布局内容粘贴进去
 4. 根据你的需求自定义该布局
@@ -181,9 +184,9 @@ links:
 - `_layouts/default.html` - 主布局模板
 - `_includes/head-custom.html` - 可在站点中覆盖的自定义头部入口
 - `assets/css/*` 与 `assets/js/*` - 样式和脚本文件
-- `lib/jekyll-theme-mdui.rb` - 主题 Ruby 入口
-- `lib/jekyll-theme-mdui/version.rb` - 版本定义
-- `jekyll-theme-mdui.gemspec` - Gem 规范文件
+- `lib/jekyll-mdui-theme.rb` - 主题 Ruby 入口
+- `lib/jekyll-mdui-theme/version.rb` - 版本定义
+- `jekyll-mdui-theme.gemspec` - Gem 规范文件
 
 ### 浏览器兼容策略
 
