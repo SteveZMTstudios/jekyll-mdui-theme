@@ -76,10 +76,11 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.cn">
   <link rel="preconnect" href="https://fonts.gstatic.cn" crossorigin>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.cn/css2?family=Noto+Sans+SC:wght@400;500;700;800&family=Source+Serif+4:opsz,wght@8..60,500;8..60,700&display=swap" onerror="this.onerror=null;this.href='https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700;800&family=Source+Serif+4:opsz,wght@8..60,500;8..60,700&display=swap'">
-  <link rel="stylesheet" href="https://unpkg.com/mdui@2/mdui.css">
+  <!-- <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> -->
+  <link rel="preconnect" href="https://registry.npmmirror.com" crossorigin>
+  <link rel="stylesheet" href="{{ '/assets/css/fonts.googleapis.cn.min.css' | relative_url }}" onerror="this.onerror=null;this.href='https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,500;8..60,700&display=swap'">
+  <link rel="stylesheet" href="https://registry.npmmirror.com/mdui/2/files/mdui.css" onerror="this.onerror=null;this.href='https://unpkg.com/mdui@2/mdui.css'">
   <link rel="stylesheet" href="https://fonts.googleapis.cn/icon?family=Material+Icons" onerror="this.onerror=null;this.href='https://fonts.googleapis.com/icon?family=Material+Icons'">
   {% assign favicon_path = site.icon_path | default: '/favicon.ico' %}
   {% unless favicon_path == blank %}
@@ -122,14 +123,14 @@
     {% endif %}
   {% endunless %}
   
-  <script nomodule src="https://unpkg.com/@webcomponents/webcomponentsjs@2.8.0/webcomponents-loader.js" defer></script>
-  <script src="https://unpkg.com/mdui@2/mdui.global.js"></script>
+  <script nomodule src="https://registry.npmmirror.com/@webcomponents%2Fwebcomponentsjs/2.8.0/files/webcomponents-loader.js" onerror="this.onerror=null;this.src='https://unpkg.com/@webcomponents/webcomponentsjs@2.8.0/webcomponents-loader.js'" defer></script>
+  <script src="https://registry.npmmirror.com/mdui/2/files/mdui.global.js" onerror="this.onerror=null;this.src='https://unpkg.com/mdui@2/mdui.global.js'"></script>
   <script src="{{ '/assets/js/translate.min.js' | relative_url }}" onerror="this.onerror=null;this.src='https://cdn.staticfile.net/translate.js/3.18.66/translate.js'" defer></script>
   {% unless page.url == '/' %}
     <link rel="prefetch" href="{{ '/' | relative_url }}">
   {% endunless %}
-  <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
-  <link rel="stylesheet" href="{{ '/assets/css/theme-legacy.css' | relative_url }}">
+  <link rel="stylesheet" href="{{ '/assets/css/style.min.css' | relative_url }}" onerror="this.onerror=null;this.href='{{ '/assets/css/style.css' | relative_url }}'">
+  <link rel="stylesheet" href="{{ '/assets/css/theme-legacy.css' | relative_url }}" media="print" onload="this.media='all'">
   {% include head-custom.html %}
 </head>
 <body>
@@ -230,6 +231,8 @@
   </mdui-dialog>
 
   <main class="main-wrap" id="content" aria-label="主内容">
+    <a id="skip-to-content" href="#articleContent" aria-label="跳到主要内容">Skip to the content.</a>
+
     <section class="content">
       <header class="hero" aria-label="页面引导信息">
         <p class="hero-kicker">{{ repo_path | default: site.title }}</p>

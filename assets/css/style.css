@@ -74,7 +74,7 @@ html {
 }
 
 body {
-  font-family: "Noto Sans SC", "Segoe UI", sans-serif;
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", "Noto Sans", "Liberation Sans", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
   background-color: #f7f8fb;
   color: #1b1f24;
   background-color: rgb(var(--mdui-color-surface));
@@ -88,7 +88,7 @@ a {
 
 #skip-to-content {
   position: absolute;
-  top: 0;
+  top: -100px;
   left: 0;
   display: inline-block;
   padding: 0;
@@ -385,7 +385,7 @@ article.mdui-prose h1,
 article.mdui-prose h2,
 article.mdui-prose h3,
 article.mdui-prose h4 {
-  font-family: "Source Serif 4", "Noto Sans SC", serif;
+  font-family: "Source Serif 4", serif;
 }
 
 .highlighter-rouge {
