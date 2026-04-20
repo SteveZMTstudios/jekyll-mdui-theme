@@ -86,7 +86,8 @@ a {
   color: rgb(var(--mdui-color-primary));
 }
 
-#skip-to-content {
+#skip-to-content,
+.skip-to-content {
   position: absolute;
   top: -100px;
   left: 0;
@@ -103,7 +104,9 @@ a {
 }
 
 #skip-to-content:focus,
-#skip-to-content:focus-visible {
+#skip-to-content:focus-visible,
+.skip-to-content:focus,
+.skip-to-content:focus-visible {
   position: fixed;
   top: 10px;
   left: 10px;

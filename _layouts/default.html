@@ -78,9 +78,9 @@
   <link rel="preconnect" href="https://fonts.gstatic.cn" crossorigin>
   <!-- <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> -->
-  <link rel="preconnect" href="https://registry.npmmirror.com" crossorigin>
+  <link rel="preconnect" href="https://s4.zstatic.net" crossorigin>
   <link rel="stylesheet" href="{{ '/assets/css/fonts.googleapis.cn.min.css' | relative_url }}" onerror="this.onerror=null;this.href='https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,500;8..60,700&display=swap'">
-  <link rel="stylesheet" href="https://registry.npmmirror.com/mdui/2/files/mdui.css" referrerpolicy="no-referrer" onerror="this.onerror=null;this.href='https://unpkg.com/mdui@2/mdui.css'">
+  <link rel="stylesheet" href="https://s4.zstatic.net/npm/mdui@2.1.4/mdui.css" onerror="this.onerror=null;this.href='https://unpkg.com/mdui@2/mdui.css'">
   <link rel="stylesheet" href="https://fonts.googleapis.cn/icon?family=Material+Icons" onerror="this.onerror=null;this.href='https://fonts.googleapis.com/icon?family=Material+Icons'">
   {% assign favicon_path = site.icon_path | default: '/favicon.ico' %}
   {% unless favicon_path == blank %}
@@ -123,18 +123,19 @@
     {% endif %}
   {% endunless %}
   
-  <script nomodule src="https://registry.npmmirror.com/@webcomponents%2Fwebcomponentsjs/2.8.0/files/webcomponents-loader.js" referrerpolicy="no-referrer" onerror="this.onerror=null;this.src='https://unpkg.com/@webcomponents/webcomponentsjs@2.8.0/webcomponents-loader.js'" defer></script>
-  <script src="https://registry.npmmirror.com/mdui/2/files/mdui.global.js" referrerpolicy="no-referrer" onerror="this.onerror=null;this.src='https://unpkg.com/mdui@2/mdui.global.js'"></script>
+  <script nomodule src="https://s4.zstatic.net/npm/@webcomponents/webcomponentsjs@2.8.0/webcomponents-loader.js" onerror="this.onerror=null;this.src='https://unpkg.com/@webcomponents/webcomponentsjs@2.8.0/webcomponents-loader.js'" defer></script>
+  <script src="https://s4.zstatic.net/npm/mdui@2.1.4/mdui.global.js" onerror="this.onerror=null;this.src='https://unpkg.com/mdui@2/mdui.global.js'"></script>
   <script src="{{ '/assets/js/translate.min.js' | relative_url }}" onerror="this.onerror=null;this.src='https://cdn.staticfile.net/translate.js/3.18.66/translate.js'" defer></script>
   {% unless page.url == '/' %}
     <link rel="prefetch" href="{{ '/' | relative_url }}">
   {% endunless %}
   <link rel="stylesheet" href="{{ '/assets/css/style.min.css' | relative_url }}" onerror="this.onerror=null;this.href='{{ '/assets/css/style.css' | relative_url }}'">
   <link rel="stylesheet" href="{{ '/assets/css/theme-legacy.css' | relative_url }}" media="print" onload="this.media='all'">
+  <link rel="stylesheet" href="{{ '/assets/css/print.css' | relative_url }}" media="print">
   {% include head-custom.html %}
 </head>
 <body>
-  <a id="skip-to-content" href="#articleContent" aria-label="跳到主要内容">Skip to the content.</a>
+  <a id="skip-to-content" class="skip-to-content" href="#articleContent" aria-label="跳到主要内容">Skip to the content.</a>
 
   <div class="legacy-banner" id="legacyBanner" hidden>
     当前浏览器未完整支持 mdui Web Components，已切换为兼容阅读模式。
@@ -231,7 +232,7 @@
   </mdui-dialog>
 
   <main class="main-wrap" id="content" aria-label="主内容">
-    <a id="skip-to-content" href="#articleContent" aria-label="跳到主要内容">Skip to the content.</a>
+    <a class="skip-to-content" href="#articleContent" aria-label="跳到主要内容">Skip to the content.</a>
 
     <section class="content">
       <header class="hero" aria-label="页面引导信息">

@@ -87,6 +87,7 @@ bundle exec jekyll serve
 - Material Design 3 风格
 - 自动生成文章目录（H1/H2/H3）
 - 代码块复制按钮
+- 针对打印机优化的样式
 - 动态配色（基于 `theme_color` 生成 Material 配色）
 - 内置翻译脚本（单语言编写，全球用户自动翻译）
 - 亮色 / 暗色 / 自动主题切换

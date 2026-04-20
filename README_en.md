@@ -86,6 +86,7 @@ Visit: <http://127.0.0.1:4000>
 - Material Design 3 style
 - Automatic article table of contents generation (H1/H2/H3)
 - Code block copy button
+- Print-optimized styles
 - Dynamic color theming (generates Material palette from `theme_color`)
 - Built-in translation script (write in one language, global users see translation automatically)
 - Light / dark / auto theme switching

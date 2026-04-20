@@ -1,0 +1,205 @@
+/* Print layout tuned for article readability and predictable pagination. */
+
+@page {
+  size: auto;
+  margin: 14mm 12mm 16mm;
+}
+
+@media print {
+  :root {
+    --print-text-color: #111111;
+    --print-muted-color: #4a4a4a;
+    --print-border-color: #cfcfcf;
+  }
+
+  html,
+  body {
+    width: auto !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    background: #ffffff !important;
+    color: var(--print-text-color) !important;
+  }
+
+  body {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+
+  *,
+  *::before,
+  *::after {
+    box-shadow: none !important;
+    text-shadow: none !important;
+    filter: none !important;
+    animation: none !important;
+    transition: none !important;
+  }
+
+  .app-bar,
+  .app-drawer,
+  .legacy-banner,
+  .legacy-nav,
+  .translate-dropdown,
+  .translate-dialog,
+  .qr-dialog,
+  .scroll-top-fab,
+  .no-script-tip,
+  #skip-to-content,
+  .skip-to-content,
+  .hero-actions,
+  .article-share-actions,
+  .code-copy {
+    display: none !important;
+    visibility: hidden !important;
+  }
+
+  .main-wrap,
+  .content {
+    width: 100% !important;
+    max-width: none !important;
+    min-width: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  .hero {
+    margin: 0 0 8mm !important;
+    padding: 0 0 4mm !important;
+    border: 0 !important;
+    border-bottom: 1px solid var(--print-border-color) !important;
+    border-radius: 0 !important;
+    background: transparent !important;
+    color: var(--print-text-color) !important;
+  }
+
+  .hero-kicker {
+    margin: 0 0 1.5mm !important;
+    letter-spacing: 0.02em !important;
+    color: var(--print-muted-color) !important;
+  }
+
+  .hero-title {
+    margin: 0 !important;
+    font-size: 22pt !important;
+    line-height: 1.25 !important;
+    color: var(--print-text-color) !important;
+  }
+
+  .hero-subtitle {
+    margin: 2.5mm 0 0 !important;
+    font-size: 11pt !important;
+    line-height: 1.6 !important;
+    color: var(--print-muted-color) !important;
+  }
+
+  article.mdui-prose {
+    color: var(--print-text-color) !important;
+    font-size: 11pt !important;
+    line-height: 1.7 !important;
+  }
+
+  article.mdui-prose h1,
+  article.mdui-prose h2,
+  article.mdui-prose h3,
+  article.mdui-prose h4,
+  article.mdui-prose h5,
+  article.mdui-prose h6 {
+    color: var(--print-text-color) !important;
+    page-break-after: avoid;
+    page-break-inside: avoid;
+  }
+
+  article.mdui-prose a,
+  .site-footer a {
+    color: var(--print-text-color) !important;
+    text-decoration: underline !important;
+  }
+
+  article.mdui-prose a[href^="http"]::after {
+    content: " (" attr(href) ")";
+    font-size: 9pt;
+    color: var(--print-muted-color);
+    word-break: break-all;
+  }
+
+  article.mdui-prose img,
+  article.mdui-prose svg,
+  article.mdui-prose canvas,
+  article.mdui-prose video,
+  article.mdui-prose table,
+  article.mdui-prose pre,
+  article.mdui-prose blockquote {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+
+  article.mdui-prose img,
+  article.mdui-prose svg,
+  article.mdui-prose canvas {
+    max-width: 100% !important;
+    height: auto !important;
+  }
+
+  article.mdui-prose table {
+    width: 100% !important;
+    border-collapse: collapse !important;
+  }
+
+  article.mdui-prose th,
+  article.mdui-prose td {
+    border: 1px solid var(--print-border-color);
+    padding: 2.5mm 2mm;
+    vertical-align: top;
+  }
+
+  .code-shell,
+  .highlighter-rouge,
+  .code-scroll {
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+
+  .code-scroll {
+    overflow: visible !important;
+    border: 1px solid var(--print-border-color) !important;
+    border-radius: 0 !important;
+    background: #f8f8f8 !important;
+  }
+
+  .code-scroll pre,
+  .code-scroll .highlight pre,
+  article.mdui-prose pre,
+  article.mdui-prose code {
+    color: #000000 !important;
+    background: transparent !important;
+  }
+
+  .code-scroll pre,
+  .code-scroll .highlight pre,
+  article.mdui-prose pre {
+    width: auto !important;
+    min-width: 0 !important;
+    margin: 0 !important;
+    padding: 3mm !important;
+    white-space: pre-wrap !important;
+    overflow: visible !important;
+    word-break: break-word !important;
+    border: 0 !important;
+    border-radius: 0 !important;
+  }
+
+  article.mdui-prose :not(pre) > code {
+    border: 1px solid var(--print-border-color);
+    background: #f1f1f1 !important;
+    color: #000000 !important;
+  }
+
+  .site-footer {
+    margin-top: 10mm !important;
+    padding-top: 4mm !important;
+    border-top: 1px solid var(--print-border-color) !important;
+    color: var(--print-muted-color) !important;
+    font-size: 9pt !important;
+  }
+}
