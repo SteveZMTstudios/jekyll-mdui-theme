@@ -75,14 +75,20 @@
 
     /* Skeleton placeholder styles */
     .skeleton-line {
-      background: linear-gradient(90deg, #e0e0e0 25%, #f0f0f0 50%, #e0e0e0 75%);
+      background: linear-gradient(90deg, rgba(0, 0, 0, 0.08) 25%, rgba(0, 0, 0, 0.16) 50%, rgba(0, 0, 0, 0.08) 75%);
       background-size: 200% 100%;
       animation: skeleton-loading 1.5s infinite;
       border-radius: 4px;
     }
     html.mdui-theme-dark .skeleton-line,
-    html.mdui-theme-auto .skeleton-line {
-      background: linear-gradient(90deg, #2a2d35 25%, #3a3d46 50%, #2a2d35 75%);
+    @media (prefers-color-scheme: dark) {
+      html.mdui-theme-auto .skeleton-line {
+        background: linear-gradient(90deg, rgba(255, 255, 255, 0.08) 25%, rgba(255, 255, 255, 0.16) 50%, rgba(255, 255, 255, 0.08) 75%);
+        background-size: 200% 100%;
+      }
+    }
+    html.mdui-theme-dark .skeleton-line {
+      background: linear-gradient(90deg, rgba(255, 255, 255, 0.08) 25%, rgba(255, 255, 255, 0.16) 50%, rgba(255, 255, 255, 0.08) 75%);
       background-size: 200% 100%;
     }
     @keyframes skeleton-loading {

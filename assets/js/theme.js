@@ -1281,6 +1281,13 @@
             rememberCheckbox.checked = false;
           }
           clearStoredPassword();
+          if (dialog && window.customElements) {
+            window.customElements.whenDefined('mdui-dialog').then(() => {
+              dialog.open = true;
+            });
+          } else if (legacyFallback) {
+            legacyFallback.hidden = false;
+          }
         } else if (input) {
           setPasswordError(msg);
         } else if (legacyInput) {
@@ -1306,9 +1313,14 @@
       }
     }
 
-    if (dialog && window.customElements && window.customElements.get('mdui-dialog')) {
-      // Use MDUI dialog
-      dialog.open = true;
+    if (dialog && window.customElements) {
+      if (!storedPassword) {
+        window.customElements.whenDefined('mdui-dialog').then(() => {
+          if (!resolving && article.classList.contains('encrypted-content-placeholder')) {
+            dialog.open = true;
+          }
+        });
+      }
       if (btn) {
         btn.addEventListener('click', () => attemptDecrypt(input.value));
       }
@@ -1346,7 +1358,9 @@
       }
     } else if (legacyFallback && legacyForm) {
       // Use fallback
-      legacyFallback.hidden = false;
+      if (!storedPassword) {
+        legacyFallback.hidden = false;
+      }
       legacyForm.addEventListener('submit', (e) => {
         e.preventDefault();
         attemptDecrypt(legacyInput.value);
