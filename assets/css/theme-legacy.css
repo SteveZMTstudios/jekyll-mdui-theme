@@ -21,8 +21,14 @@ body.legacy-mode .scroll-top-fab {
 }
 
 html.no-js .legacy-banner,
-body.legacy-mode .legacy-banner {
+body.legacy-mode .legacy-banner,
+html.no-js .legacy-crypto-fallback,
+body.legacy-mode .legacy-crypto-fallback {
   display: block;
+}
+
+html.no-js .legacy-banner,
+body.legacy-mode .legacy-banner {
   margin: 12px;
   padding: 12px;
   border-radius: 12px;
@@ -98,6 +104,35 @@ body.legacy-mode.legacy-theme-dark .legacy-banner {
 }
 
 body.legacy-mode.legacy-theme-dark .legacy-nav {
+  border-color: #3b4251;
+  background: #252b36;
+}
+
+.legacy-crypto-form {
+  padding: 16px;
+  margin: 16px 0;
+  border: 1px solid #d6dce8;
+  border-radius: 12px;
+  background: #f7f8fb;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  max-width: 400px;
+}
+
+html.mdui-theme-dark .legacy-crypto-form,
+body.legacy-mode.legacy-theme-dark .legacy-crypto-form {
+  border-color: #3b4251;
+  background: #252b36;
+  color: #e7ebf1;
+}
+
+.legacy-crypto-form input, .legacy-crypto-form button {
+  padding: 8px 12px;
+  border: 1px solid #bfd1ff;
+  border-radius: 8px;
+  font: inherit;
+}
   border-color: #30415a;
   background: #1a2434;
 }

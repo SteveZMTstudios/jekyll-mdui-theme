@@ -6,6 +6,10 @@ layout: default
 
 [链接到另一个页面]({{ '/test/' | relative_url }})。
 
+[测试加密](test-crypto-auto)
+
+密码：1234
+
 段落之间应有空白。
 
 段落之间应有空白。建议包含 README 文件，或包含项目相关信息的文件。

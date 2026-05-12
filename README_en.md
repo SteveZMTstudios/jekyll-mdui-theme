@@ -94,6 +94,56 @@ Visit: <http://127.0.0.1:4000>
 - Sidebar article card (title + URL copy, Web Share, QR code)
 - GitHub Pages style buttons (View on GitHub / Download .zip / Download .tar.gz)
 
+## Encrypted Pages (Optional)
+
+The theme includes built-in client-side decryption. Use the scripts below to encrypt or decrypt Markdown before build.
+
+### 1) Mark a Markdown page for encryption
+
+Add `encrypt` in the Front Matter:
+
+```yml
+---
+title: Encrypted Page
+encrypt: "your-password"
+password_prompt: "Enter password to decrypt" # Optional: custom dialog text
+---
+```
+
+### 2) Run the encryption script
+
+Node.js version:
+
+```bash
+node script/encrypt.js path/to/file.md
+node script/encrypt.js path/to/folder
+```
+
+Python version (install dependency first):
+
+```bash
+pip install cryptography
+python script/encrypt.py path/to/file.md
+python script/encrypt.py path/to/folder
+```
+
+> The script reads the `encrypt` field as the password, writes `encrypted: true`, `crypto_*`, and `ciphertext`, and removes the plaintext body.
+
+### 3) Restore plaintext
+
+Use the decrypt script to restore the original Markdown content:
+
+```bash
+python script/decrypt.py path/to/file.md your-password
+python script/decrypt.py path/to/folder your-password
+```
+
+### 4) Runtime behavior
+
+- The password field uses form validation and helper text; invalid passwords shake and clear the input.
+- “Remember password” stores the password in local storage.
+- If the stored credential no longer matches, a warning will appear: “Credentials have changed since your last visit.”
+
 ## Configuration
 
 The mdui theme follows these variables in `_config.yml`:

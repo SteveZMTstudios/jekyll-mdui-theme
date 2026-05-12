@@ -72,6 +72,48 @@
         background-color: #111318;
       }
     }
+
+    /* Skeleton placeholder styles */
+    .skeleton-line {
+      background: linear-gradient(90deg, #e0e0e0 25%, #f0f0f0 50%, #e0e0e0 75%);
+      background-size: 200% 100%;
+      animation: skeleton-loading 1.5s infinite;
+      border-radius: 4px;
+    }
+    html.mdui-theme-dark .skeleton-line,
+    html.mdui-theme-auto .skeleton-line {
+      background: linear-gradient(90deg, #2a2d35 25%, #3a3d46 50%, #2a2d35 75%);
+      background-size: 200% 100%;
+    }
+    @keyframes skeleton-loading {
+      0% { background-position: 200% 0; }
+      100% { background-position: -200% 0; }
+    }
+    /* Shake animation */
+    @keyframes shake-x {
+      0%, 100% { transform: translateX(0); }
+      20%, 60% { transform: translateX(-6px); }
+      40%, 80% { transform: translateX(6px); }
+    }
+    .shake-once {
+      animation: shake-x 0.4s ease-in-out;
+    }
+    .password-dialog-content {
+      overflow-x: hidden;
+    }
+    .password-dialog-content mdui-checkbox {
+      margin-top: 8px;
+    }
+    .crypto-warning {
+      margin: 8px 0 0;
+      font-size: 0.9rem;
+      text-align: center;
+      color: #b45309;
+    }
+    html.mdui-theme-dark .crypto-warning,
+    html.mdui-theme-auto .crypto-warning {
+      color: #fbbf24;
+    }
   </style>
 
   <link rel="preconnect" href="https://fonts.googleapis.cn">
@@ -282,9 +324,65 @@
         {% endif %}
       </header>
 
-      <article class="mdui-prose" id="articleContent">
-        {{ content }}
-      </article>
+      {% if page.encrypted %}
+        <article class="mdui-prose encrypted-content-placeholder" id="articleContent">
+          <noscript>
+            <div class="no-script-tip">该页面已加密，需开启 JavaScript 并输入密码后方可查看。</div>
+          </noscript>
+          
+          <div class="skeleton-placeholder" aria-hidden="true" style="margin-top: 16px;">
+            <div class="skeleton-line" style="width: 40%; height: 28px; margin-bottom: 24px;"></div>
+            <div class="skeleton-line" style="width: 100%; height: 16px; margin-bottom: 12px;"></div>
+            <div class="skeleton-line" style="width: 100%; height: 16px; margin-bottom: 12px;"></div>
+            <div class="skeleton-line" style="width: 80%; height: 16px; margin-bottom: 24px;"></div>
+            <div class="skeleton-line" style="width: 60%; height: 24px; margin-bottom: 16px;"></div>
+            <div class="skeleton-line" style="width: 100%; height: 16px; margin-bottom: 12px;"></div>
+            <div class="skeleton-line" style="width: 90%; height: 16px; margin-bottom: 124px;"></div>
+            <div class="skeleton-line" style="width: 40%; height: 28px; margin-bottom: 24px;"></div>
+            <div class="skeleton-line" style="width: 100%; height: 16px; margin-bottom: 12px;"></div>
+            <div class="skeleton-line" style="width: 100%; height: 16px; margin-bottom: 12px;"></div>
+            <div class="skeleton-line" style="width: 80%; height: 16px; margin-bottom: 24px;"></div>
+            <div class="skeleton-line" style="width: 60%; height: 24px; margin-bottom: 16px;"></div>
+            <div class="skeleton-line" style="width: 100%; height: 16px; margin-bottom: 12px;"></div>
+            <div class="skeleton-line" style="width: 90%; height: 16px; margin-bottom: 12px;"></div>
+
+          </div>
+
+          <div class="legacy-crypto-fallback" id="legacyCryptoFallback" hidden>
+            <form id="legacyCryptoForm" class="legacy-crypto-form">
+              <label for="legacyCryptoPassword">{{ page.password_prompt | default: '输入密码以解密此页' }}</label>
+              <input type="password" id="legacyCryptoPassword" required>
+              <button type="submit">解密</button>
+            </form>
+          </div>
+
+          <mdui-dialog id="passwordDialog" headline="访问受限" close-on-esc="false" close-on-overlay-click="false" icon="lock">
+            <div class="password-dialog-content">
+              <p style="text-align: center;">{{ page.password_prompt | default: '输入密码以解密此页' }}</p>
+              <p id="cryptoCredentialWarning" class="crypto-warning" hidden>自上次访问后，此页面的凭据已修改。</p>
+              <mdui-text-field id="cryptoPasswordInput" type="password" label="密码" toggle-password clearable required></mdui-text-field>
+              <mdui-checkbox id="rememberPassword">记住密码</mdui-checkbox>
+              
+            </div>
+            <mdui-button-icon slot="action" icon="content_paste" id="pastePasswordButton" aria-label="粘贴密码" title="粘贴密码" style="margin-right: auto;"></mdui-button-icon>
+            <mdui-button slot="action" variant="tonal" id="decryptButtonText" >解密</mdui-button>
+          </mdui-dialog>
+
+          <script type="application/json" id="crypto-data">
+            {
+              "encrypted": true,
+              "salt": "{{ page.crypto_salt }}",
+              "iv": "{{ page.crypto_iv }}",
+              "tag": "{{ page.crypto_tag }}",
+              "ciphertext": "{{ page.ciphertext }}"
+            }
+          </script>
+        </article>
+      {% else %}
+        <article class="mdui-prose" id="articleContent">
+          {{ content }}
+        </article>
+      {% endif %}
 
       <footer class="site-footer">
         <div class="footer-info">

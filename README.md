@@ -95,6 +95,56 @@ bundle exec jekyll serve
 - 侧边栏文章卡片（标题 + URL 复制、Web Share、二维码）
 - GitHub Pages 风格按钮（View on GitHub / Download .zip / Download .tar.gz）
 
+## 加密文档
+
+主题内置前端解密逻辑，配套脚本可在构建前对 Markdown 进行加密或解密。
+
+### 1) 在 Markdown 中声明加密
+
+在 Front Matter 中添加 `encrypt` 字段：
+
+```yml
+---
+title: 需要加密的页面
+encrypt: "your-password"
+password_prompt: "输入密码以解密此页" # 可选：自定义弹窗提示
+---
+```
+
+### 2) 执行加密脚本
+
+Node.js 版本：
+
+```bash
+node script/encrypt.js path/to/file.md
+node script/encrypt.js path/to/folder
+```
+
+Python 版本（需先安装依赖）：
+
+```bash
+pip install cryptography
+python script/encrypt.py path/to/file.md
+python script/encrypt.py path/to/folder
+```
+
+> 脚本会读取 `encrypt` 字段作为密码，并自动写入 `encrypted: true`、`crypto_*` 以及 `ciphertext`，并移除原始明文正文。
+
+### 3) 还原为未加密状态
+
+使用解密脚本还原原始 Markdown 正文：
+
+```bash
+python script/decrypt.py path/to/file.md your-password
+python script/decrypt.py path/to/folder your-password
+```
+
+### 4) 访问体验说明
+
+- 密码输入框支持表单验证与错误提示，密码错误时会清空并摇动输入框。
+- 可勾选“记住密码”，密码将存储于浏览器本地存储。
+- 若页面密钥变更导致自动解密失败，会提示“自上次访问后，此页面的凭据已修改。”
+
 
 ## 配置项
 
