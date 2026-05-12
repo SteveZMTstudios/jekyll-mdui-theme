@@ -73,6 +73,7 @@
       }
     }
 
+    {% if page.encrypted %}
     /* Skeleton placeholder styles */
     .skeleton-line {
       background: linear-gradient(90deg, rgba(0, 0, 0, 0.08) 25%, rgba(0, 0, 0, 0.16) 50%, rgba(0, 0, 0, 0.08) 75%);
@@ -80,15 +81,14 @@
       animation: skeleton-loading 1.5s infinite;
       border-radius: 4px;
     }
-    html.mdui-theme-dark .skeleton-line,
     @media (prefers-color-scheme: dark) {
       html.mdui-theme-auto .skeleton-line {
-        background: linear-gradient(90deg, rgba(255, 255, 255, 0.08) 25%, rgba(255, 255, 255, 0.16) 50%, rgba(255, 255, 255, 0.08) 75%);
+        background: linear-gradient(90deg, rgba(255, 255, 255, 0.15) 25%, rgba(255, 255, 255, 0.25) 50%, rgba(255, 255, 255, 0.15) 75%);
         background-size: 200% 100%;
       }
     }
     html.mdui-theme-dark .skeleton-line {
-      background: linear-gradient(90deg, rgba(255, 255, 255, 0.08) 25%, rgba(255, 255, 255, 0.16) 50%, rgba(255, 255, 255, 0.08) 75%);
+      background: linear-gradient(90deg, rgba(255, 255, 255, 0.15) 25%, rgba(255, 255, 255, 0.25) 50%, rgba(255, 255, 255, 0.15) 75%);
       background-size: 200% 100%;
     }
     @keyframes skeleton-loading {
@@ -118,8 +118,9 @@
     }
     html.mdui-theme-dark .crypto-warning,
     html.mdui-theme-auto .crypto-warning {
-      color: #fbbf24;
+      color: #ebab05;
     }
+    {% endif %}
   </style>
 
   <link rel="preconnect" href="https://fonts.googleapis.cn">
@@ -426,5 +427,8 @@
   <script nomodule src="{{ '/assets/js/theme-legacy.js' | relative_url }}" defer></script>
   <script type="module" src="{{ '/assets/js/theme.js' | relative_url }}"></script>
   <script type="module" src="{{ '/assets/js/instant.min.js' | relative_url }}"></script>
+  {% if page.encrypted %}
+  <script type="module" src="{{ '/assets/js/crypto.js' | relative_url }}"></script>
+  {% endif %}
 </body>
 </html>
