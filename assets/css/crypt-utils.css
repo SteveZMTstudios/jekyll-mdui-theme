@@ -1,0 +1,59 @@
+/* Crypto fallback styles */
+.crypto-fallback {
+    display: none;
+}
+html.no-js .crypto-fallback,
+html.crypto-unsupported .crypto-fallback {
+    display: block !important;
+}
+html.no-js .crypto-interactive,
+html.crypto-unsupported .crypto-interactive {
+    display: none !important;
+}
+
+/* Skeleton placeholder styles */
+.skeleton-line {
+    background: linear-gradient(90deg, rgba(0, 0, 0, 0.08) 25%, rgba(0, 0, 0, 0.16) 50%, rgba(0, 0, 0, 0.08) 75%);
+    background-size: 200% 100%;
+    animation: skeleton-loading 1.5s infinite;
+    border-radius: 4px;
+}
+@media (prefers-color-scheme: dark) {
+    html.mdui-theme-auto .skeleton-line {
+    background: linear-gradient(90deg, rgba(255, 255, 255, 0.15) 25%, rgba(255, 255, 255, 0.25) 50%, rgba(255, 255, 255, 0.15) 75%);
+    background-size: 200% 100%;
+    }
+}
+html.mdui-theme-dark .skeleton-line {
+    background: linear-gradient(90deg, rgba(255, 255, 255, 0.15) 25%, rgba(255, 255, 255, 0.25) 50%, rgba(255, 255, 255, 0.15) 75%);
+    background-size: 200% 100%;
+}
+@keyframes skeleton-loading {
+    0% { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
+}
+/* Shake animation */
+@keyframes shake-x {
+    0%, 100% { transform: translateX(0); }
+    20%, 60% { transform: translateX(-6px); }
+    40%, 80% { transform: translateX(6px); }
+}
+.shake-once {
+    animation: shake-x 0.4s ease-in-out;
+}
+.password-dialog-content {
+    overflow-x: hidden;
+}
+.password-dialog-content mdui-checkbox {
+    margin-top: 8px;
+}
+.crypto-warning {
+    margin: 8px 0 0;
+    font-size: 0.9rem;
+    text-align: center;
+    color: #b45309;
+}
+html.mdui-theme-dark .crypto-warning,
+html.mdui-theme-auto .crypto-warning {
+    color: #ebab05;
+}

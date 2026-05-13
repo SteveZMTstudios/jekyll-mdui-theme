@@ -101,49 +101,42 @@ bundle exec jekyll serve
 
 ### 1) 在 Markdown 中声明加密
 
-在 Front Matter 中添加 `encrypt` 字段：
+在 Front Matter 中添加 `password` 字段：
 
 ```yml
 ---
 title: 需要加密的页面
-encrypt: "your-password"
+password: "your-password"
 password_prompt: "输入密码以解密此页" # 可选：自定义弹窗提示
 ---
 ```
 
 ### 2) 执行加密脚本
 
-Node.js 版本：
-
-```bash
-node script/encrypt.js path/to/file.md
-node script/encrypt.js path/to/folder
-```
-
-Python 版本（需先安装依赖）：
 
 ```bash
 pip install cryptography
-python script/encrypt.py path/to/file.md
-python script/encrypt.py path/to/folder
+cd path/to/your/site
+curl -s https://stevezmt.top/jekyll-mdui-theme/script/encrypt.py | python3 -
+```
+或者直接从 GitHub：
+```
+curl -s https://raw.githubusercontent.com/SteveZMTstudios/jekyll-mdui-theme/main/script/encrypt.py | python3 -
 ```
 
-> 脚本会读取 `encrypt` 字段作为密码，并自动写入 `encrypted: true`、`crypto_*` 以及 `ciphertext`，并移除原始明文正文。
 
 ### 3) 还原为未加密状态
 
-使用解密脚本还原原始 Markdown 正文：
+使用解密脚本还原原始 Markdown 正文，需要输入密码：
 
 ```bash
-python script/decrypt.py path/to/file.md your-password
-python script/decrypt.py path/to/folder your-password
+curl -s https://stevezmt.top/jekyll-mdui-theme/script/decrypt.py | python3 -
 ```
 
-### 4) 访问体验说明
+```bash
+curl -s https://raw.githubusercontent.com/SteveZMTstudios/jekyll-mdui-theme/main/script/decrypt.py | python3 -
+```
 
-- 密码输入框支持表单验证与错误提示，密码错误时会清空并摇动输入框。
-- 可勾选“记住密码”，密码将存储于浏览器本地存储。
-- 若页面密钥变更导致自动解密失败，会提示“自上次访问后，此页面的凭据已修改。”
 
 
 ## 配置项

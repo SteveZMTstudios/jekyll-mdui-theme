@@ -22,17 +22,25 @@ def yaml_quote(value):
     return f'"{escaped}"'
 
 
-def decrypt_file(file_path, password):
+def read_encrypted_file(file_path):
     with open(file_path, 'r', encoding='utf-8') as f:
         content = f.read()
 
     match = re.match(r'^---\r?\n([\s\S]+?)\r?\n---\r?\n([\s\S]*)$', content)
     if not match:
-        return
+        return None
 
     front_matter = match.group(1)
     if 'encrypted: true' not in front_matter:
-        return
+        return None
+
+    return front_matter
+
+
+def decrypt_file(file_path, password):
+    front_matter = read_encrypted_file(file_path)
+    if not front_matter:
+        return True
 
     salt_b64 = parse_value(front_matter, 'crypto_salt')
     iv_b64 = parse_value(front_matter, 'crypto_iv')
@@ -41,7 +49,7 @@ def decrypt_file(file_path, password):
 
     if not salt_b64 or not iv_b64 or not tag_b64 or not ciphertext_b64:
         print(f"Missing crypto fields in {file_path}")
-        return
+        return False
 
     salt = base64.b64decode(salt_b64)
     iv = base64.b64decode(iv_b64)
@@ -61,7 +69,7 @@ def decrypt_file(file_path, password):
         plaintext = aesgcm.decrypt(iv, ciphertext + tag, None).decode('utf-8')
     except Exception as exc:
         print(f"Failed to decrypt {file_path}: {exc}")
-        return
+        return False
 
     lines = front_matter.split('\n')
     filtered = []
@@ -78,7 +86,7 @@ def decrypt_file(file_path, password):
             continue
         filtered.append(line)
 
-    filtered.append(f'encrypt: {yaml_quote(password)}')
+    filtered.append(f'password: {yaml_quote(password)}')
 
     new_front_matter = "---\n" + "\n".join(filtered) + "\n---\n"
     new_content = new_front_matter + "\n" + plaintext + "\n"
@@ -87,16 +95,40 @@ def decrypt_file(file_path, password):
         f.write(new_content)
 
     print(f"Decrypted {file_path}")
+    return True
+
+
+def prompt_password_for_file(file_path):
+    print(f"Preparing to decrypt {file_path}")
+    answer = getpass.getpass('Enter password: ')
+    answer = answer.strip()
+    return answer if answer else None
+
+
+def decrypt_with_retry(file_path, password):
+    current_password = password
+    while True:
+        if not current_password:
+            current_password = prompt_password_for_file(file_path)
+            if not current_password:
+                print(f"Skipping {file_path}: password is required.")
+                return
+
+        if decrypt_file(file_path, current_password):
+            return
+
+        print(f"Password did not work for {file_path}. Please try again.")
+        current_password = None
 
 
 def scan_and_decrypt(target, password):
     if os.path.isfile(target):
-        decrypt_file(target, password)
+        decrypt_with_retry(target, password)
         return
 
     if os.path.isdir(target):
         for file_path in glob.glob(os.path.join(target, '**/*.md'), recursive=True):
-            decrypt_file(file_path, password)
+            decrypt_with_retry(file_path, password)
 
 
 def prompt_password():

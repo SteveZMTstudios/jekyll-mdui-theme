@@ -7,3 +7,5 @@ node_modules
 .bundle/
 vendor
 .agents/
+__pycache__/
+jekyll-mdui-theme.wiki/
