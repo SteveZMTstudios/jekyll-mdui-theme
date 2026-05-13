@@ -48,10 +48,17 @@
         themeMode = 'auto';
       }
 
-      themeClasses.forEach(function (themeClass) {
-        rootElement.classList.remove(themeClass);
-      });
-      rootElement.classList.add('mdui-theme-' + themeMode);
+      var currentClass = rootElement.className;
+      for (var i = 0; i < themeClasses.length; i++) {
+        currentClass = currentClass.replace(new RegExp('\\b' + themeClasses[i] + '\\b', 'g'), '');
+      }
+      currentClass += ' mdui-theme-' + themeMode;
+
+      if (!window.crypto || !window.crypto.subtle || !window.TextDecoder || !window.customElements) {
+        currentClass += ' crypto-unsupported';
+      }
+      
+      rootElement.className = currentClass.replace(/\s+/g, ' ').replace(/^\s+|\s+$/g, '');
     })();
   </script>
   <style>
@@ -74,6 +81,19 @@
     }
 
     {% if page.encrypted %}
+    /* Crypto fallback styles */
+    .crypto-fallback {
+      display: none;
+    }
+    html.no-js .crypto-fallback,
+    html.crypto-unsupported .crypto-fallback {
+      display: block !important;
+    }
+    html.no-js .crypto-interactive,
+    html.crypto-unsupported .crypto-interactive {
+      display: none !important;
+    }
+
     /* Skeleton placeholder styles */
     .skeleton-line {
       background: linear-gradient(90deg, rgba(0, 0, 0, 0.08) 25%, rgba(0, 0, 0, 0.16) 50%, rgba(0, 0, 0, 0.08) 75%);
@@ -180,6 +200,9 @@
   {% endunless %}
   <link rel="stylesheet" href="{{ '/assets/css/style.min.css' | relative_url }}" onerror="this.onerror=null;this.href='{{ '/assets/css/style.css' | relative_url }}'">
   <link rel="stylesheet" href="{{ '/assets/css/theme-legacy.css' | relative_url }}" media="print" onload="this.media='all'">
+  <noscript>
+    <link rel="stylesheet" href="{{ '/assets/css/theme-legacy.css' | relative_url }}">
+  </noscript>
   <link rel="stylesheet" href="{{ '/assets/css/print.css' | relative_url }}" media="print">
   {% include head-custom.html %}
 </head>
@@ -300,13 +323,22 @@
         {% if show_github_action or show_download_actions or custom_links.size > 0 %}
           <div class="hero-actions">
             {% if show_github_action %}
-              <mdui-button href="{{ repo_url }}" target="_blank" rel="noopener" icon="code" variant="filled">
-                在 GitHub 上查看
-              </mdui-button>
+              <div class="hero-action-item">
+                <mdui-button href="{{ repo_url }}" target="_blank" rel="noopener" icon="code" variant="filled">
+                  在 GitHub 上查看
+                </mdui-button>
+                <a class="hero-action-link" href="{{ repo_url }}" target="_blank" rel="noopener">在 GitHub 上查看</a>
+              </div>
             {% endif %}
             {% if show_download_actions %}
-              <mdui-button href="{{ zip_url }}" icon="download" variant="tonal">下载 .zip</mdui-button>
-              <mdui-button href="{{ tar_url }}" icon="download" variant="tonal">下载 .tar.gz</mdui-button>
+              <div class="hero-action-item">
+                <mdui-button href="{{ zip_url }}" icon="download" variant="tonal">下载 .zip</mdui-button>
+                <a class="hero-action-link" href="{{ zip_url }}">下载 .zip</a>
+              </div>
+              <div class="hero-action-item">
+                <mdui-button href="{{ tar_url }}" icon="download" variant="tonal">下载 .tar.gz</mdui-button>
+                <a class="hero-action-link" href="{{ tar_url }}">下载 .tar.gz</a>
+              </div>
             {% endif %}
             {% for link in custom_links %}
               {% assign link_name = link.name | default: link.title %}
@@ -322,9 +354,14 @@
                 {% assign link_rel = 'noopener noreferrer' %}
               {% endif %}
               {% if link_name != blank and link_url != blank %}
-                <mdui-button href="{{ link_url }}" target="{{ link_target }}" variant="{{ link_variant }}"{% if link_icon != blank %} icon="{{ link_icon }}"{% endif %}{% if link_rel != blank %} rel="{{ link_rel }}"{% endif %}>
-                  {{ link_name }}
-                </mdui-button>
+                <div class="hero-action-item">
+                  <mdui-button href="{{ link_url }}" target="{{ link_target }}" variant="{{ link_variant }}"{% if link_icon != blank %} icon="{{ link_icon }}"{% endif %}{% if link_rel != blank %} rel="{{ link_rel }}"{% endif %}>
+                    {{ link_name }}
+                  </mdui-button>
+                  <a class="hero-action-link" href="{{ link_url }}" target="{{ link_target }}"{% if link_rel != blank %} rel="{{ link_rel }}"{% endif %}>
+                    {{ link_name }}
+                  </a>
+                </div>
               {% endif %}
             {% endfor %}
           </div>
@@ -333,11 +370,10 @@
 
       {% if page.encrypted %}
         <article class="mdui-prose encrypted-content-placeholder" id="articleContent">
-          <noscript>
-            <div class="no-script-tip">该页面已加密，需开启 JavaScript 并输入密码后方可查看。</div>
-          </noscript>
+          <div class="crypto-fallback">{{ content }}</div>
           
-          <div class="skeleton-placeholder" aria-hidden="true" style="margin-top: 16px;">
+          <div class="crypto-interactive">
+            <div class="skeleton-placeholder" aria-hidden="true" style="margin-top: 16px;">
             <div class="skeleton-line" style="width: 40%; height: 28px; margin-bottom: 24px;"></div>
             <div class="skeleton-line" style="width: 100%; height: 16px; margin-bottom: 12px;"></div>
             <div class="skeleton-line" style="width: 100%; height: 16px; margin-bottom: 12px;"></div>
@@ -355,14 +391,6 @@
 
           </div>
 
-          <div class="legacy-crypto-fallback" id="legacyCryptoFallback" hidden>
-            <form id="legacyCryptoForm" class="legacy-crypto-form">
-              <label for="legacyCryptoPassword">{{ page.password_prompt | default: '输入密码以解密此页' }}</label>
-              <input type="password" id="legacyCryptoPassword" required>
-              <button type="submit">解密</button>
-            </form>
-          </div>
-
           <mdui-dialog id="passwordDialog" headline="访问受限" close-on-esc="false" close-on-overlay-click="false" icon="lock">
             <div class="password-dialog-content">
               <p style="text-align: center;">{{ page.password_prompt | default: '输入密码以解密此页' }}</p>
@@ -374,10 +402,13 @@
             <mdui-button-icon slot="action" icon="content_paste" id="pastePasswordButton" aria-label="粘贴密码" title="粘贴密码" style="margin-right: auto;"></mdui-button-icon>
             <mdui-button slot="action" variant="tonal" id="decryptButtonText" >解密</mdui-button>
           </mdui-dialog>
+          </div>
 
+          {% assign save_pass = page['save-pass'] | default: site['save-pass'] | default: '' %}
           <script type="application/json" id="crypto-data">
             {
               "encrypted": true,
+              "savePass": "{{ save_pass }}",
               "salt": "{{ page.crypto_salt }}",
               "iv": "{{ page.crypto_iv }}",
               "tag": "{{ page.crypto_tag }}",

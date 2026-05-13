@@ -379,6 +379,14 @@ a {
   gap: 10px;
 }
 
+.hero-action-item {
+  display: contents;
+}
+
+.hero-action-link {
+  display: none !important;
+}
+
 article.mdui-prose {
   max-width: none;
   color: rgb(var(--mdui-color-on-surface));
@@ -654,7 +662,8 @@ article.mdui-prose .err {
     gap: 8px;
   }
 
-  .hero-actions mdui-button {
+  .hero-actions mdui-button,
+  .hero-actions .hero-action-link {
     width: 100%;
   }
 

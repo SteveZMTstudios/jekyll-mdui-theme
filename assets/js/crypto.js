@@ -81,6 +81,9 @@
     const rememberCheckbox = document.getElementById('rememberPassword');
     const credentialWarning = document.getElementById('cryptoCredentialWarning');
     const storageKey = 'crypto-password:' + window.location.pathname;
+    const savePassMode = String(cryptoData.savePass || '').trim().toLowerCase();
+    const savePassDisabled = savePassMode === 'disabled' || savePassMode === 'disable';
+    const savePassDefaultOn = savePassMode === 'on' || savePassMode === 'true' || savePassMode === 'yes';
 
     // Show initial TOC skeleton if encrypted
     if (toc) {
@@ -99,14 +102,26 @@
     }
 
     let storedPassword = '';
-    try {
-      storedPassword = window.localStorage.getItem(storageKey) || '';
-    } catch (error) {
-      storedPassword = '';
+    if (!savePassDisabled) {
+      try {
+        storedPassword = window.localStorage.getItem(storageKey) || '';
+      } catch (error) {
+        storedPassword = '';
+      }
     }
 
     if (rememberCheckbox) {
-      rememberCheckbox.checked = Boolean(storedPassword);
+      if (savePassDisabled) {
+        rememberCheckbox.checked = false;
+        rememberCheckbox.disabled = true;
+      } else if (storedPassword) {
+        rememberCheckbox.checked = true;
+      } else {
+        rememberCheckbox.checked = savePassDefaultOn;
+      }
+    }
+    if (savePassDisabled && input) {
+      input.setAttribute('autocomplete', 'off');
     }
 
     let resolving = false;
@@ -195,14 +210,16 @@
         };
         document.head.appendChild(script);
 
-        if (rememberCheckbox && rememberCheckbox.checked) {
-          try {
-            window.localStorage.setItem(storageKey, password);
-          } catch (error) {
-            // Ignore storage failures.
+        if (!savePassDisabled) {
+          if (rememberCheckbox && rememberCheckbox.checked) {
+            try {
+              window.localStorage.setItem(storageKey, password);
+            } catch (error) {
+              // Ignore storage failures.
+            }
+          } else {
+            clearStoredPassword();
           }
-        } else {
-          clearStoredPassword();
         }
 
         if (credentialWarning) {
