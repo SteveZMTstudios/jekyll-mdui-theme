@@ -4,9 +4,20 @@ import glob
 import base64
 import re
 import getpass
+import traceback
 from cryptography.hazmat.primitives.ciphers.aead import AESGCM
 from cryptography.hazmat.primitives.kdf.pbkdf2 import PBKDF2HMAC
 from cryptography.hazmat.primitives import hashes
+
+
+def pause_before_exit():
+    if not sys.stdin.isatty():
+        return
+
+    try:
+        input("Press Enter to exit...")
+    except EOFError:
+        pass
 
 
 def parse_value(front_matter, key):
@@ -49,7 +60,7 @@ def decrypt_file(file_path, password):
 
     if not salt_b64 or not iv_b64 or not tag_b64 or not ciphertext_b64:
         print(f"Missing crypto fields in {file_path}")
-        return False
+        return None
 
     salt = base64.b64decode(salt_b64)
     iv = base64.b64decode(iv_b64)
@@ -112,10 +123,13 @@ def decrypt_with_retry(file_path, password):
             current_password = prompt_password_for_file(file_path)
             if not current_password:
                 print(f"Skipping {file_path}: password is required.")
-                return
+                return False
 
-        if decrypt_file(file_path, current_password):
-            return
+        result = decrypt_file(file_path, current_password)
+        if result is True:
+            return True
+        if result is None:
+            return False
 
         print(f"Password did not work for {file_path}. Please try again.")
         current_password = None
@@ -123,12 +137,17 @@ def decrypt_with_retry(file_path, password):
 
 def scan_and_decrypt(target, password):
     if os.path.isfile(target):
-        decrypt_with_retry(target, password)
-        return
+        return decrypt_with_retry(target, password)
 
     if os.path.isdir(target):
+        success = True
         for file_path in glob.glob(os.path.join(target, '**/*.md'), recursive=True):
-            decrypt_with_retry(file_path, password)
+            if not decrypt_with_retry(file_path, password):
+                success = False
+        return success
+
+    print(f"Target not found: {target}")
+    return False
 
 
 def prompt_password():
@@ -138,16 +157,27 @@ def prompt_password():
 
 
 def main():
-    args = sys.argv[1:]
-    target = args[0] if len(args) > 0 else os.getcwd()
-    password = args[1] if len(args) > 1 else prompt_password()
+    exit_code = 0
 
-    if not password:
-        print('Password is required to decrypt files.')
-        sys.exit(1)
+    try:
+        args = sys.argv[1:]
+        target = args[0] if len(args) > 0 else os.getcwd()
+        password = args[1] if len(args) > 1 else prompt_password()
 
-    scan_and_decrypt(target, password)
+        if not password:
+            print('Password is required to decrypt files.')
+            exit_code = 1
+        elif not scan_and_decrypt(target, password):
+            exit_code = 1
+    except Exception:
+        traceback.print_exc()
+        exit_code = 1
+    finally:
+        if exit_code != 0:
+            pause_before_exit()
+
+    return exit_code
 
 
 if __name__ == '__main__':
-    main()
+    sys.exit(main())

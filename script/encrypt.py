@@ -3,9 +3,20 @@ import sys
 import glob
 import base64
 import re
+import traceback
 from cryptography.hazmat.primitives.ciphers.aead import AESGCM
 from cryptography.hazmat.primitives.kdf.pbkdf2 import PBKDF2HMAC
 from cryptography.hazmat.primitives import hashes
+
+
+def pause_before_exit():
+    if not sys.stdin.isatty():
+        return
+
+    try:
+        input("Press Enter to exit...")
+    except EOFError:
+        pass
 
 def encrypt_file(file_path):
     with open(file_path, 'r', encoding='utf-8') as f:
@@ -91,8 +102,7 @@ Try the following solutions:
 - 清理浏览器缓存后重试。  
   Clear your browser cache and try again.
 - 下载[离线解密脚本](https://github.com/SteveZMTstudios/jekyll-mdui-theme/raw/main/script/decrypt.py)（需要 Python3+，参考[文档](https://github.com/SteveZMTstudios/jekyll-mdui-theme#3-%E8%BF%98%E5%8E%9F%E4%B8%BA%E6%9C%AA%E5%8A%A0%E5%AF%86%E7%8A%B6%E6%80%81)）。   
-  Download [offline decryption script](https://github.com/SteveZMTstudios/jekyll-mdui-theme/raw/main/script/decrypt.py) (Required Python 3+, see [documentation](https://github.com/SteveZMTstudios/jekyll-mdui-theme#3-%E8%BF%98%E5%8E%9F%E4%B8%BA%E6%9C%AA%E5%8A%A0%E5%AF%86%E7%8A%B6%E6%80%81) for details).
-  """
+  Download [offline decryption script](https://github.com/SteveZMTstudios/jekyll-mdui-theme/raw/main/script/decrypt.py) (Required Python 3+, see [documentation](https://github.com/SteveZMTstudios/jekyll-mdui-theme#3-%E8%BF%98%E5%8E%9F%E4%B8%BA%E6%9C%AA%E5%8A%A0%E5%AF%86%E7%8A%B6%E6%80%81) for details)."""
 
     new_content = "---\n" + "\n".join(new_lines) + "\n---\n" + fallback_text
 
@@ -102,20 +112,32 @@ Try the following solutions:
 
 
 def main():
-    args = sys.argv[1:]
-    target = args[0] if len(args) > 0 else os.getcwd()
+    exit_code = 0
 
-    if os.path.isfile(target):
-        encrypt_file(target)
-        return
+    try:
+        args = sys.argv[1:]
+        target = args[0] if len(args) > 0 else os.getcwd()
 
-    if os.path.isdir(target):
-        for file_path in glob.glob(os.path.join(target, '**/*.md'), recursive=True):
-            encrypt_file(file_path)
+        if os.path.isfile(target):
+            encrypt_file(target)
+        elif os.path.isdir(target):
+            for file_path in glob.glob(os.path.join(target, '**/*.md'), recursive=True):
+                encrypt_file(file_path)
 
-    print("Encryption complete.")
-    print("WARNING: You may want to save the output somewhere safe, as it cannot be recovered if lost.")
-    print("警告：请务必妥善保存加密后的文件和密码，丢失后无法恢复。")
+            print("Encryption complete.")
+            print("WARNING: You may want to save the output somewhere safe, as it cannot be recovered if lost.")
+            print("警告：请务必妥善保存加密后的文件和密码，丢失后无法恢复。")
+        else:
+            print(f"Target not found: {target}")
+            exit_code = 1
+    except Exception:
+        traceback.print_exc()
+        exit_code = 1
+    finally:
+        if exit_code != 0:
+            pause_before_exit()
+
+    return exit_code
 
 if __name__ == "__main__":
-    main()
+    sys.exit(main())

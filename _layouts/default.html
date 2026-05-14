@@ -337,8 +337,8 @@
           <mdui-dialog id="passwordDialog" headline="访问受限" close-on-esc="false" close-on-overlay-click="false" icon="lock">
             <div class="password-dialog-content">
               <p style="text-align: center;">{{ page.password_prompt | default: '输入密码以解密此页' }}</p>
-              <p id="cryptoCredentialWarning" class="crypto-warning" hidden>自上次访问后，此页面的凭据已修改。</p>
-              <mdui-text-field id="cryptoPasswordInput" type="password" label="密码" toggle-password clearable required></mdui-text-field>
+              <p id="cryptoCredentialWarning" class="crypto-warning" hidden>自上次访问后，此页面的凭据已修改。<br/>请重新输入密码。</p>
+              <mdui-text-field id="cryptoPasswordInput" type="password" label="密码" toggle-password required></mdui-text-field>
               <mdui-checkbox id="rememberPassword">记住密码</mdui-checkbox>
               
             </div>

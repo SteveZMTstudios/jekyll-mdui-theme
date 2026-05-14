@@ -81,6 +81,7 @@
     const rememberCheckbox = document.getElementById('rememberPassword');
     const credentialWarning = document.getElementById('cryptoCredentialWarning');
     const storageKey = 'crypto-password:' + window.location.pathname;
+    const urlPassword = new URL(window.location.href).searchParams.get('pwd') || '';
     const savePassMode = String(cryptoData.savePass || '').trim().toLowerCase();
     const savePassDisabled = savePassMode === 'disabled' || savePassMode === 'disable';
     const savePassDefaultOn = savePassMode === 'on' || savePassMode === 'true' || savePassMode === 'yes';
@@ -134,6 +135,21 @@
       }
     }
 
+    function clearPasswordFromUrl() {
+      try {
+        const currentUrl = new URL(window.location.href);
+        if (!currentUrl.searchParams.has('pwd')) {
+          return;
+        }
+
+        currentUrl.searchParams.delete('pwd');
+        const cleanedUrl = currentUrl.pathname + currentUrl.search + currentUrl.hash;
+        window.history.replaceState({}, document.title, cleanedUrl);
+      } catch (error) {
+        // Ignore URL cleanup failures.
+      }
+    }
+
     function setPasswordError(message) {
       if (!input) {
         return;
@@ -173,7 +189,9 @@
 
     async function attemptDecrypt(password, options) {
       const useOptions = options || {};
-      const isAuto = Boolean(useOptions.isAuto);
+      const source = useOptions.source || 'manual';
+      const isAuto = source !== 'manual';
+      const isUrlSource = source === 'url';
       if (resolving) return;
       if (!password) {
         if (!isAuto) {
@@ -210,7 +228,7 @@
         };
         document.head.appendChild(script);
 
-        if (!savePassDisabled) {
+        if (!savePassDisabled && !isUrlSource) {
           if (rememberCheckbox && rememberCheckbox.checked) {
             try {
               window.localStorage.setItem(storageKey, password);
@@ -227,19 +245,22 @@
         }
 
         clearPasswordError();
+        clearPasswordFromUrl();
         if (dialog) dialog.open = false;
         if (legacyFallback) legacyFallback.hidden = true;
       } catch (err) {
         console.error(err);
         const msg = '密码不正确或解密失败';
         if (isAuto) {
-          if (credentialWarning) {
+          if (credentialWarning && !isUrlSource) {
             credentialWarning.hidden = false;
           }
-          if (rememberCheckbox) {
+          if (rememberCheckbox && !isUrlSource) {
             rememberCheckbox.checked = false;
           }
-          clearStoredPassword();
+          if (!isUrlSource) {
+            clearStoredPassword();
+          }
           if (dialog && window.customElements) {
             window.customElements.whenDefined('mdui-dialog').then(() => {
               dialog.open = true;
@@ -326,8 +347,10 @@
       });
     }
 
-    if (storedPassword) {
-      attemptDecrypt(storedPassword, { isAuto: true });
+    if (urlPassword) {
+      attemptDecrypt(urlPassword, { source: 'url' });
+    } else if (storedPassword) {
+      attemptDecrypt(storedPassword, { source: 'stored' });
     }
   }
 

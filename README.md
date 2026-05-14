@@ -58,7 +58,7 @@ remote_theme: SteveZMTstudios/jekyll-mdui-theme@v1.0.0
 </a>
 
 > [!WARNING]
-> 若直接使用模板创建仓库，请先按需删除示例内容（如 `test.md`、`THEME_SYNTAX.md`）。
+> 若直接使用模板创建仓库，请先按需删除示例内容（如 `test.md`、`THEME_SYNTAX.md`等）。
 
 ## 本地预览（使用 remote_theme 的站点）
 
@@ -88,6 +88,7 @@ bundle exec jekyll serve
 - 自动生成文章目录（H1/H2/H3）
 - 代码块复制按钮
 - 针对打印机优化的样式
+- 加密文档以仅供授权用户访问
 - 动态配色（基于 `theme_color` 生成 Material 配色）
 - 内置翻译脚本（单语言编写，全球用户自动翻译）
 - 亮色 / 暗色 / 自动主题切换
@@ -111,13 +112,19 @@ password_prompt: "输入密码以解密此页" # 可选：自定义弹窗提示
 ---
 ```
 
+> [!WARNING]
+> 1. 加密仅保护 Markdown 正文，页面标题、URL、图片等资源仍然可见。
+>    若需要保护图片，请考虑通过 DataURL 引入。另见 [MDN DataURL](https://developer.mozilla.org/zh-CN/docs/Web/URI/Reference/Schemes/data)。
+> 2. 建议的密码长度至少为 20 个字符，并包含大小写字母、数字和特殊字符。
+> 3. 加密后请妥善保管密码，丢失后无法恢复原始内容。
+
 ### 2) 执行加密脚本
 
 
 ```bash
 pip install cryptography
 cd path/to/your/site
-curl -s https://stevezmt.top/jekyll-mdui-theme/script/encrypt.py | python3 -
+curl -s https://stevezmt.top/jekyll-mdui-theme/script/encrypt.py | python -
 ```
 或者直接从 GitHub：
 ```
@@ -130,13 +137,12 @@ curl -s https://raw.githubusercontent.com/SteveZMTstudios/jekyll-mdui-theme/main
 使用解密脚本还原原始 Markdown 正文，需要输入密码：
 
 ```bash
-curl -s https://stevezmt.top/jekyll-mdui-theme/script/decrypt.py | python3 -
+curl -s https://stevezmt.top/jekyll-mdui-theme/script/decrypt.py | python -
 ```
 
 ```bash
 curl -s https://raw.githubusercontent.com/SteveZMTstudios/jekyll-mdui-theme/main/script/decrypt.py | python3 -
 ```
-
 
 
 ## 配置项
@@ -166,7 +172,7 @@ links:
     rel: "noopener noreferrer" # 可选，_blank 且未填写时会自动补齐
 ```
 
-完整的配置项请参见 [THEME_SYNTAX.md](THEME_SYNTAX.md) 和 [_config.yml](_config.yml)。
+完整的配置项请参见 [Wiki（简体中文）](https://github.com/SteveZMTstudios/jekyll-mdui-theme/wiki) [THEME_SYNTAX.md](THEME_SYNTAX.md) 和 [_config.yml](_config.yml)。
 
 ### 覆盖 GitHub 自动生成的 URLs
 
@@ -216,6 +222,7 @@ links:
 
 #### 重大改动
 
+0. 阅读 [Wiki（简体中文）](https://github.com/SteveZMTstudios/jekyll-mdui-theme/wiki) ，确认你需要覆盖的部分无法通过参数或 includes 实现。
 1. [复制原始模板](https://github.com/SteveZMTstudios/jekyll-mdui-theme/blob/main/_layouts/default.html)
    （*Protip：点击 "raw" 可以更容易地复制*）
 2. 在你的网站中创建一个文件：`/_layouts/default.html`

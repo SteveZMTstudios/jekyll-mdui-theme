@@ -396,7 +396,7 @@ article.mdui-prose h1,
 article.mdui-prose h2,
 article.mdui-prose h3,
 article.mdui-prose h4 {
-  font-family: "Source Serif 4", serif;
+  font-family: "Roboto Serif", "Noto Serif", "Source Serif 4", serif;
 }
 
 .highlighter-rouge {

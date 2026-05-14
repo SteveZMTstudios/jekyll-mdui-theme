@@ -941,6 +941,12 @@
     return window.location.href;
   }
 
+  function resolveShareDisplayUrl(shareUrl) {
+    const displayUrl = new URL(shareUrl);
+    displayUrl.hash = '';
+    return decodeURI(displayUrl.toString());
+  }
+
   function canUseNativeShare(shareData) {
     if (typeof navigator.share !== 'function') {
       return false;
@@ -959,15 +965,16 @@
 
   function initSharePanel() {
     const shareUrl = resolveShareUrl();
+    const shareDisplayUrl = resolveShareDisplayUrl(shareUrl);
     const shareTitle = articleTitleText ? articleTitleText.textContent.trim() : document.title;
 
     if (articleUrlText) {
       articleUrlText.href = shareUrl;
-      articleUrlText.textContent = shareUrl;
+      articleUrlText.textContent = shareDisplayUrl;
     }
 
     if (qrDialogUrl) {
-      qrDialogUrl.textContent = shareUrl;
+      qrDialogUrl.textContent = shareDisplayUrl;
     }
 
     if (copyLinkButton) {

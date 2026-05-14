@@ -13,42 +13,74 @@ html.crypto-unsupported .crypto-interactive {
 
 /* Skeleton placeholder styles */
 .skeleton-line {
-    background: linear-gradient(90deg, rgba(0, 0, 0, 0.08) 25%, rgba(0, 0, 0, 0.16) 50%, rgba(0, 0, 0, 0.08) 75%);
+    background: linear-gradient(
+        90deg,
+        rgba(0, 0, 0, 0.08) 0%,
+        rgba(0, 0, 0, 0.16) 40%,
+        rgba(0, 0, 0, 0.08) 70%
+    );
     background-size: 200% 100%;
-    animation: skeleton-loading 1.5s infinite;
+    animation: skeleton-loading 2s linear infinite;
     border-radius: 4px;
+    overflow: hidden;
+    will-change: background-position;
 }
+
+
 @media (prefers-color-scheme: dark) {
     html.mdui-theme-auto .skeleton-line {
-    background: linear-gradient(90deg, rgba(255, 255, 255, 0.15) 25%, rgba(255, 255, 255, 0.25) 50%, rgba(255, 255, 255, 0.15) 75%);
-    background-size: 200% 100%;
+        background: linear-gradient(
+            90deg,
+            rgba(255, 255, 255, 0.15) 0%,
+            rgba(255, 255, 255, 0.25) 40%,
+            rgba(255, 255, 255, 0.15) 70%
+        );
+        background-size: 200% 100%;
     }
 }
-html.mdui-theme-dark .skeleton-line {
-    background: linear-gradient(90deg, rgba(255, 255, 255, 0.15) 25%, rgba(255, 255, 255, 0.25) 50%, rgba(255, 255, 255, 0.15) 75%);
-    background-size: 200% 100%;
-}
+
 @keyframes skeleton-loading {
-    0% { background-position: 200% 0; }
-    100% { background-position: -200% 0; }
+    0%   { background-position: 100% 0; }
+    100% { background-position: -100% 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .skeleton-line {
+        animation: none;
+    }
 }
 /* Shake animation */
 @keyframes shake-x {
-    0%, 100% { transform: translateX(0); }
-    20%, 60% { transform: translateX(-6px); }
-    40%, 80% { transform: translateX(6px); }
+    0%   { transform: translateX(0); }
+    10%  { transform: translateX(-12px); }
+    25%  { transform: translateX(10px); }
+    40%  { transform: translateX(-6px); }
+    55%  { transform: translateX(4px); }
+    70%  { transform: translateX(-1.5px); }
+    85%  { transform: translateX(0.5px); }
+    100% { transform: translateX(0); }
 }
+
 .shake-once {
-    animation: shake-x 0.4s ease-in-out;
+    animation: shake-x 0.55s cubic-bezier(0.22, 0.61, 0.36, 1) both;
 }
+@media (prefers-reduced-motion: reduce) {
+    .shake-once {
+        animation: none;
+    }
+}
+
 .password-dialog-content {
     overflow-x: hidden;
 }
+.password-dialog-content p {
+    margin: 0 0 12px;
+}
+
 .password-dialog-content mdui-checkbox {
     margin-top: 8px;
 }
 .crypto-warning {
-    margin: 8px 0 0;
     font-size: 0.9rem;
     text-align: center;
     color: #b45309;

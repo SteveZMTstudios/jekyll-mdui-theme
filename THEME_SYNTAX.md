@@ -1,7 +1,5 @@
 # Jekyll Theme Syntax Quick Notes
 
-This repository is configured as a minimal single-page markdown theme for GitHub Pages.
-
 ## 1) Core files Jekyll expects
 
 - `_config.yml`: site config, markdown engine, defaults, permalink.
