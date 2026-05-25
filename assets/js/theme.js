@@ -937,6 +937,19 @@
     });
   }
 
+  function enhanceTables() {
+    const tables = article ? article.querySelectorAll('table') : document.querySelectorAll('table');
+    tables.forEach(function (table) {
+      if (table.parentElement.classList.contains('mdui-table')) {
+        return;
+      }
+      const wrapper = document.createElement('div');
+      wrapper.className = 'mdui-table';
+      table.parentNode.insertBefore(wrapper, table);
+      wrapper.appendChild(table);
+    });
+  }
+
   function resolveShareUrl() {
     return window.location.href;
   }
@@ -1070,7 +1083,8 @@
 
   window.ThemeAPI = {
     buildToc: buildToc,
-    enhanceCodeBlocks: enhanceCodeBlocks
+    enhanceCodeBlocks: enhanceCodeBlocks,
+    enhanceTables: enhanceTables
   };
 
   setHoverCapable(hoverMediaQuery.matches);
@@ -1097,6 +1111,7 @@
   registerDrawerResizeListener();
   buildToc();
   enhanceCodeBlocks();
+  enhanceTables();
   initSharePanel();
   initTranslate();
   initScrollTopFab();

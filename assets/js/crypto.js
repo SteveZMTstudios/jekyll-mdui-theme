@@ -214,6 +214,7 @@
           if (window.ThemeAPI) {
             if (window.ThemeAPI.buildToc) window.ThemeAPI.buildToc();
             if (window.ThemeAPI.enhanceCodeBlocks) window.ThemeAPI.enhanceCodeBlocks();
+            if (window.ThemeAPI.enhanceTables) window.ThemeAPI.enhanceTables();
           }
           if (window.translate && typeof window.translate.execute === 'function') {
             try {
