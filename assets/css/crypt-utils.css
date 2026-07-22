@@ -13,6 +13,19 @@ html.crypto-unsupported .crypto-interactive {
 
 /* Skeleton placeholder styles */
 .skeleton-line {
+    background: -webkit-gradient(
+        linear,
+        left top, right top,
+        from(rgba(0, 0, 0, 0.08)),
+        color-stop(40%, rgba(0, 0, 0, 0.16)),
+        color-stop(70%, rgba(0, 0, 0, 0.08))
+    );
+    background: -webkit-linear-gradient(
+        left,
+        rgba(0, 0, 0, 0.08) 0%,
+        rgba(0, 0, 0, 0.16) 40%,
+        rgba(0, 0, 0, 0.08) 70%
+    );
     background: linear-gradient(
         90deg,
         rgba(0, 0, 0, 0.08) 0%,
@@ -20,7 +33,8 @@ html.crypto-unsupported .crypto-interactive {
         rgba(0, 0, 0, 0.08) 70%
     );
     background-size: 200% 100%;
-    animation: skeleton-loading 2s linear infinite;
+    -webkit-animation: skeleton-loading 2s linear infinite;
+            animation: skeleton-loading 2s linear infinite;
     border-radius: 4px;
     overflow: hidden;
     will-change: background-position;
@@ -29,6 +43,19 @@ html.crypto-unsupported .crypto-interactive {
 
 @media (prefers-color-scheme: dark) {
     html.mdui-theme-auto .skeleton-line {
+        background: -webkit-gradient(
+            linear,
+            left top, right top,
+            from(rgba(255, 255, 255, 0.15)),
+            color-stop(40%, rgba(255, 255, 255, 0.25)),
+            color-stop(70%, rgba(255, 255, 255, 0.15))
+        );
+        background: -webkit-linear-gradient(
+            left,
+            rgba(255, 255, 255, 0.15) 0%,
+            rgba(255, 255, 255, 0.25) 40%,
+            rgba(255, 255, 255, 0.15) 70%
+        );
         background: linear-gradient(
             90deg,
             rgba(255, 255, 255, 0.15) 0%,
@@ -39,6 +66,11 @@ html.crypto-unsupported .crypto-interactive {
     }
 }
 
+@-webkit-keyframes skeleton-loading {
+    0%   { background-position: 100% 0; }
+    100% { background-position: -100% 0; }
+}
+
 @keyframes skeleton-loading {
     0%   { background-position: 100% 0; }
     100% { background-position: -100% 0; }
@@ -46,27 +78,40 @@ html.crypto-unsupported .crypto-interactive {
 
 @media (prefers-reduced-motion: reduce) {
     .skeleton-line {
-        animation: none;
+        -webkit-animation: none;
+                animation: none;
     }
 }
 /* Shake animation */
+@-webkit-keyframes shake-x {
+    0%   { -webkit-transform: translateX(0); transform: translateX(0); }
+    10%  { -webkit-transform: translateX(-12px); transform: translateX(-12px); }
+    25%  { -webkit-transform: translateX(10px); transform: translateX(10px); }
+    40%  { -webkit-transform: translateX(-6px); transform: translateX(-6px); }
+    55%  { -webkit-transform: translateX(4px); transform: translateX(4px); }
+    70%  { -webkit-transform: translateX(-1.5px); transform: translateX(-1.5px); }
+    85%  { -webkit-transform: translateX(0.5px); transform: translateX(0.5px); }
+    100% { -webkit-transform: translateX(0); transform: translateX(0); }
+}
 @keyframes shake-x {
-    0%   { transform: translateX(0); }
-    10%  { transform: translateX(-12px); }
-    25%  { transform: translateX(10px); }
-    40%  { transform: translateX(-6px); }
-    55%  { transform: translateX(4px); }
-    70%  { transform: translateX(-1.5px); }
-    85%  { transform: translateX(0.5px); }
-    100% { transform: translateX(0); }
+    0%   { -webkit-transform: translateX(0); transform: translateX(0); }
+    10%  { -webkit-transform: translateX(-12px); transform: translateX(-12px); }
+    25%  { -webkit-transform: translateX(10px); transform: translateX(10px); }
+    40%  { -webkit-transform: translateX(-6px); transform: translateX(-6px); }
+    55%  { -webkit-transform: translateX(4px); transform: translateX(4px); }
+    70%  { -webkit-transform: translateX(-1.5px); transform: translateX(-1.5px); }
+    85%  { -webkit-transform: translateX(0.5px); transform: translateX(0.5px); }
+    100% { -webkit-transform: translateX(0); transform: translateX(0); }
 }
 
 .shake-once {
-    animation: shake-x 0.55s cubic-bezier(0.22, 0.61, 0.36, 1) both;
+    -webkit-animation: shake-x 0.55s cubic-bezier(0.22, 0.61, 0.36, 1) both;
+            animation: shake-x 0.55s cubic-bezier(0.22, 0.61, 0.36, 1) both;
 }
 @media (prefers-reduced-motion: reduce) {
     .shake-once {
-        animation: none;
+        -webkit-animation: none;
+                animation: none;
     }
 }
 

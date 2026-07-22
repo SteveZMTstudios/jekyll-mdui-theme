@@ -1,0 +1,29 @@
+{
+  "name": "jekyll-mdui-theme",
+  "version": "1.0.0",
+  "description": "Jekyll theme built with mdui v2 and legacy fallback support",
+  "main": "assets/js/theme.js",
+  "scripts": {
+    "build": "node script/build.js",
+    "build:css": "node script/build-css.js",
+    "build:js": "node script/build-js.js"
+  },
+  "browserslist": [
+    "safari >= 5",
+    "iOS >= 5",
+    "Android >= 4.0",
+    "ie >= 9"
+  ],
+  "devDependencies": {
+    "@babel/core": "^8.0.1",
+    "@babel/preset-env": "^8.0.2",
+    "babel-plugin-polyfill-corejs3": "^1.0.0",
+    "core-js": "^3.49.0",
+    "esbuild": "^0.28.1",
+    "postcss": "^8.5.20",
+    "postcss-preset-env": "^11.3.2"
+  },
+  "dependencies": {
+    "crypto-js": "^4.2.0"
+  }
+}

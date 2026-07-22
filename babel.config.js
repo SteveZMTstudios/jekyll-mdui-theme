@@ -1,0 +1,18 @@
+module.exports = {
+  presets: [
+    [
+      '@babel/preset-env',
+      {
+        targets: {
+          browsers: [
+            'safari >= 5',
+            'iOS >= 5',
+            'Android >= 4.0',
+            'ie >= 9'
+          ]
+        },
+        modules: false
+      }
+    ]
+  ]
+};

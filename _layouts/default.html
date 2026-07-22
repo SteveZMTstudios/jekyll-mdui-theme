@@ -1,5 +1,8 @@
 <!DOCTYPE html>
-<html lang="{{ site.lang | default: 'zh-CN' }}" class="mdui-theme-light no-js" data-seed-color="{{ site.theme_color | default: '#6750a4' }}" data-translate-source="{{ site.translate_source | default: site.lang | default: 'zh-CN' }}">
+<html lang="{{ site.lang | default: 'zh-CN' }}" class="mdui-theme-light no-js"
+  data-seed-color="{{ site.theme_color | default: '#6750a4' }}"
+  data-translate-source="{{ site.translate_source | default: site.lang | default: 'zh-CN' }}">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -9,7 +12,7 @@
   {% assign repo_path = site.github.repository_nwo | default: site.repository | default: site.github.repository_name %}
   {% assign repo_url = site.github.repository_url %}
   {% if repo_url == blank %}
-    {% assign repo_url = 'https://github.com/' | append: repo_path %}
+  {% assign repo_url = 'https://github.com/' | append: repo_path %}
   {% endif %}
   {% assign repo_branch = site.github.source.branch | default: site.github.branch | default: 'main' %}
   {% assign page_url = page.url | absolute_url %}
@@ -17,16 +20,17 @@
   {% assign app_bar_title_large = site.title %}
   {% assign zip_url = site.github.zip_url %}
   {% if zip_url == blank %}
-    {% assign zip_url = repo_url | append: '/archive/refs/heads/' | append: repo_branch | append: '.zip' %}
+  {% assign zip_url = repo_url | append: '/archive/refs/heads/' | append: repo_branch | append: '.zip' %}
   {% endif %}
   {% assign tar_url = site.github.tar_url %}
   {% if tar_url == blank %}
-    {% assign tar_url = repo_url | append: '/archive/refs/heads/' | append: repo_branch | append: '.tar.gz' %}
+  {% assign tar_url = repo_url | append: '/archive/refs/heads/' | append: repo_branch | append: '.tar.gz' %}
   {% endif %}
   {% assign custom_links = site.links | default: empty %}
 
   <title>{% if page.title %}{{ page.title }} | {% endif %}{{ site.title }}</title>
-  <meta name="description" content="{{ page.excerpt | default: site.description | strip_html | strip_newlines | truncate: 140 }}">
+  <meta name="description"
+    content="{{ page.excerpt | default: site.description | strip_html | strip_newlines | truncate: 140 }}">
 
   <script>
     (function () {
@@ -57,7 +61,7 @@
       if (!window.crypto || !window.crypto.subtle || !window.TextDecoder || !window.customElements) {
         currentClass += ' crypto-unsupported';
       }
-      
+
       rootElement.className = currentClass.replace(/\s+/g, ' ').replace(/^\s+|\s+$/g, '');
     })();
   </script>
@@ -70,17 +74,49 @@
 
     html.mdui-theme-dark,
     html.mdui-theme-dark body {
-      background-color: #111318;
+      background-color: #1b1b1f;
     }
 
-    @media (prefers-color-scheme: dark) {
-      html.mdui-theme-auto,
-      html.mdui-theme-auto body {
-        background-color: #111318;
-      }
+    html.no-js mdui-top-app-bar,
+    html.no-js mdui-navigation-drawer,
+    html.no-js mdui-dialog,
+    html.no-js mdui-fab,
+    html.no-js mdui-dropdown,
+    html.no-js mdui-card,
+    html.no-js mdui-list,
+    html.no-js mdui-menu,
+    html.no-js mdui-menu-item,
+    html.no-js mdui-button,
+    html.no-js mdui-button-icon,
+    html.no-js .app-bar,
+    html.no-js .app-drawer,
+    html.no-js .qr-dialog,
+    html.no-js .translate-dialog,
+    html.no-js .password-dialog,
+    html.no-js .scroll-top-fab,
+    html.no-js .translate-dropdown,
+    html.no-js .translate-menu,
+    body.legacy-mode mdui-top-app-bar,
+    body.legacy-mode mdui-navigation-drawer,
+    body.legacy-mode mdui-dialog,
+    body.legacy-mode mdui-fab,
+    body.legacy-mode mdui-dropdown,
+    body.legacy-mode mdui-card,
+    body.legacy-mode mdui-list,
+    body.legacy-mode mdui-menu,
+    body.legacy-mode mdui-menu-item,
+    body.legacy-mode mdui-button,
+    body.legacy-mode mdui-button-icon,
+    body.legacy-mode .app-bar,
+    body.legacy-mode .app-drawer,
+    body.legacy-mode .qr-dialog,
+    body.legacy-mode .translate-dialog,
+    body.legacy-mode .password-dialog,
+    body.legacy-mode .scroll-top-fab,
+    body.legacy-mode .translate-dropdown,
+    body.legacy-mode .translate-menu {
+      display: none !important;
     }
-
-
   </style>
 
   <link rel="preconnect" href="https://fonts.googleapis.cn">
@@ -88,72 +124,83 @@
   <!-- <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> -->
   <link rel="preconnect" href="https://s4.zstatic.net" crossorigin>
-  <link rel="stylesheet" href="{{ '/assets/css/fonts.googleapis.cn.min.css' | relative_url }}" onerror="this.onerror=null;this.href='https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,500;8..60,700&display=swap'">
-  <link rel="stylesheet" href="https://s4.zstatic.net/npm/mdui@2.1.4/mdui.css" onerror="this.onerror=null;this.href='https://unpkg.com/mdui@2/mdui.css'">
-  <link rel="stylesheet" href="https://fonts.googleapis.cn/icon?family=Material+Icons" onerror="this.onerror=null;this.href='https://fonts.googleapis.com/icon?family=Material+Icons'">
+  <link rel="stylesheet" href="{{ '/assets/css/fonts.googleapis.cn.min.css' | relative_url }}"
+    onerror="this.onerror=null;this.href='https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,500;8..60,700&display=swap'">
+  <link rel="stylesheet" href="https://s4.zstatic.net/npm/mdui@2.1.4/mdui.css"
+    onerror="this.onerror=null;this.href='https://unpkg.com/mdui@2/mdui.css'">
+  <link rel="stylesheet" href="https://fonts.googleapis.cn/icon?family=Material+Icons"
+    onerror="this.onerror=null;this.href='https://fonts.googleapis.com/icon?family=Material+Icons'">
   {% if page.encrypted %}
   <link rel="stylesheet" href="{{ '/assets/css/crypt-utils.css' | relative_url }}">
   {% endif %}
   {% assign favicon_path = site.icon_path | default: '/favicon.ico' %}
   {% unless favicon_path == blank %}
-    {% assign favicon_lookup_path = favicon_path %}
-    {% assign favicon_leading_char = favicon_lookup_path | slice: 0, 1 %}
-    {% unless favicon_leading_char == '/' %}
-      {% assign favicon_lookup_path = '/' | append: favicon_lookup_path %}
-    {% endunless %}
-
-    {% assign favicon_exists = false %}
-    {% for static_file in site.static_files %}
-      {% if static_file.path == favicon_lookup_path %}
-        {% assign favicon_exists = true %}
-        {% break %}
-      {% endif %}
-    {% endfor %}
-
-    {% if favicon_exists %}
-      {% assign favicon_ext = favicon_lookup_path | split: '.' | last | downcase %}
-      {% assign favicon_type = '' %}
-      {% if favicon_ext == 'ico' %}
-        {% assign favicon_type = 'image/x-icon' %}
-      {% elsif favicon_ext == 'png' %}
-        {% assign favicon_type = 'image/png' %}
-      {% elsif favicon_ext == 'svg' %}
-        {% assign favicon_type = 'image/svg+xml' %}
-      {% elsif favicon_ext == 'webp' %}
-        {% assign favicon_type = 'image/webp' %}
-      {% elsif favicon_ext == 'jpg' or favicon_ext == 'jpeg' %}
-        {% assign favicon_type = 'image/jpeg' %}
-      {% elsif favicon_ext == 'gif' %}
-        {% assign favicon_type = 'image/gif' %}
-      {% elsif favicon_ext == 'avif' %}
-        {% assign favicon_type = 'image/avif' %}
-      {% elsif favicon_ext == 'bmp' %}
-        {% assign favicon_type = 'image/bmp' %}
-      {% endif %}
-
-      <link rel="shortcut icon"{% if favicon_type != blank %} type="{{ favicon_type }}"{% endif %} href="{{ favicon_lookup_path | relative_url }}">
-    {% endif %}
+  {% assign favicon_lookup_path = favicon_path %}
+  {% assign favicon_leading_char = favicon_lookup_path | slice: 0, 1 %}
+  {% unless favicon_leading_char == '/' %}
+  {% assign favicon_lookup_path = '/' | append: favicon_lookup_path %}
   {% endunless %}
-  
-  <script nomodule src="https://s4.zstatic.net/npm/@webcomponents/webcomponentsjs@2.8.0/webcomponents-loader.js" onerror="this.onerror=null;this.src='https://unpkg.com/@webcomponents/webcomponentsjs@2.8.0/webcomponents-loader.js'" defer></script>
-  <script src="https://s4.zstatic.net/npm/mdui@2.1.4/mdui.global.js" onerror="this.onerror=null;this.src='https://unpkg.com/mdui@2/mdui.global.js'"></script>
-  <script src="{{ '/assets/js/translate.min.js' | relative_url }}" onerror="this.onerror=null;this.src='https://cdn.staticfile.net/translate.js/3.18.66/translate.js'" defer></script>
+
+  {% assign favicon_exists = false %}
+  {% for static_file in site.static_files %}
+  {% if static_file.path == favicon_lookup_path %}
+  {% assign favicon_exists = true %}
+  {% break %}
+  {% endif %}
+  {% endfor %}
+
+  {% if favicon_exists %}
+  {% assign favicon_ext = favicon_lookup_path | split: '.' | last | downcase %}
+  {% assign favicon_type = '' %}
+  {% if favicon_ext == 'ico' %}
+  {% assign favicon_type = 'image/x-icon' %}
+  {% elsif favicon_ext == 'png' %}
+  {% assign favicon_type = 'image/png' %}
+  {% elsif favicon_ext == 'svg' %}
+  {% assign favicon_type = 'image/svg+xml' %}
+  {% elsif favicon_ext == 'webp' %}
+  {% assign favicon_type = 'image/webp' %}
+  {% elsif favicon_ext == 'jpg' or favicon_ext == 'jpeg' %}
+  {% assign favicon_type = 'image/jpeg' %}
+  {% elsif favicon_ext == 'gif' %}
+  {% assign favicon_type = 'image/gif' %}
+  {% elsif favicon_ext == 'avif' %}
+  {% assign favicon_type = 'image/avif' %}
+  {% elsif favicon_ext == 'bmp' %}
+  {% assign favicon_type = 'image/bmp' %}
+  {% endif %}
+
+  <link rel="shortcut icon" {% if favicon_type !=blank %} type="{{ favicon_type }}" {% endif %}
+    href="{{ favicon_lookup_path | relative_url }}">
+  {% endif %}
+  {% endunless %}
+
+  <script nomodule src="https://s4.zstatic.net/npm/@webcomponents/webcomponentsjs@2.8.0/webcomponents-loader.js"
+    onerror="this.onerror=null;this.src='https://unpkg.com/@webcomponents/webcomponentsjs@2.8.0/webcomponents-loader.js'"
+    defer></script>
+  <script src="https://s4.zstatic.net/npm/mdui@2.1.4/mdui.global.js"
+    onerror="this.onerror=null;this.src='https://unpkg.com/mdui@2/mdui.global.js'"></script>
+  <script src="{{ '/assets/js/translate.min.js' | relative_url }}"
+    onerror="this.onerror=null;this.src='https://cdn.staticfile.net/translate.js/3.18.66/translate.js'" defer></script>
   {% unless page.url == '/' %}
-    <link rel="prefetch" href="{{ '/' | relative_url }}">
+  <link rel="prefetch" href="{{ '/' | relative_url }}">
   {% endunless %}
-  <link rel="stylesheet" href="{{ '/assets/css/style.min.css' | relative_url }}" onerror="this.onerror=null;this.href='{{ '/assets/css/style.css' | relative_url }}'">
-  <link rel="stylesheet" href="{{ '/assets/css/theme-legacy.css' | relative_url }}" media="print" onload="this.media='all'">
+  <link rel="stylesheet" href="{{ '/assets/css/style.min.css' | relative_url }}"
+    onerror="this.onerror=null;this.href='{{ '/assets/css/style.css' | relative_url }}'">
+  <link rel="stylesheet" href="{{ '/assets/css/theme-legacy.css' | relative_url }}" media="print"
+    onload="this.media='all'">
   <noscript>
     <link rel="stylesheet" href="{{ '/assets/css/theme-legacy.css' | relative_url }}">
   </noscript>
   <link rel="stylesheet" href="{{ '/assets/css/print.css' | relative_url }}" media="print">
   {% include head-custom.html %}
 </head>
+
 <body>
   <a id="skip-to-content" class="skip-to-content" href="#articleContent" aria-label="跳到主要内容">Skip to the content.</a>
 
   <div class="legacy-banner" id="legacyBanner" hidden>
-    当前浏览器未完整支持 mdui Web Components，已切换为兼容阅读模式。
+    当前浏览器未完整支持 Web Components，已切换为兼容阅读模式。
   </div>
   <noscript>
     <div class="no-script-tip">当前浏览器关闭了 JavaScript，部分函数和功能可能无法正常使用。</div>
@@ -175,7 +222,8 @@
     </mdui-top-app-bar-title>
     <div class="app-bar-spacer"></div>
     <mdui-dropdown id="translateDropdown" class="translate-dropdown ignore-translate" placement="bottom-end">
-      <mdui-button-icon slot="trigger" id="translateToggle" icon="translate" aria-label="翻译" aria-haspopup="menu" aria-controls="translateMenu"></mdui-button-icon>
+      <mdui-button-icon slot="trigger" id="translateToggle" icon="translate" aria-label="翻译" aria-haspopup="menu"
+        aria-controls="translateMenu"></mdui-button-icon>
       <mdui-menu id="translateMenu" class="translate-menu ignore-translate" selects="single">
         <mdui-menu-item value="chinese_simplified" selected-icon="check">简体中文</mdui-menu-item>
         <mdui-menu-item value="chinese_traditional" selected-icon="check">繁體中文</mdui-menu-item>
@@ -218,9 +266,12 @@
         <p class="article-share-title" id="articleTitleText">{{ page.title | default: site.title }}</p>
         <a class="article-share-url ignore-translate" id="articleUrlText" href="{{ page_url }}">{{ page_url }}</a>
         <div class="article-share-actions" aria-label="文章分享操作">
-          <mdui-button-icon id="copyArticleUrlButton" icon="content_copy" variant="filled" aria-label="复制标题和链接"></mdui-button-icon>
-          <mdui-button-icon id="openQrDialogButton" icon="qr_code_2" variant="filled" aria-label="显示二维码" aria-haspopup="dialog" aria-controls="qrDialog"></mdui-button-icon>
-          <mdui-button-icon id="shareArticleButton" icon="share" variant="filled" aria-label="共享" hidden></mdui-button-icon>
+          <mdui-button-icon id="copyArticleUrlButton" icon="content_copy" variant="filled"
+            aria-label="复制标题和链接"></mdui-button-icon>
+          <mdui-button-icon id="openQrDialogButton" icon="qr_code_2" variant="filled" aria-label="显示二维码"
+            aria-haspopup="dialog" aria-controls="qrDialog"></mdui-button-icon>
+          <mdui-button-icon id="shareArticleButton" icon="share" variant="filled" aria-label="共享"
+            hidden></mdui-button-icon>
         </div>
       </mdui-card>
     </div>
@@ -239,7 +290,8 @@
     <mdui-button slot="action" id="closeQrDialogButton" variant="text">关闭</mdui-button>
   </mdui-dialog>
 
-  <mdui-dialog id="translateDialog" class="translate-dialog ignore-translate" close-on-esc close-on-overlay-click headline="Other Language">
+  <mdui-dialog id="translateDialog" class="translate-dialog ignore-translate" close-on-esc close-on-overlay-click
+    headline="Other Language">
     <div class="translate-dialog-content ignore-translate">
       <div id="translate" class="ignore-translate"></div>
     </div>
@@ -257,66 +309,68 @@
 
         {% assign show_github_action = false %}
         {% if site.github.is_project_page and repo_path != blank %}
-          {% assign show_github_action = true %}
+        {% assign show_github_action = true %}
         {% endif %}
         {% assign show_download_actions = false %}
         {% if site.show_downloads and repo_path != blank %}
-          {% assign show_download_actions = true %}
+        {% assign show_download_actions = true %}
         {% endif %}
         {% if show_github_action or show_download_actions or custom_links.size > 0 %}
-          <div class="hero-actions">
-            {% if show_github_action %}
-              <div class="hero-action-item">
-                <mdui-button href="{{ repo_url }}" target="_blank" rel="noopener" icon="code" variant="filled">
-                  在 GitHub 上查看
-                </mdui-button>
-                <a class="hero-action-link" href="{{ repo_url }}" target="_blank" rel="noopener">在 GitHub 上查看</a>
-              </div>
-            {% endif %}
-            {% if show_download_actions %}
-              <div class="hero-action-item">
-                <mdui-button href="{{ zip_url }}" icon="download" variant="tonal">下载 .zip</mdui-button>
-                <a class="hero-action-link" href="{{ zip_url }}">下载 .zip</a>
-              </div>
-              <div class="hero-action-item">
-                <mdui-button href="{{ tar_url }}" icon="download" variant="tonal">下载 .tar.gz</mdui-button>
-                <a class="hero-action-link" href="{{ tar_url }}">下载 .tar.gz</a>
-              </div>
-            {% endif %}
-            {% for link in custom_links %}
-              {% assign link_name = link.name | default: link.title %}
-              {% assign link_url = link.url | default: link.href %}
-              {% assign link_icon = link.icon %}
-              {% assign link_variant = link.variant | default: 'tonal' %}
-              {% if link_variant == 'flat' %}
-                {% assign link_variant = 'text' %}
-              {% endif %}
-              {% assign link_target = link._target | default: link.target | default: '_self' %}
-              {% assign link_rel = link.rel %}
-              {% if link_target == '_blank' and link_rel == blank %}
-                {% assign link_rel = 'noopener noreferrer' %}
-              {% endif %}
-              {% if link_name != blank and link_url != blank %}
-                <div class="hero-action-item">
-                  <mdui-button href="{{ link_url }}" target="{{ link_target }}" variant="{{ link_variant }}"{% if link_icon != blank %} icon="{{ link_icon }}"{% endif %}{% if link_rel != blank %} rel="{{ link_rel }}"{% endif %}>
-                    {{ link_name }}
-                  </mdui-button>
-                  <a class="hero-action-link" href="{{ link_url }}" target="{{ link_target }}"{% if link_rel != blank %} rel="{{ link_rel }}"{% endif %}>
-                    {{ link_name }}
-                  </a>
-                </div>
-              {% endif %}
-            {% endfor %}
+        <div class="hero-actions">
+          {% if show_github_action %}
+          <div class="hero-action-item">
+            <mdui-button href="{{ repo_url }}" target="_blank" rel="noopener" icon="code" variant="filled">
+              在 GitHub 上查看
+            </mdui-button>
+            <a class="hero-action-link" href="{{ repo_url }}" target="_blank" rel="noopener">在 GitHub 上查看</a>
           </div>
+          {% endif %}
+          {% if show_download_actions %}
+          <div class="hero-action-item">
+            <mdui-button href="{{ zip_url }}" icon="download" variant="tonal">下载 .zip</mdui-button>
+            <a class="hero-action-link" href="{{ zip_url }}">下载 .zip</a>
+          </div>
+          <div class="hero-action-item">
+            <mdui-button href="{{ tar_url }}" icon="download" variant="tonal">下载 .tar.gz</mdui-button>
+            <a class="hero-action-link" href="{{ tar_url }}">下载 .tar.gz</a>
+          </div>
+          {% endif %}
+          {% for link in custom_links %}
+          {% assign link_name = link.name | default: link.title %}
+          {% assign link_url = link.url | default: link.href %}
+          {% assign link_icon = link.icon %}
+          {% assign link_variant = link.variant | default: 'tonal' %}
+          {% if link_variant == 'flat' %}
+          {% assign link_variant = 'text' %}
+          {% endif %}
+          {% assign link_target = link._target | default: link.target | default: '_self' %}
+          {% assign link_rel = link.rel %}
+          {% if link_target == '_blank' and link_rel == blank %}
+          {% assign link_rel = 'noopener noreferrer' %}
+          {% endif %}
+          {% if link_name != blank and link_url != blank %}
+          <div class="hero-action-item">
+            <mdui-button href="{{ link_url }}" target="{{ link_target }}" variant="{{ link_variant }}" {% if link_icon
+              !=blank %} icon="{{ link_icon }}" {% endif %}{% if link_rel !=blank %} rel="{{ link_rel }}" {% endif %}>
+              {{ link_name }}
+            </mdui-button>
+            <a class="hero-action-link" href="{{ link_url }}" target="{{ link_target }}" {% if link_rel !=blank %}
+              rel="{{ link_rel }}" {% endif %}>
+              {{ link_name }}
+            </a>
+          </div>
+          {% endif %}
+          {% endfor %}
+        </div>
         {% endif %}
       </header>
 
       {% if page.encrypted %}
-        <article class="mdui-prose encrypted-content-placeholder" id="articleContent">
-          <div class="crypto-fallback">{{ content }}</div>
-          
-          <div class="crypto-interactive">
-            <div class="skeleton-placeholder" aria-hidden="true" style="margin-top: 16px;">
+      <article class="mdui-prose encrypted-content-placeholder" id="articleContent">
+        <div class="crypto-fallback">{{ content }}</div>
+
+        <div class="crypto-interactive">
+          <div class="skeleton-placeholder" aria-hidden="true" style="margin-top: 16px;">
             <div class="skeleton-line" style="width: 40%; height: 28px; margin-bottom: 24px;"></div>
             <div class="skeleton-line" style="width: 100%; height: 16px; margin-bottom: 12px;"></div>
             <div class="skeleton-line" style="width: 100%; height: 16px; margin-bottom: 12px;"></div>
@@ -334,21 +388,24 @@
 
           </div>
 
-          <mdui-dialog id="passwordDialog" headline="访问受限" close-on-esc="false" close-on-overlay-click="false" icon="lock">
+          <mdui-dialog id="passwordDialog" headline="访问受限" close-on-esc="false" close-on-overlay-click="false"
+            icon="lock">
             <div class="password-dialog-content">
               <p style="text-align: center;">{{ page.password_prompt | default: '输入密码以解密此页' }}</p>
-              <p id="cryptoCredentialWarning" class="crypto-warning" hidden>自上次访问后，此页面的凭据已修改。<br/>请重新输入密码。</p>
-              <mdui-text-field id="cryptoPasswordInput" type="password" label="密码" toggle-password required></mdui-text-field>
+              <p id="cryptoCredentialWarning" class="crypto-warning" hidden>自上次访问后，此页面的凭据已修改。<br />请重新输入密码。</p>
+              <mdui-text-field id="cryptoPasswordInput" type="password" label="密码" toggle-password
+                required></mdui-text-field>
               <mdui-checkbox id="rememberPassword">记住密码</mdui-checkbox>
-              
-            </div>
-            <mdui-button-icon slot="action" icon="content_paste" id="pastePasswordButton" aria-label="粘贴密码" title="粘贴密码" style="margin-right: auto;"></mdui-button-icon>
-            <mdui-button slot="action" variant="tonal" id="decryptButtonText" >解密</mdui-button>
-          </mdui-dialog>
-          </div>
 
-          {% assign save_pass = page['save-pass'] | default: site['save-pass'] | default: '' %}
-          <script type="application/json" id="crypto-data">
+            </div>
+            <mdui-button-icon slot="action" icon="content_paste" id="pastePasswordButton" aria-label="粘贴密码" title="粘贴密码"
+              style="margin-right: auto;"></mdui-button-icon>
+            <mdui-button slot="action" variant="tonal" id="decryptButtonText">解密</mdui-button>
+          </mdui-dialog>
+        </div>
+
+        {% assign save_pass = page['save-pass'] | default: site['save-pass'] | default: '' %}
+        <script type="application/json" id="crypto-data">
             {
               "encrypted": true,
               "savePass": "{{ save_pass }}",
@@ -358,37 +415,37 @@
               "ciphertext": "{{ page.ciphertext }}"
             }
           </script>
-        </article>
+      </article>
       {% else %}
-        <article class="mdui-prose" id="articleContent">
-          {{ content }}
-        </article>
+      <article class="mdui-prose" id="articleContent">
+        {{ content }}
+      </article>
       {% endif %}
 
       <footer class="site-footer">
         <div class="footer-info">
           {% if repo_path != blank %}
-            <span><a href="{{ repo_url }}" target="_blank" rel="noopener">{{ repo_path }}</a>
-              {% unless site.show_downloads == false or site.github.is_project_page == false or site.beian == blank %}
-               · Hosted on GitHub Pages.
-              {% endunless %}
-            </span>
+          <span><a href="{{ repo_url }}" target="_blank" rel="noopener">{{ repo_path }}</a>
+            {% unless site.show_downloads == false or site.github.is_project_page == false or site.beian == blank %}
+            · Hosted on GitHub Pages.
+            {% endunless %}
+          </span>
           {% else %}
-            <span>Powered by Jekyll + mdui v2.</span>
+          <span>Powered by Jekyll + mdui v2.</span>
           {% endif %}
         </div>
 
         {% if site.beian or site.psb_beian %}
-          <div class="beian-info">
-            {% if site.beian %}
-              <a href="https://beian.miit.gov.cn/" target="_blank" rel="noopener">{{ site.beian }}</a>
-            {% endif %}
-            {% if site.psb_beian %}
-              <a href="http://www.beian.gov.cn/portal/registerSystemInfo" target="_blank" rel="noopener">
-                {{ site.psb_beian }}
-              </a>
-            {% endif %}
-          </div>
+        <div class="beian-info">
+          {% if site.beian %}
+          <a href="https://beian.miit.gov.cn/" target="_blank" rel="noopener">{{ site.beian }}</a>
+          {% endif %}
+          {% if site.psb_beian %}
+          <a href="http://www.beian.gov.cn/portal/registerSystemInfo" target="_blank" rel="noopener">
+            {{ site.psb_beian }}
+          </a>
+          {% endif %}
+        </div>
         {% endif %}
       </footer>
     </section>
@@ -405,4 +462,5 @@
   <script type="module" src="{{ '/assets/js/crypto.js' | relative_url }}"></script>
   {% endif %}
 </body>
+
 </html>

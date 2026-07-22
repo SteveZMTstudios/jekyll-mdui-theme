@@ -6,19 +6,13 @@
 }
 
 @media print {
-  :root {
-    --print-text-color: #111111;
-    --print-muted-color: #4a4a4a;
-    --print-border-color: #cfcfcf;
-  }
-
   html,
   body {
     width: auto !important;
     margin: 0 !important;
     padding: 0 !important;
     background: #ffffff !important;
-    color: var(--print-text-color) !important;
+    color: #111111 !important;
   }
 
   body {
@@ -29,10 +23,14 @@
   *,
   *::before,
   *::after {
-    box-shadow: none !important;
+    -webkit-box-shadow: none !important;
+            box-shadow: none !important;
     text-shadow: none !important;
-    filter: none !important;
-    animation: none !important;
+    -webkit-filter: none !important;
+            filter: none !important;
+    -webkit-animation: none !important;
+            animation: none !important;
+    -webkit-transition: none !important;
     transition: none !important;
   }
 
@@ -67,34 +65,34 @@
     margin: 0 0 8mm !important;
     padding: 0 0 4mm !important;
     border: 0 !important;
-    border-bottom: 1px solid var(--print-border-color) !important;
+    border-bottom: 1px solid #cfcfcf !important;
     border-radius: 0 !important;
     background: transparent !important;
-    color: var(--print-text-color) !important;
+    color: #111111 !important;
   }
 
   .hero-kicker {
     margin: 0 0 1.5mm !important;
     letter-spacing: 0.02em !important;
-    color: var(--print-muted-color) !important;
+    color: #4a4a4a !important;
   }
 
   .hero-title {
     margin: 0 !important;
     font-size: 22pt !important;
     line-height: 1.25 !important;
-    color: var(--print-text-color) !important;
+    color: #111111 !important;
   }
 
   .hero-subtitle {
     margin: 2.5mm 0 0 !important;
     font-size: 11pt !important;
     line-height: 1.6 !important;
-    color: var(--print-muted-color) !important;
+    color: #4a4a4a !important;
   }
 
   article.mdui-prose {
-    color: var(--print-text-color) !important;
+    color: #111111 !important;
     font-size: 11pt !important;
     line-height: 1.7 !important;
   }
@@ -105,21 +103,22 @@
   article.mdui-prose h4,
   article.mdui-prose h5,
   article.mdui-prose h6 {
-    color: var(--print-text-color) !important;
+    color: #111111 !important;
     page-break-after: avoid;
     page-break-inside: avoid;
   }
 
   article.mdui-prose a,
   .site-footer a {
-    color: var(--print-text-color) !important;
+    color: #111111 !important;
+    -webkit-text-decoration: underline !important;
     text-decoration: underline !important;
   }
 
   article.mdui-prose a[href^="http"]::after {
     content: " (" attr(href) ")";
     font-size: 9pt;
-    color: var(--print-muted-color);
+    color: #4a4a4a;
     word-break: break-all;
   }
 
@@ -130,7 +129,8 @@
   article.mdui-prose table,
   article.mdui-prose pre,
   article.mdui-prose blockquote {
-    break-inside: avoid;
+    -webkit-column-break-inside: avoid;
+            break-inside: avoid;
     page-break-inside: avoid;
   }
 
@@ -148,7 +148,7 @@
 
   article.mdui-prose th,
   article.mdui-prose td {
-    border: 1px solid var(--print-border-color);
+    border: 1px solid #cfcfcf;
     padding: 2.5mm 2mm;
     vertical-align: top;
   }
@@ -162,7 +162,7 @@
 
   .code-scroll {
     overflow: visible !important;
-    border: 1px solid var(--print-border-color) !important;
+    border: 1px solid #cfcfcf !important;
     border-radius: 0 !important;
     background: #f8f8f8 !important;
   }
@@ -190,7 +190,7 @@
   }
 
   article.mdui-prose :not(pre) > code {
-    border: 1px solid var(--print-border-color);
+    border: 1px solid #cfcfcf;
     background: #f1f1f1 !important;
     color: #000000 !important;
   }
@@ -198,8 +198,8 @@
   .site-footer {
     margin-top: 10mm !important;
     padding-top: 4mm !important;
-    border-top: 1px solid var(--print-border-color) !important;
-    color: var(--print-muted-color) !important;
+    border-top: 1px solid #cfcfcf !important;
+    color: #4a4a4a !important;
     font-size: 9pt !important;
   }
 }

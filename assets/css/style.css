@@ -159,8 +159,6 @@ a {
   position: sticky;
   top: 0;
   z-index: 1100;
-  /* border-bottom: 1px solid rgb(var(--mdui-color-outline-variant)); */
-  /* background-color: rgb(var(--mdui-color-surface)); */
 }
 
 .app-bar-spacer {

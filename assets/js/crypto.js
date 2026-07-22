@@ -14,9 +14,9 @@
   async function decryptData(passwordStr, base64Salt, base64Iv, base64Ciphertext, base64Tag) {
     const salt = uint8ArrayFromBase64(base64Salt);
     const iv = uint8ArrayFromBase64(base64Iv);
-    // Construct aes-256-gcm payload: ciphertext + tag
     const ciphertextBytes = uint8ArrayFromBase64(base64Ciphertext);
     const tagBytes = uint8ArrayFromBase64(base64Tag);
+
     const encryptedBytes = new Uint8Array(ciphertextBytes.length + tagBytes.length);
     encryptedBytes.set(ciphertextBytes, 0);
     encryptedBytes.set(tagBytes, ciphertextBytes.length);
@@ -189,7 +189,7 @@
 
     async function attemptDecrypt(password, options) {
       const useOptions = options || {};
-      const source = useOptions.source || 'manual';
+      const source = useOptions.source || (useOptions.isAuto ? 'stored' : 'manual');
       const isAuto = source !== 'manual';
       const isUrlSource = source === 'url';
       if (resolving) return;
@@ -262,9 +262,15 @@
           if (!isUrlSource) {
             clearStoredPassword();
           }
+          if (input) {
+            setPasswordError(msg);
+          }
           if (dialog && window.customElements) {
             window.customElements.whenDefined('mdui-dialog').then(() => {
               dialog.open = true;
+              setTimeout(() => {
+                if (input) input.focus();
+              }, 100);
             });
           } else if (legacyFallback) {
             legacyFallback.hidden = false;
@@ -337,21 +343,23 @@
       } else if (pasteBtn) {
         pasteBtn.hidden = true;
       }
-    } else if (legacyFallback && legacyForm) {
-      // Use fallback
-      if (!storedPassword) {
-        legacyFallback.hidden = false;
-      }
+    }
+
+    if (legacyForm) {
       legacyForm.addEventListener('submit', (e) => {
         e.preventDefault();
-        attemptDecrypt(legacyInput.value);
+        if (legacyInput) {
+          attemptDecrypt(legacyInput.value);
+        }
       });
     }
 
-    if (urlPassword) {
-      attemptDecrypt(urlPassword, { source: 'url' });
-    } else if (storedPassword) {
-      attemptDecrypt(storedPassword, { source: 'stored' });
+    if (!storedPassword && legacyFallback && (!window.customElements || document.body.classList.contains('legacy-mode'))) {
+      legacyFallback.hidden = false;
+    }
+
+    if (storedPassword) {
+      attemptDecrypt(storedPassword, { isAuto: true });
     }
   }
 

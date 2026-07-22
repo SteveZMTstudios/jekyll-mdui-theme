@@ -1,0 +1,378 @@
+/* Compatibility-only styles for legacy or JavaScript-disabled browsers. */
+
+.legacy-banner,
+.legacy-nav {
+  display: none;
+}
+
+html.no-js mdui-top-app-bar,
+html.no-js mdui-navigation-drawer,
+html.no-js mdui-dialog,
+html.no-js mdui-fab,
+html.no-js mdui-dropdown,
+html.no-js mdui-card,
+html.no-js mdui-list,
+html.no-js mdui-menu,
+html.no-js mdui-menu-item,
+html.no-js mdui-button,
+html.no-js mdui-button-icon,
+html.no-js .app-bar,
+html.no-js .app-drawer,
+html.no-js .qr-dialog,
+html.no-js .translate-dropdown,
+html.no-js .translate-dialog,
+html.no-js .password-dialog,
+html.no-js .scroll-top-fab,
+html.no-js #translateMenu,
+html.no-js #translateDialog,
+html.no-js .qr-dialog-content,
+body.legacy-mode mdui-top-app-bar,
+body.legacy-mode mdui-navigation-drawer,
+body.legacy-mode mdui-dialog,
+body.legacy-mode mdui-fab,
+body.legacy-mode mdui-dropdown,
+body.legacy-mode mdui-card,
+body.legacy-mode mdui-list,
+body.legacy-mode mdui-menu,
+body.legacy-mode mdui-menu-item,
+body.legacy-mode mdui-button,
+body.legacy-mode mdui-button-icon,
+body.legacy-mode .app-bar,
+body.legacy-mode .app-drawer,
+body.legacy-mode .qr-dialog,
+body.legacy-mode .translate-dropdown,
+body.legacy-mode .translate-dialog,
+body.legacy-mode .password-dialog,
+body.legacy-mode .scroll-top-fab,
+body.legacy-mode #translateMenu,
+body.legacy-mode #translateDialog,
+body.legacy-mode .qr-dialog-content {
+  display: none !important;
+}
+
+html.no-js .legacy-banner,
+body.legacy-mode .legacy-banner,
+html.no-js .legacy-crypto-fallback,
+body.legacy-mode .legacy-crypto-fallback {
+  display: block;
+}
+
+html.no-js .legacy-banner,
+body.legacy-mode .legacy-banner {
+  margin: 12px;
+  padding: 12px;
+  border-radius: 12px;
+  border: 1px solid #d6dce8;
+  background: #eef3ff;
+  color: #1c2430;
+}
+
+html.no-js .legacy-nav,
+body.legacy-mode .legacy-nav {
+  display: flex;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  flex-wrap: wrap;
+  -webkit-flex-wrap: wrap;
+  -ms-flex-wrap: wrap;
+  align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  gap: 12px;
+  margin: 12px;
+  padding: 12px;
+  border: 1px solid #d6dce8;
+  border-radius: 12px;
+  background: #eef3ff;
+}
+
+html.no-js .legacy-nav a,
+html.no-js .legacy-nav .legacy-theme-toggle,
+body.legacy-mode .legacy-nav a,
+body.legacy-mode .legacy-nav .legacy-theme-toggle {
+  display: inline-flex;
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-block; /* IE9 / Safari 5 fallback */
+  align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  min-height: 32px;
+  padding: 4px 10px;
+  margin-right: 8px;
+  margin-bottom: 8px;
+  border-radius: 8px;
+  border: 1px solid #bfd1ff;
+  background: #ffffff;
+  color: #0b57d0;
+  text-decoration: none;
+}
+
+html.no-js .legacy-theme-toggle {
+  display: none;
+}
+
+body.legacy-mode .legacy-theme-toggle {
+  cursor: pointer;
+  font: inherit;
+}
+
+html.no-js body,
+body.legacy-mode {
+  background: #f7f8fb;
+  color: #1b1f24;
+  padding-top: 0 !important;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+
+body.legacy-mode.legacy-theme-light {
+  background: #f7f8fb;
+  color: #1b1f24;
+}
+
+body.legacy-mode.legacy-theme-dark {
+  background: #111418;
+  color: #e7ebf1;
+}
+
+body.legacy-mode.legacy-theme-dark a {
+  color: #9ec1ff;
+}
+
+body.legacy-mode.legacy-theme-dark .legacy-banner {
+  border-color: #6a4545;
+  background: #543333;
+  color: #ffd7d7;
+}
+
+body.legacy-mode.legacy-theme-dark .legacy-nav {
+  border-color: #3b4251;
+  background: #252b36;
+}
+
+.legacy-crypto-form {
+  padding: 16px;
+  margin: 16px 0;
+  border: 1px solid #d6dce8;
+  border-radius: 12px;
+  background: #f7f8fb;
+  display: flex;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  flex-direction: column;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  gap: 12px;
+  max-width: 400px;
+}
+
+html.mdui-theme-dark .legacy-crypto-form,
+body.legacy-mode.legacy-theme-dark .legacy-crypto-form {
+  border-color: #3b4251;
+  background: #252b36;
+  color: #e7ebf1;
+}
+
+.legacy-crypto-form input, .legacy-crypto-form button {
+  padding: 8px 12px;
+  border: 1px solid #bfd1ff;
+  border-radius: 8px;
+  font: inherit;
+}
+
+body.legacy-mode.legacy-theme-dark .legacy-nav a,
+body.legacy-mode.legacy-theme-dark .legacy-nav .legacy-theme-toggle {
+  border-color: #45608a;
+  background: #223048;
+  color: #dce8ff;
+}
+
+html.no-js .main-wrap,
+body.legacy-mode .main-wrap {
+  width: 100%;
+}
+
+html.no-js .content,
+body.legacy-mode .content {
+  width: 100%;
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 20px 16px 72px;
+}
+
+html.no-js img,
+html.no-js svg,
+html.no-js video,
+html.no-js canvas,
+body.legacy-mode img,
+body.legacy-mode svg,
+body.legacy-mode video,
+body.legacy-mode canvas {
+  max-width: 100%;
+  height: auto;
+}
+
+html.no-js .hero,
+body.legacy-mode .hero {
+  border-radius: 12px;
+  background: #eef3ff;
+  color: #1c2430;
+}
+
+html.no-js .hero-action-item,
+body.legacy-mode .hero-action-item {
+  display: inline-block; /* Fallback for browsers without display: contents support (IE9, Safari 5) */
+  margin-right: 8px;
+  margin-bottom: 8px;
+}
+
+html.no-js .hero-actions mdui-button,
+body.legacy-mode .hero-actions mdui-button {
+  display: none !important;
+}
+
+html.no-js .hero-action-link,
+body.legacy-mode .hero-action-link {
+  display: inline-flex !important;
+  display: -webkit-inline-box !important;
+  display: -webkit-inline-flex !important;
+  display: -ms-inline-flexbox !important;
+  display: inline-block !important;
+  align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  gap: 8px;
+  padding: 8px 16px;
+  border-radius: 999px;
+  border: 1px solid #bfd1ff;
+  background: #ffffff;
+  color: #0b57d0;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+html.no-js .hero-action-link::before,
+body.legacy-mode .hero-action-link::before {
+  content: attr(data-icon);
+  font-family: 'Material Icons';
+  font-weight: normal;
+  font-size: 1.1rem;
+  line-height: 1;
+}
+
+html.no-js .hero-action-link:hover,
+html.no-js .hero-action-link:focus-visible,
+body.legacy-mode .hero-action-link:hover,
+body.legacy-mode .hero-action-link:focus-visible {
+  border-color: #8fb0ff;
+  background: #e9f0ff;
+}
+
+html.no-js .site-footer,
+body.legacy-mode .site-footer {
+  border-top: 1px solid #d6dce8;
+  color: #4b5565;
+}
+
+body.legacy-mode.legacy-theme-dark .hero {
+  background: #1d2b3f;
+  color: #e8f1ff;
+}
+
+body.legacy-mode.legacy-theme-dark .hero-action-link {
+  border-color: #45608a;
+  background: #223048;
+  color: #dce8ff;
+}
+
+body.legacy-mode.legacy-theme-dark .site-footer {
+  border-top-color: #30415a;
+  color: #a8b5c8;
+}
+
+html.no-js pre,
+body.legacy-mode pre {
+  max-width: 100%;
+  overflow: auto;
+}
+
+body.legacy-mode .legacy-code-shell {
+  position: relative;
+  margin: 1rem 0;
+}
+
+body.legacy-mode .legacy-code-shell pre {
+  margin: 0;
+  padding: 0.95rem 4.75rem 0.95rem 0.95rem;
+  overflow: auto;
+  border-radius: 10px;
+  border: 1px solid #cfd7e6;
+  background: #f8f9fc;
+  color: #1a1f29;
+}
+
+body.legacy-mode .legacy-code-copy {
+  position: absolute;
+  top: 0.55rem;
+  right: 0.55rem;
+  min-height: 28px;
+  padding: 2px 8px;
+  border: 1px solid #bfd1ff;
+  border-radius: 7px;
+  background: #ffffff;
+  color: #0b57d0;
+  font: inherit;
+  font-size: 0.82rem;
+  cursor: pointer;
+}
+
+body.legacy-mode.legacy-theme-dark .legacy-code-shell pre {
+  border-color: #3b4a63;
+  background: #192131;
+  color: #e7edf8;
+}
+
+body.legacy-mode.legacy-theme-dark .legacy-code-copy {
+  border-color: #45608a;
+  background: #223048;
+  color: #dce8ff;
+}
+
+.no-script-tip {
+  margin: 12px;
+  padding: 12px;
+  border-radius: 12px;
+  border: 1px solid #d6dce8;
+  background: #eef3ff;
+  color: #1c2430;
+}
+
+@media (max-width: 959px) {
+  html.no-js .content,
+  body.legacy-mode .content {
+    width: 100%;
+    max-width: 680px;
+    padding: 14px 12px 72px;
+  }
+
+  html.no-js .hero-actions,
+  body.legacy-mode .hero-actions {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+
+  html.no-js .hero-action-link,
+  body.legacy-mode .hero-action-link {
+    width: 100%;
+    justify-content: center;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+  }
+}

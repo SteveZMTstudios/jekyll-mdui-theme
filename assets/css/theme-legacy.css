@@ -5,24 +5,48 @@
   display: none;
 }
 
+html.no-js mdui-top-app-bar,
+html.no-js mdui-navigation-drawer,
+html.no-js mdui-dialog,
+html.no-js mdui-fab,
+html.no-js mdui-dropdown,
+html.no-js mdui-card,
+html.no-js mdui-list,
+html.no-js mdui-menu,
+html.no-js mdui-menu-item,
+html.no-js mdui-button,
+html.no-js mdui-button-icon,
 html.no-js .app-bar,
 html.no-js .app-drawer,
 html.no-js .qr-dialog,
 html.no-js .translate-dropdown,
 html.no-js .translate-dialog,
+html.no-js .password-dialog,
 html.no-js .scroll-top-fab,
+html.no-js #translateMenu,
+html.no-js #translateDialog,
+html.no-js .qr-dialog-content,
+body.legacy-mode mdui-top-app-bar,
+body.legacy-mode mdui-navigation-drawer,
+body.legacy-mode mdui-dialog,
+body.legacy-mode mdui-fab,
+body.legacy-mode mdui-dropdown,
+body.legacy-mode mdui-card,
+body.legacy-mode mdui-list,
+body.legacy-mode mdui-menu,
+body.legacy-mode mdui-menu-item,
+body.legacy-mode mdui-button,
+body.legacy-mode mdui-button-icon,
 body.legacy-mode .app-bar,
 body.legacy-mode .app-drawer,
 body.legacy-mode .qr-dialog,
 body.legacy-mode .translate-dropdown,
 body.legacy-mode .translate-dialog,
-body.legacy-mode .scroll-top-fab {
-  display: none !important;
-}
-
-html.no-js #translateMenu,
-html.no-js #translateDialog,
-html.no-js .qr-dialog-content {
+body.legacy-mode .password-dialog,
+body.legacy-mode .scroll-top-fab,
+body.legacy-mode #translateMenu,
+body.legacy-mode #translateDialog,
+body.legacy-mode .qr-dialog-content {
   display: none !important;
 }
 
@@ -46,8 +70,15 @@ body.legacy-mode .legacy-banner {
 html.no-js .legacy-nav,
 body.legacy-mode .legacy-nav {
   display: flex;
+  display: -webkit-flex;
+  display: -ms-flexbox;
   flex-wrap: wrap;
-  align-items: center;
+  -webkit-flex-wrap: wrap;
+  -ms-flex-wrap: wrap;
+  -webkit-align-items: center;
+          align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
   gap: 12px;
   margin: 12px;
   padding: 12px;
@@ -61,13 +92,22 @@ html.no-js .legacy-nav .legacy-theme-toggle,
 body.legacy-mode .legacy-nav a,
 body.legacy-mode .legacy-nav .legacy-theme-toggle {
   display: inline-flex;
-  align-items: center;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-block; /* IE9 / Safari 5 fallback */
+  -webkit-align-items: center;
+          align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
   min-height: 32px;
   padding: 4px 10px;
+  margin-right: 8px;
+  margin-bottom: 8px;
   border-radius: 8px;
   border: 1px solid #bfd1ff;
   background: #ffffff;
   color: #0b57d0;
+  -webkit-text-decoration: none;
   text-decoration: none;
 }
 
@@ -121,7 +161,11 @@ body.legacy-mode.legacy-theme-dark .legacy-nav {
   border-radius: 12px;
   background: #f7f8fb;
   display: flex;
+  display: -webkit-flex;
+  display: -ms-flexbox;
   flex-direction: column;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
   gap: 12px;
   max-width: 400px;
 }
@@ -139,7 +183,6 @@ body.legacy-mode.legacy-theme-dark .legacy-crypto-form {
   border-radius: 8px;
   font: inherit;
 }
-
 
 body.legacy-mode.legacy-theme-dark .legacy-nav a,
 body.legacy-mode.legacy-theme-dark .legacy-nav .legacy-theme-toggle {
@@ -182,7 +225,9 @@ body.legacy-mode .hero {
 
 html.no-js .hero-action-item,
 body.legacy-mode .hero-action-item {
-  display: contents;
+  display: inline-block; /* Fallback for browsers without display: contents support (IE9, Safari 5) */
+  margin-right: 8px;
+  margin-bottom: 8px;
 }
 
 html.no-js .hero-actions mdui-button,
@@ -193,13 +238,20 @@ body.legacy-mode .hero-actions mdui-button {
 html.no-js .hero-action-link,
 body.legacy-mode .hero-action-link {
   display: inline-flex !important;
-  align-items: center;
+  display: -webkit-inline-flex !important;
+  display: -ms-inline-flexbox !important;
+  display: inline-block !important;
+  -webkit-align-items: center;
+          align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
   gap: 8px;
   padding: 8px 16px;
   border-radius: 999px;
   border: 1px solid #bfd1ff;
   background: #ffffff;
   color: #0b57d0;
+  -webkit-text-decoration: none;
   text-decoration: none;
   font-weight: 600;
 }
@@ -310,14 +362,20 @@ body.legacy-mode.legacy-theme-dark .legacy-code-copy {
 
   html.no-js .hero-actions,
   body.legacy-mode .hero-actions {
+    display: -ms-grid;
     display: grid;
+    -ms-grid-columns: 1fr;
     grid-template-columns: 1fr;
+    grid-gap: 8px;
     gap: 8px;
   }
 
   html.no-js .hero-action-link,
   body.legacy-mode .hero-action-link {
     width: 100%;
-    justify-content: center;
+    -webkit-justify-content: center;
+            justify-content: center;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
   }
 }

@@ -239,9 +239,9 @@ This repository follows the common structure of GitHub Pages themes. It can be u
 
 ### Browser compatibility strategy
 
-- **Modern browsers**: Full mdui Web Components experience
-- **IE11 and contemporaries**: Automatically enables a compatible reading mode, ensuring basic layout, link accessibility, image rendering, dark/light switching, and code copy functionality are available
-- **IE6/older browsers and JavaScript-disabled scenarios**: Ensures page readability, image rendering, and hyperlink accessibility, but does not guarantee the full reading experience.
+- **Modern browsers**: Full mdui Web Components experience with Material Design 3 interactive features.
+- **Legacy & Compatible Browsers (Safari >= 5, iOS >= 5, Android >= 4.0, IE >= 9)**: Automatically toggles/smoothly degrades to legacy reading mode, ensuring essential layout, responsive navigation, image/media rendering, dark/light theme toggle, and code block copying functions work seamlessly.
+- **JavaScript-disabled scenarios**: Ensures basic page readability, media rendering, and hyperlink accessibility.
 
 ## Local development
 
@@ -252,6 +252,22 @@ To preview the theme locally (e.g., when proposing changes):
 3. Run `bundle install` to install necessary dependencies
 4. Run `bundle exec jekyll serve` to start the preview server
 5. Visit [`localhost:4000`](http://localhost:4000) in your browser to preview the theme
+
+### Building Frontend Assets (CSS / JS)
+
+Source code is maintained in `assets/css/*.src.css` and `assets/js/*.src.js`. Using PostCSS (`postcss-preset-env`), Babel (`@babel/preset-env` + `babel-plugin-polyfill-corejs3`), and esbuild, assets are compiled for target browsers (`safari >= 5, iOS >= 5, Android >= 4.0, ie >= 9`):
+
+```bash
+# Install frontend build dependencies
+npm install
+
+# Compile all frontend CSS and JS assets
+npm run build
+
+# Compile CSS or JS separately
+npm run build:css
+npm run build:js
+```
 
 ### Running tests
 

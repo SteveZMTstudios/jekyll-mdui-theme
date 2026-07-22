@@ -243,9 +243,9 @@ links:
 
 ### 浏览器兼容策略
 
-- **现代浏览器**：完整的 mdui Web Components 体验
-- **IE11 及同代浏览器**：自动启用兼容阅读模式，保证基础布局、链接可达、图片渲染、深浅色切换和代码复制功能可用
-- **IE6/更旧浏览器及禁用 JavaScript 场景**：保证页面可读、图片可渲染、超链接可访问，不保证阅读体验。
+- **现代浏览器**：完整的 mdui Web Components 体验与 Material Design 3 动态交互。
+- **旧式与兼容浏览器（Safari >= 5, iOS >= 5, Android >= 4.0, IE >= 9）**：自动转换/平滑降级至兼容阅读模式，保障排版布局、响应式导航、图片/媒体渲染、深浅色主题切换及代码复制等核心体验不受影响。
+- **禁用 JavaScript 场景**：保障页面内容基本排版可读、媒体可渲染、超链接可访问。
 
 
 ## 本地开发
@@ -257,6 +257,22 @@ links:
 3. 运行 `bundle install` 安装必要的依赖
 4. 运行 `bundle exec jekyll serve` 启动预览服务器
 5. 在浏览器中访问 [`localhost:4000`](http://localhost:4000) 预览主题
+
+### 前端资源构建 (CSS / JS)
+
+源码逻辑分别维护于 `assets/css/*.src.css` 与 `assets/js/*.src.js` 中。利用 PostCSS (`postcss-preset-env`)、Babel (`@babel/preset-env` + `babel-plugin-polyfill-corejs3`) 与 esbuild 自动构建出兼容 `safari >= 5, iOS >= 5, Android >= 4.0, ie >= 9` 的目标产物：
+
+```bash
+# 安装前端构建依赖
+npm install
+
+# 编译所有前端 CSS 和 JS 产物
+npm run build
+
+# 单独编译 CSS 或 JS
+npm run build:css
+npm run build:js
+```
 
 ### 运行测试
 

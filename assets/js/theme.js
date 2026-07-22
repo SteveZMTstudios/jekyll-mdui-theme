@@ -326,7 +326,7 @@
       indonesian: 'Halaman telah diterjemahkan ke Bahasa Indonesia',
       arabic: 'تمت ترجمة الصفحة إلى العربية',
       hindi: 'पेज का हिंदी में अनुवाद हो गया है',
-      bengali: 'পৃষ্ঠাটি বাংলায় অনুবাদ করা হয়েছে',
+      bengali: 'পৃষ্ঠাটি বাংলায় अनुवाद করা হয়েছে',
       turkish: 'Sayfa Turkceye cevrildi',
       polish: 'Strona zostala przetlumaczona na jezyk polski',
       ukrainian: 'Сторінку перекладено українською',
@@ -436,12 +436,14 @@
     pendingTranslateSnackbarShown = false;
     startTranslateLoading();
 
-    if (typeof window.translate.changeLanguage === 'function') {
-      window.translate.changeLanguage(normalized);
-    }
-
-    if (typeof window.translate.execute === 'function') {
-      window.translate.execute();
+    try {
+      if (typeof window.translate.changeLanguage === 'function') {
+        window.translate.changeLanguage(normalized);
+      } else if (typeof window.translate.execute === 'function') {
+        window.translate.execute();
+      }
+    } catch (e) {
+      console.warn('translate.changeLanguage failed:', e);
     }
 
     startTranslateSuccessMonitor(normalized, '');
@@ -682,6 +684,20 @@
       if (window.translate.selectLanguageTag) {
         window.translate.selectLanguageTag.show = false;
         window.translate.selectLanguageTag.documentId = 'translate';
+      }
+
+      if (window.translate.visual && typeof window.translate.visual.adjustTranslationSpacesByNodequeueUuid === 'function') {
+        const origAdjust = window.translate.visual.adjustTranslationSpacesByNodequeueUuid;
+        window.translate.visual.adjustTranslationSpacesByNodequeueUuid = function (uuid) {
+          if (!window.translate.request || !window.translate.request.data || !window.translate.request.data[uuid]) {
+            return;
+          }
+          try {
+            return origAdjust.apply(this, arguments);
+          } catch (err) {
+            console.warn('adjustTranslationSpacesByNodequeueUuid error handled:', err);
+          }
+        };
       }
 
       const savedLanguage = getStoredTranslateLanguage();
