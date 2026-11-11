@@ -69,8 +69,17 @@ source "https://rubygems.org"
 
 gem "github-pages", group: :jekyll_plugins
 gem "jekyll-remote-theme", group: :jekyll_plugins
-gem "webrick", "~> 1.8"
+gem "webrick", "~> 1.9"
 ```
+
+> [!NOTE]
+> `github-pages` 能让本地预览与 GitHub 托管构建保持一致，但它同时把这些传递依赖钉死在历史版本上，其中 `rubyzip` 2.x 存在路径穿越漏洞（CVE-2026-85396）。
+> 如果你的站点不使用 `github-pages`（例如自建 CI 或部署到其他平台），请改用带安全修复的版本：
+>
+> ```ruby
+> gem "jekyll-remote-theme", "~> 0.6.3"
+> gem "rubyzip", ">= 3.4.0"
+> ```
 
 然后执行：
 
@@ -257,6 +266,30 @@ links:
 3. 运行 `bundle install` 安装必要的依赖
 4. 运行 `bundle exec jekyll serve` 启动预览服务器
 5. 在浏览器中访问 [`localhost:4000`](http://localhost:4000) 预览主题
+
+### 依赖版本与安全
+
+- 主题仓库自身使用 **Jekyll 4.4** 构建（见 `Gemfile`），不再引入 `github-pages`：后者会把 `jekyll`、`liquid`、`rouge`、`rubyzip`、`jekyll-sass-converter`（Ruby Sass 3.x）等一整套传递依赖固定在已停止安全更新的版本上。
+- 本仓库是**主题仓库**而非"使用主题的站点仓库"，`_config.yml` 使用 `theme: null` 且没有 `remote_theme`，因此本地构建**不需要** `jekyll-remote-theme` 插件——它只对引用远程主题的消费者站点有意义。
+- 主题以 `remote_theme` 分发时，托管构建使用 GitHub 侧的插件版本，因此本仓库升级 Jekyll 不会影响使用者的托管构建结果。
+- `Gemfile` 中显式声明了传递依赖的安全下限（`addressable`、`concurrent-ruby`、`json`、`faraday`），取值对应各自 CVE / GHSA 的修复版本，修改依赖时请勿回退。
+- 定期复核依赖漏洞（应输出 `No vulnerabilities found`）：
+
+```bash
+bundle exec bundle-audit check --update
+```
+
+- `gemfiles/` 下提供两个独立对照环境，按需使用：
+
+| 文件 | 用途 | 说明 |
+| --- | --- | --- |
+| `gemfiles/github_pages.gemfile` | 复刻 GitHub Pages 托管构建 | 会带入已停止安全更新的旧依赖，仅用于"构建是否等价"的对照 |
+| `gemfiles/remote_theme.gemfile` | 验证 `remote_theme` 消费路径 | Windows 上需先安装 OpenSSL 开发库，见文件内注释 |
+
+```bash
+BUNDLE_GEMFILE=gemfiles/github_pages.gemfile bundle install
+BUNDLE_GEMFILE=gemfiles/github_pages.gemfile bundle exec jekyll build
+```
 
 ### 前端资源构建 (CSS / JS)
 

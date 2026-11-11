@@ -83,6 +83,7 @@ exclude: # Jekyll 构建时需要排除的文件和目录
   - .jekyll-metadata
   - Gemfile
   - Gemfile.lock
+  - gemfiles/
   - node_modules
 
 

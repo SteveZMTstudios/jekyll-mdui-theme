@@ -65,6 +65,12 @@ Use `github-pages` gem in `Gemfile` for local parity with GitHub build:
 gem "github-pages", group: :jekyll_plugins
 ```
 
+> Security note: `github-pages` pins transitive dependencies (e.g. `rubyzip` 2.x,
+> Ruby Sass 3.x) that no longer receive fixes. Keep it in a dedicated parity
+> environment (`gemfiles/github_pages.gemfile` in this repo) instead of the main
+> development bundle, and use `jekyll-remote-theme ~> 0.6.3` + `rubyzip >= 3.4.0`
+> when you are not bound to the hosted environment.
+
 ## 6) Local preview
 
 ```bash

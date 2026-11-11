@@ -67,8 +67,17 @@ source "https://rubygems.org"
 
 gem "github-pages", group: :jekyll_plugins
 gem "jekyll-remote-theme", group: :jekyll_plugins
-gem "webrick", "~> 1.8"
+gem "webrick", "~> 1.9"
 ```
+
+> [!NOTE]
+> `github-pages` keeps local preview aligned with the GitHub-hosted build, but it also pins several transitive dependencies to historical versions — notably `rubyzip` 2.x, which is affected by CVE-2026-85396 (path traversal).
+> If your site does not use `github-pages` (for example, self-hosted CI or another platform), use the patched versions instead:
+>
+> ```ruby
+> gem "jekyll-remote-theme", "~> 0.6.3"
+> gem "rubyzip", ">= 3.4.0"
+> ```
 
 Then run:
 
@@ -252,6 +261,30 @@ To preview the theme locally (e.g., when proposing changes):
 3. Run `bundle install` to install necessary dependencies
 4. Run `bundle exec jekyll serve` to start the preview server
 5. Visit [`localhost:4000`](http://localhost:4000) in your browser to preview the theme
+
+### Dependency versions and security
+
+- The theme repository itself builds with **Jekyll 4.4** (see `Gemfile`) and no longer pulls in `github-pages`, which pins `jekyll`, `liquid`, `rouge`, `rubyzip`, `jekyll-sass-converter` (Ruby Sass 3.x) and friends to versions that no longer receive security fixes.
+- This is a **theme repository**, not a site that consumes a theme: `_config.yml` uses `theme: null` and has no `remote_theme`, so the local build does **not** need `jekyll-remote-theme` — that plugin only matters for consumer sites referencing a remote theme.
+- When distributed via `remote_theme`, the hosted build uses GitHub's own plugin versions, so upgrading Jekyll here does not change what your visitors get from the hosted build.
+- `Gemfile` declares explicit security floors for transitive dependencies (`addressable`, `concurrent-ruby`, `json`, `faraday`), each taken from the corresponding CVE / GHSA fix. Do not lower them.
+- Re-check for vulnerabilities periodically (expected output: `No vulnerabilities found`):
+
+```bash
+bundle exec bundle-audit check --update
+```
+
+- Two standalone comparison environments live under `gemfiles/`:
+
+| File | Purpose | Notes |
+| --- | --- | --- |
+| `gemfiles/github_pages.gemfile` | Mirrors the GitHub Pages hosted build | Pulls in unpatched legacy dependencies — for build-equivalence checks only |
+| `gemfiles/remote_theme.gemfile` | Verifies the `remote_theme` consumer path | On Windows, install the OpenSSL dev libraries first — see the comments in the file |
+
+```bash
+BUNDLE_GEMFILE=gemfiles/github_pages.gemfile bundle install
+BUNDLE_GEMFILE=gemfiles/github_pages.gemfile bundle exec jekyll build
+```
 
 ### Building Frontend Assets (CSS / JS)
 

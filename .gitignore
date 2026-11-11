@@ -1,6 +1,7 @@
 _site
 .sass-cache
 Gemfile.lock
+gemfiles/*.lock
 *.gem
 .jekyll-cache
 node_modules
@@ -8,6 +9,5 @@ node_modules
 vendor
 .agents/
 __pycache__/
+bundle-install.log
 jekyll-mdui-theme.wiki/
-
-

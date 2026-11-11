@@ -1,0 +1,14 @@
+# 可选环境：完全复刻 GitHub Pages 托管构建的依赖集合，仅用于兼容性验证。
+#
+#   BUNDLE_GEMFILE=gemfiles/github_pages.gemfile bundle install
+#   BUNDLE_GEMFILE=gemfiles/github_pages.gemfile bundle exec jekyll build
+#
+# 会带入的历史依赖：Jekyll 3.10、Rouge 3.x、Ruby Sass 3.7（已 EOL，不再收安全
+# 修复）。github-pages 233 已把 rubyzip 放开到 3.x，因此当前解析结果通过了
+# bundle-audit；但这条链路仍由 GitHub 侧决定版本，主题不应把它当默认环境。
+# 仅用于“托管构建是否等价”的对照验证，不要用它处理不受信任的 remote_theme
+# 压缩包。
+source "https://rubygems.org"
+
+gem "github-pages", group: :jekyll_plugins
+gem "webrick", "~> 1.9"

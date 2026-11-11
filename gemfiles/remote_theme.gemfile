@@ -1,0 +1,22 @@
+# 可选环境：验证 remote_theme 消费路径（本仓库作为远程主题被其他站点引用）。
+#
+#   BUNDLE_GEMFILE=gemfiles/remote_theme.gemfile bundle install
+#   BUNDLE_GEMFILE=gemfiles/remote_theme.gemfile bundle exec jekyll build
+#
+# 前置条件：jekyll-remote-theme >= 0.5.1 声明了 `openssl >= 3.1.2`。openssl 是
+# Ruby 的 default gem，但 Bundler 会优先从源安装更新的版本，而构建 openssl
+# 原生扩展需要系统 OpenSSL 开发头文件。Windows 官方 Ruby 不自带，需要先装：
+#
+#   MSYS2 (UCRT64): pacman -S mingw-w64-ucrt-x86_64-openssl
+#
+# 或者把 openssl 指向本地已安装版本：
+#
+#   bundle config set --local build.openssl --with-openssl-dir=<OpenSSL 安装前缀>
+source "https://rubygems.org"
+
+gem "jekyll", "~> 4.4"
+gem "jekyll-remote-theme", "~> 0.6.3"
+gem "webrick", "~> 1.9"
+
+# rubyzip < 3.4.0 存在路径穿越（CVE-2026-85396），必须抬高下限
+gem "rubyzip", ">= 3.4.0"

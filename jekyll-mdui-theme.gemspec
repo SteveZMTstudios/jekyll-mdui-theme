@@ -23,5 +23,8 @@ Gem::Specification.new do |spec|
 
   spec.required_ruby_version = ">= 2.7.0"
 
+  # 主题只依赖 Jekyll 核心；插件由使用者的站点自行声明。
+  # 保留 Jekyll 3.9 下限是为了兼容 GitHub Pages 托管构建读取本 gemspec 的
+  # 场景，主题仓库自身的开发/构建使用 Jekyll 4.4（见 Gemfile）。
   spec.add_runtime_dependency "jekyll", ">= 3.9", "< 5.0"
 end
